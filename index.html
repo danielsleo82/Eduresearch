@@ -2632,22 +2632,19 @@ function handleModalOverlayClick(e) {
 // Ne jamais placer de clés API dans le code frontend
 
 async function sendToBrevo(contact) {
-  // En production, appeler votre API Brevo
-  // En dev / sans clé, on simule le succès
-  if (!BREVO_API_KEY || BREVO_API_KEY === 'YOUR_BREVO_API_KEY') {
-    console.log('[EduResearch] Brevo non configuré — données collectées localement:', contact);
-    return { ok: true, simulated: true };
-  }
   try {
-    // Contact data sent directly to Netlify proxy
     const resp = await fetch('/.netlify/functions/brevo', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(contact),
     });
+    if (!resp.ok) {
+      console.error('[EduResearch] Brevo error:', resp.status);
+    }
     return { ok: resp.ok, status: resp.status };
   } catch(e) {
-    console.error('[EduResearch] Brevo error:', e);
+    // Network error — don't block the user, just log
+    console.error('[EduResearch] Brevo network error:', e.message);
     return { ok: false, error: e.message };
   }
 }
@@ -2742,7 +2739,7 @@ async function handleModalSubmit() {
     } else if (pendingKey) {
       setTimeout(() => loadTheme(pendingKey), 100);
     }
-  }, 2000);
+  }, 3500);
 }
 
 function updateModalLang() {
