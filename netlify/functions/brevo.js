@@ -1,5 +1,5 @@
 // netlify/functions/brevo.js
-// Proxy sécurisé vers l'API Brevo (contacts)
+const https = require('https');
 
 exports.handler = async (event) => {
   const headers = {
@@ -9,51 +9,94 @@ exports.handler = async (event) => {
     'Content-Type': 'application/json',
   };
 
+  console.log('=== BREVO START ===');
+  console.log('Method:', event.httpMethod);
+
   if (event.httpMethod === 'OPTIONS') {
     return { statusCode: 200, headers, body: '' };
   }
-
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, headers, body: JSON.stringify({ error: 'Method not allowed' }) };
   }
 
-  const BREVO_API_KEY = process.env.BREVO_API_KEY;
+  const BREVO_API_KEY = process.env.BREVO_API_V3_KEY || process.env.BREVO_API_KEY;
+  console.log('Key found:', !!BREVO_API_KEY);
+  console.log('Key prefix:', BREVO_API_KEY ? BREVO_API_KEY.substring(0, 15) : 'NONE');
+
   if (!BREVO_API_KEY) {
-    return { statusCode: 500, headers, body: JSON.stringify({ error: 'Brevo key not configured' }) };
+    return { statusCode: 500, headers, body: JSON.stringify({ error: 'No API key' }) };
   }
 
+  let contact;
   try {
-    const contact = JSON.parse(event.body);
+    contact = JSON.parse(event.body || '{}');
+    console.log('Email:', contact.email);
+  } catch(e) {
+    console.error('Parse error:', e.message);
+    return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid JSON' }) };
+  }
 
-    const response = await fetch('https://api.brevo.com/v3/contacts', {
-      method: 'POST',
-      headers: {
-        'accept': 'application/json',
-        'content-type': 'application/json',
-        'api-key': BREVO_API_KEY,
-      },
-      body: JSON.stringify({
-        email: contact.email,
-        attributes: {
-          PRENOM:            contact.firstname,
-          NOM:               contact.lastname,
-          PAYS:              contact.country,
-          PROFIL:            contact.profile,
-          ORGANISATION:      contact.org,
-          LANGUE:            contact.lang,
-          FICHES_VUES:       contact.seenCount,
-          THEME_DECLENCHEUR: contact.triggerTheme,
-          SOURCE:            'EduResearch',
+  if (!contact.email) {
+    console.error('No email in contact');
+    return { statusCode: 400, headers, body: JSON.stringify({ error: 'No email' }) };
+  }
+
+  // Build minimal payload first — just email + list
+  // to isolate attribute issues
+  const payload = JSON.stringify({
+    email:         contact.email,
+    attributes: {
+      PRENOM: contact.firstname || '',
+      NOM:    contact.lastname  || '',
+    },
+    listIds:       [3],
+    updateEnabled: true,
+  });
+
+  console.log('Payload:', payload);
+
+  try {
+    const result = await new Promise((resolve, reject) => {
+      const options = {
+        hostname: 'api.brevo.com',
+        path: '/v3/contacts',
+        method: 'POST',
+        headers: {
+          'Content-Type':   'application/json',
+          'Content-Length': Buffer.byteLength(payload),
+          'accept':         'application/json',
+          'api-key':        BREVO_API_KEY,
         },
-        listIds:      [3],
-        updateEnabled: true,
-      }),
+      };
+
+      const req = https.request(options, (res) => {
+        let data = '';
+        res.on('data', chunk => data += chunk);
+        res.on('end', () => {
+          console.log('Brevo HTTP status:', res.statusCode);
+          console.log('Brevo response body:', data);
+          resolve({ status: res.statusCode, body: data });
+        });
+      });
+
+      req.on('error', (e) => {
+        console.error('Request error:', e.message);
+        reject(e);
+      });
+
+      req.write(payload);
+      req.end();
     });
 
-    const data = await response.json();
-    return { statusCode: response.ok ? 200 : response.status, headers, body: JSON.stringify(data) };
+    console.log('=== BREVO END ===');
+    return {
+      statusCode: result.status < 300 ? 200 : result.status,
+      headers,
+      body: result.body,
+    };
 
   } catch (err) {
+    console.error('Caught error:', err.message);
     return { statusCode: 500, headers, body: JSON.stringify({ error: err.message }) };
   }
 };
