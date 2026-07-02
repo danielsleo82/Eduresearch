@@ -390,6 +390,13 @@ select.modal-input:invalid,.modal-input option[value=""]{color:var(--tf);}
 .ai-notice{display:flex;align-items:center;gap:8px;background:var(--a50);border:1px solid var(--a100);border-radius:var(--r);padding:9px 13px;margin-bottom:12px;font-size:11px;color:var(--a800);line-height:1.5;}
 .ai-notice-icon{font-size:14px;flex-shrink:0;}
 
+
+/* ── NAV ACCOUNT BUTTON ── */
+.nav-account-btn{display:flex;align-items:center;gap:7px;padding:4px 12px 4px 4px;border-radius:20px;background:rgba(255,255,255,.1);text-decoration:none;transition:background .15s;cursor:pointer;}
+.nav-account-btn:hover{background:rgba(255,255,255,.18);}
+.nav-avatar-sm{width:26px;height:26px;border-radius:50%;background:var(--t400);color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+#nav-account-lbl{font-size:11px;font-weight:500;color:rgba(255,255,255,.85);}
+
 /* ── CATÉGORIES ── */
 .cat-section{margin-bottom:28px;}
 .cat-header{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding-bottom:8px;border-bottom:1.5px solid var(--bd);}
@@ -400,6 +407,14 @@ select.modal-input:invalid,.modal-input option[value=""]{color:var(--tf);}
 .tgrid{margin-bottom:0;}
 </style>
 
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LV34TMMSWJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LV34TMMSWJ');
+</script>
 </head>
 <body>
 <nav class="nav">
@@ -414,6 +429,10 @@ select.modal-input:invalid,.modal-input option[value=""]{color:var(--tf);}
         <button class="lb" onclick="setLang('nl',this)">NL</button>
       </div>
       <div class="nbadge" id="nbadge">Données scientifiques réelles</div>
+      <a class="nav-account-btn" id="nav-account-btn" href="mon-compte.html" style="display:none;">
+        <div class="nav-avatar-sm" id="nav-avatar-sm">?</div>
+        <span id="nav-account-lbl">Mon compte</span>
+      </a>
     </div>
   </div>
   <div class="nav-menu">
@@ -2708,6 +2727,7 @@ async function handleModalSubmit() {
   // Unlock regardless of Brevo result (don't penalise user for API issues)
   setUnlocked();
   updateAnalyserPromo();
+  updateNavAccount();
 
   // Show success state in modal
   document.getElementById('modal-form').style.display = 'none';
@@ -3175,11 +3195,31 @@ function updateNavLabels() {
   el('nm-favoris-lbl',  ui.favoris);
 }
 
+function updateNavAccount() {
+  const btn = document.getElementById('nav-account-btn');
+  const avatarEl = document.getElementById('nav-avatar-sm');
+  const lblEl = document.getElementById('nav-account-lbl');
+  if (!btn) return;
+  if (getUnlocked()) {
+    btn.style.display = 'flex';
+    try {
+      const c = JSON.parse(localStorage.getItem('eduresearch_contact') || '{}');
+      const initials = ((c.firstname||'').charAt(0) + (c.lastname||'').charAt(0)).toUpperCase() || '?';
+      const name = c.firstname || 'Mon compte';
+      if (avatarEl) avatarEl.textContent = initials;
+      if (lblEl) lblEl.textContent = name;
+    } catch(e) {}
+  } else {
+    btn.style.display = 'none';
+  }
+}
+
 renderCategories();
 renderQuotaBar();
 updateAnalyserLabel();
 updateAnalyserPromo();
 updateNavLabels();
+updateNavAccount();
 
 
 </script>
