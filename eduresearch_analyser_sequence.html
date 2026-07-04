@@ -254,6 +254,14 @@ body{font-family:var(--font);background:var(--bgs);color:var(--tx);min-height:10
   .export-bar{flex-direction:column;}
 }
 </style>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LV34TMMSWJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LV34TMMSWJ');
+</script>
 </head>
 <body>
 
@@ -773,39 +781,21 @@ TEXTE :
 ${txt || '[Fichier déposé sans texte extrait]'}
 
 ---
-INSTRUCTIONS : Analysez ce texte pédagogique. Répondez UNIQUEMENT en JSON valide, sans backticks ni texte autour.
+INSTRUCTIONS : Analysez ce texte pédagogique et répondez avec un objet JSON valide.
+IMPORTANT : Commencez DIRECTEMENT par { et terminez par }. Aucun texte avant ou après. Aucun markdown.
 
-{
-  "score": <0-100>,
-  "scoreLabel": "<jugement en une phrase>",
-  "scoreTags": ["<tag1>", "<tag2>", "<tag3>"],
-  "analyse": [
-    {
-      "icon": "<emoji>",
-      "status": "<ok|warn|plus>",
-      "badge": "<✓ Point fort|⚠️ À renforcer|⚠️ Neuromythe détecté|💡 Opportunité>",
-      "title": "<titre court>",
-      "detail": "<2-3 phrases avec <strong> pour les termes clés et références>",
-      "refTxt": "<référence scientifique courte>",
-      "refCls": "<vide ou ref-warn>",
-      "fiche": "<nom fiche EduResearch>"
-    }
-  ],
-  "suggestions": [
-    {
-      "icon": "<emoji>",
-      "title": "<titre activité>",
-      "color": "<hex couleur>",
-      "pill": "<thème · d=XX>",
-      "steps": [
-        {"t": "<étape avec <strong> sur mots clés>", "ex": "<phrase exacte à dire>", "col": "<hex>"}
-      ],
-      "why": "<justification scientifique>"
-    }
-  ]
-}
+Format exact attendu :
+{"score":75,"scoreLabel":"Séquence solide avec 2 points à renforcer","scoreTags":["✓ Point fort","⚠️ À ajuster","💡 Opportunité"],"analyse":[{"icon":"📖","status":"ok","badge":"✓ Point fort","title":"Titre court","detail":"Explication en 2-3 phrases. <strong>Terme clé</strong> bien utilisé (Auteur, année).","refTxt":"Auteur (année) · Titre · Éditeur","refCls":"","fiche":"Enseignement explicite"},{"icon":"⚠️","status":"warn","badge":"⚠️ Neuromythe détecté","title":"Styles d'apprentissage VAK","detail":"Affirmation réfutée. <strong>Howard-Jones (2014)</strong> démontre l'absence de preuves.","refTxt":"Howard-Jones (2014) · Nature Reviews Neuroscience","refCls":"ref-warn","fiche":"Neurosciences & apprentissage"}],"suggestions":[{"icon":"🔁","title":"Ajouter des rappels espacés","color":"#D85A30","pill":"Révision espacée · d=0.71","steps":[{"t":"En fin de séance, posez <strong>3 questions de rappel</strong>","ex":"«Fermez vos cahiers — qu'avez-vous retenu aujourd'hui ?»","col":"#D85A30"}],"why":"Cepeda et al. (2006) : d=0.71 — effet parmi les plus forts en éducation."}]}
 
-Règles : 3-6 éléments dans analyse · 2-3 suggestions · signaler TOUT neuromythe · adapter au niveau et matière · steps avec phrases exactes entre guillemets · score reflète alignement avec la recherche.`;
+Règles strictes :
+- 3 à 6 éléments dans "analyse" 
+- 2 à 3 éléments dans "suggestions"
+- status = "ok" (point fort), "warn" (à renforcer ou neuromythe), ou "plus" (opportunité)
+- Signaler TOUT neuromythe (styles VAK, bachotage, praise intelligence, cerveau gauche/droit)
+- Adapter les suggestions au niveau scolaire et à la matière indiqués
+- Utiliser <strong> dans detail pour mettre en valeur les termes clés
+- Dans steps, inclure des phrases exactes entre guillemets dans "ex"
+- Le score reflète l'alignement global avec la recherche (0=aucun, 100=parfait)`;
 
   // Call Claude API
   try {
@@ -813,15 +803,19 @@ Règles : 3-6 éléments dans analyse · 2-3 suggestions · signaler TOUT neurom
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
-        model: 'claude-sonnet-4-6',
-        max_tokens: 2000,
+        model: 'claude-sonnet-4-5',
+        max_tokens: 4000,
         messages: [{role: 'user', content: prompt}]
       })
     });
     if (!resp.ok) throw new Error('API ' + resp.status);
     const data = await resp.json();
     const raw = data.content.map(b => b.text || '').join('');
-    const cleaned = raw.replace(/```json|```/g, '').trim();
+    // Robust JSON extraction: find first { to last }
+    const firstBrace = raw.indexOf('{');
+    const lastBrace  = raw.lastIndexOf('}');
+    if (firstBrace === -1 || lastBrace === -1) throw new Error('No JSON in response');
+    const cleaned = raw.slice(firstBrace, lastBrace + 1);
     aiResults = JSON.parse(cleaned);
   } catch(e) {
     console.error('AI error:', e);
