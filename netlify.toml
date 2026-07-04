@@ -1,6 +1,16 @@
 [build]
   functions = "netlify/functions"
 
+[functions]
+  node_bundler = "esbuild"
+
+# Increase function timeout to maximum allowed (26s on free, 900s on paid)
+[functions."claude"]
+  timeout = 26
+
+[context.production.environment]
+  NODE_VERSION = "18"
+
 [[headers]]
   for = "/*"
   [headers.values]
