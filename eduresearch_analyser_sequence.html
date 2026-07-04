@@ -645,8 +645,14 @@ function goStep3() {
   runProgress();  // async — no await needed here
 }
 function goStep4() {
-  document.getElementById('step3').classList.remove('show');
-  document.getElementById('step4').classList.add('show');
+  console.log('goStep4 called, aiResults:', aiResults ? 'present' : 'NULL');
+  const s3 = document.getElementById('step3');
+  const s4 = document.getElementById('step4');
+  if (s3) s3.classList.remove('show');
+  if (s4) {
+    s4.classList.add('show');
+    s4.style.display = 'block'; // force visible
+  }
   setStep(4); scroll();
   renderResults();
 }
@@ -868,7 +874,12 @@ Règles strictes :
 
 function renderResults() {
   const r = aiResults;
-  if (!r) return;
+  console.log('renderResults called, aiResults:', r ? 'present (score:'+r.score+')' : 'NULL');
+  if (!r) {
+    document.getElementById('score-head').innerHTML = '<div style="color:#D85A30;padding:20px;font-size:13px;">⚠️ Erreur : pas de résultat reçu. Réessayez.</div>';
+    return;
+  }
+  console.log('analyse items:', (r.analyse||[]).length, 'suggestions:', (r.suggestions||[]).length);
 
   // Score color
   const scoreColor = r.score >= 80 ? '#1D9E75' : r.score >= 60 ? '#BA7517' : '#D85A30';
@@ -939,6 +950,9 @@ function renderResults() {
         </div>
       </div>`;
     }).join('');
+
+  // Show the analyse tab by default
+  showTab('analyse');
 }
 
 function openMainSite(fiche) {
