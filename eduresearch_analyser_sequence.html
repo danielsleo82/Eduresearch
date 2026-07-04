@@ -47,7 +47,8 @@ body{font-family:var(--font);background:var(--bgs);color:var(--tx);min-height:10
 .nav-tab{font-size:12px;font-weight:500;padding:6px 14px;border-radius:8px;border:none;background:transparent;color:var(--tm);cursor:pointer;transition:all .15s;}
 .nav-tab:hover{background:var(--bgs);color:var(--tx);}
 .nav-tab.active{background:var(--t50);color:var(--t800);}
-.nav-user{display:flex;align-items:center;gap:8px;}
+.nav-user{display:flex;align-items:center;gap:7px;padding:4px 12px 4px 4px;border-radius:20px;background:rgba(255,255,255,.1);transition:background .15s;}
+.nav-user:hover{background:rgba(255,255,255,.18);}
 .nav-avatar{width:30px;height:30px;border-radius:50%;background:var(--b600);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;}
 .nav-name{font-size:12px;color:var(--tm);}
 
@@ -271,9 +272,9 @@ body{font-family:var(--font);background:var(--bgs);color:var(--tx);min-height:10
     <a class="nav-brand" href="index.html">
       <span class="logo-edu">Edu</span><div class="logo-dot"></div><span class="logo-res">Research</span>
     </a>
-    <div class="nav-user">
-      <div class="nav-avatar">ML</div>
-      <span class="nav-name">Marie L.</span>
+    <div class="nav-user" id="nav-user-link" onclick="window.location='mon-compte.html'" style="cursor:pointer;text-decoration:none;" title="Mon compte">
+      <div class="nav-avatar" id="nav-avatar">?</div>
+      <span class="nav-name" id="nav-name">Mon compte</span>
     </div>
   </div>
   <div class="nav-menu">
@@ -783,21 +784,11 @@ TEXTE :
 ${txt || '[Fichier déposé sans texte extrait]'}
 
 ---
-INSTRUCTIONS : Analysez ce texte pédagogique et répondez avec un objet JSON valide.
-IMPORTANT : Commencez DIRECTEMENT par { et terminez par }. Aucun texte avant ou après. Aucun markdown.
+INSTRUCTIONS : Reponds uniquement avec un objet JSON valide. Commence par { et termine par }. Aucun texte autour, aucun markdown.
 
-Format exact attendu :
-{"score":75,"scoreLabel":"Séquence solide avec 2 points à renforcer","scoreTags":["✓ Point fort","⚠️ À ajuster","💡 Opportunité"],"analyse":[{"icon":"📖","status":"ok","badge":"✓ Point fort","title":"Titre court","detail":"Explication en 2-3 phrases. <strong>Terme clé</strong> bien utilisé (Auteur, année).","refTxt":"Auteur (année) · Titre · Éditeur","refCls":"","fiche":"Enseignement explicite"},{"icon":"⚠️","status":"warn","badge":"⚠️ Neuromythe détecté","title":"Styles d'apprentissage VAK","detail":"Affirmation réfutée. <strong>Howard-Jones (2014)</strong> démontre l'absence de preuves.","refTxt":"Howard-Jones (2014) · Nature Reviews Neuroscience","refCls":"ref-warn","fiche":"Neurosciences & apprentissage"}],"suggestions":[{"icon":"🔁","title":"Ajouter des rappels espacés","color":"#D85A30","pill":"Révision espacée · d=0.71","steps":[{"t":"En fin de séance, posez <strong>3 questions de rappel</strong>","ex":"«Fermez vos cahiers — qu'avez-vous retenu aujourd'hui ?»","col":"#D85A30"}],"why":"Cepeda et al. (2006) : d=0.71 — effet parmi les plus forts en éducation."}]}
+Format : {"score":72,"scoreLabel":"Bonne base avec 2 points a renforcer","scoreTags":["OK Point fort","Attention Neuromythe","Idee Opportunite"],"analyse":[{"icon":"ok","status":"ok","badge":"Point fort","title":"Titre court","detail":"Explication concise. Terme important en evidence.","refTxt":"Auteur (annee) - Titre","refCls":"","fiche":"Enseignement explicite"},{"icon":"warn","status":"warn","badge":"Neuromythe detecte","title":"Styles VAK","detail":"Refute par la recherche. Howard-Jones (2014) demontre absence de preuves.","refTxt":"Howard-Jones (2014) - Nature Reviews Neuroscience","refCls":"ref-warn","fiche":"Neurosciences"},{"icon":"plus","status":"plus","badge":"Opportunite","title":"Titre","detail":"Explication.","refTxt":"Reference","refCls":"","fiche":"Evaluation formative"}],"suggestions":[{"icon":"s1","title":"Titre activite","color":"#D85A30","pill":"Revision espacee - d=0.71","steps":[{"t":"Description etape claire","ex":"Phrase modele a dire en classe","col":"#D85A30"}],"why":"Justification scientifique courte."},{"icon":"s2","title":"Titre activite 2","color":"#1D9E75","pill":"Evaluation formative - d=0.68","steps":[{"t":"Description etape","ex":"Phrase modele","col":"#1D9E75"}],"why":"Justification."}]}
 
-Règles strictes :
-- 3 à 6 éléments dans "analyse" 
-- 2 à 3 éléments dans "suggestions"
-- status = "ok" (point fort), "warn" (à renforcer ou neuromythe), ou "plus" (opportunité)
-- Signaler TOUT neuromythe (styles VAK, bachotage, praise intelligence, cerveau gauche/droit)
-- Adapter les suggestions au niveau scolaire et à la matière indiqués
-- Utiliser <strong> dans detail pour mettre en valeur les termes clés
-- Dans steps, inclure des phrases exactes entre guillemets dans "ex"
-- Le score reflète l'alignement global avec la recherche (0=aucun, 100=parfait)`;
+Regles : exactement 3 elements dans analyse, exactement 2 dans suggestions, signaler tout neuromythe avec status=warn, score entre 0 et 100. Ne jamais utiliser d apostrophes ni de guillemets dans les valeurs texte.`;
 
   // Call Claude API
   try {
@@ -813,12 +804,34 @@ Règles strictes :
     if (!resp.ok) throw new Error('API ' + resp.status);
     const data = await resp.json();
     const raw = data.content.map(b => b.text || '').join('');
-    // Robust JSON extraction: find first { to last }
+    // Robust JSON extraction
     const firstBrace = raw.indexOf('{');
     const lastBrace  = raw.lastIndexOf('}');
-    if (firstBrace === -1 || lastBrace === -1) throw new Error('No JSON in response');
-    const cleaned = raw.slice(firstBrace, lastBrace + 1);
-    aiResults = JSON.parse(cleaned);
+    if (firstBrace === -1 || lastBrace === -1) {
+      throw new Error('No JSON in response. Raw: ' + raw.substring(0, 100));
+    }
+    let cleaned = raw.slice(firstBrace, lastBrace + 1);
+    let parsed;
+    try {
+      parsed = JSON.parse(cleaned);
+    } catch(parseErr) {
+      console.warn('JSON.parse failed, trying fixes:', parseErr.message);
+      // Fix control characters and trailing commas
+      let fixed = cleaned;
+      fixed = fixed.replace(/[ -]/g, function(c) {
+        if (c === '\n') return '\\n';
+        if (c === '\t') return '\\t';
+        if (c === '\r') return '';
+        return '';
+      });
+      fixed = fixed.replace(/,[ \t\n\r]*([}\]])/g, '$1');
+      try {
+        parsed = JSON.parse(fixed);
+      } catch(e2) {
+        throw new Error('JSON invalide: ' + parseErr.message);
+      }
+    }
+    aiResults = parsed;
   } catch(e) {
     console.error('AI error:', e);
     aiResults = {
@@ -970,6 +983,26 @@ function selectIntent(el, val) {
 
 // Init
 setStep(1);
+
+// Populate nav from localStorage
+(function() {
+  try {
+    const contact = JSON.parse(localStorage.getItem('eduresearch_contact') || '{}');
+    const unlocked = localStorage.getItem('eduresearch_unlocked') === '1';
+    const avatarEl = document.getElementById('nav-avatar');
+    const nameEl   = document.getElementById('nav-name');
+    const linkEl   = document.getElementById('nav-user-link');
+    if (unlocked && contact.firstname) {
+      const initials = ((contact.firstname||'').charAt(0) + (contact.lastname||'').charAt(0)).toUpperCase();
+      if (avatarEl) avatarEl.textContent = initials || '?';
+      if (nameEl)   nameEl.textContent   = contact.firstname;
+      if (linkEl)   linkEl.style.display = 'flex';
+    } else if (!unlocked) {
+      // Not logged in — hide nav-user or show generic
+      if (linkEl) linkEl.style.display = 'none';
+    }
+  } catch(e) {}
+})();
 </script>
 </body>
 </html>
