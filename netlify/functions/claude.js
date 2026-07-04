@@ -18,13 +18,38 @@ exports.handler = async (event) => {
 
   const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
   if (!ANTHROPIC_API_KEY) {
-    console.error('ANTHROPIC_API_KEY is not set');
     return { statusCode: 500, headers, body: JSON.stringify({ error: 'API key not configured' }) };
+  }
+
+  // If body contains "list_models", return available models for diagnosis
+  if (event.body && event.body.includes('"list_models"')) {
+    const result = await new Promise((resolve, reject) => {
+      const options = {
+        hostname: 'api.anthropic.com',
+        path: '/v1/models',
+        method: 'GET',
+        headers: {
+          'x-api-key': ANTHROPIC_API_KEY,
+          'anthropic-version': '2023-06-01',
+        },
+      };
+      const req = https.request(options, (res) => {
+        let data = '';
+        res.on('data', chunk => data += chunk);
+        res.on('end', () => resolve({ status: res.statusCode, body: data }));
+      });
+      req.on('error', reject);
+      req.end();
+    });
+    console.log('Models response:', result.status, result.body.substring(0, 500));
+    return { statusCode: result.status, headers, body: result.body };
   }
 
   try {
     const body = JSON.parse(event.body);
-    const model = 'claude-3-5-sonnet-20241022'; // stable dated model string
+    
+    // Use model from request, fallback to claude-3-haiku (most widely available)
+    const model = body.model || 'claude-haiku-4-5';
     const max_tokens = Math.min(body.max_tokens || 1000, 4000);
 
     console.log('Calling Anthropic with model:', model, 'max_tokens:', max_tokens);
