@@ -825,11 +825,46 @@ TEXTE :
 ${txt || '[Fichier déposé sans texte extrait]'}
 
 ---
-INSTRUCTIONS : Reponds uniquement avec un objet JSON valide. Commence par { et termine par }. Aucun texte autour, aucun markdown.
+INSTRUCTIONS : Analyse le texte pedagogique. Reponds avec exactement ce format XML - remplace les [...] par ton analyse :
 
-Format : {"score":72,"scoreLabel":"Bonne base avec 2 points a renforcer","scoreTags":["OK Point fort","Attention Neuromythe","Idee Opportunite"],"analyse":[{"icon":"ok","status":"ok","badge":"Point fort","title":"Titre court","detail":"Explication concise. Terme important en evidence.","refTxt":"Auteur (annee) - Titre","refCls":"","fiche":"Enseignement explicite"},{"icon":"warn","status":"warn","badge":"Neuromythe detecte","title":"Styles VAK","detail":"Refute par la recherche. Howard-Jones (2014) demontre absence de preuves.","refTxt":"Howard-Jones (2014) - Nature Reviews Neuroscience","refCls":"ref-warn","fiche":"Neurosciences"},{"icon":"plus","status":"plus","badge":"Opportunite","title":"Titre","detail":"Explication.","refTxt":"Reference","refCls":"","fiche":"Evaluation formative"}],"suggestions":[{"icon":"s1","title":"Titre activite","color":"#D85A30","pill":"Revision espacee - d=0.71","steps":[{"t":"Description etape claire","ex":"Phrase modele a dire en classe","col":"#D85A30"}],"why":"Justification scientifique courte."},{"icon":"s2","title":"Titre activite 2","color":"#1D9E75","pill":"Evaluation formative - d=0.68","steps":[{"t":"Description etape","ex":"Phrase modele","col":"#1D9E75"}],"why":"Justification."}]}
+<analyse>
+<score>[nombre entre 0 et 100]</score>
+<label>[jugement en une phrase sans apostrophe]</label>
+<tag1>[tag court ok]</tag1>
+<tag2>[tag court attention]</tag2>
+<tag3>[tag court opportunite]</tag3>
+<item status="ok" icon="ok" fiche="[nom fiche]">
+<title>[titre court]</title>
+<detail>[explication 2 phrases sans apostrophe]</detail>
+<ref>[reference auteur annee]</ref>
+</item>
+<item status="warn" icon="warn" fiche="[nom fiche]">
+<title>[titre]</title>
+<detail>[explication neuromythe ou point a renforcer]</detail>
+<ref>[reference]</ref>
+</item>
+<item status="plus" icon="plus" fiche="[nom fiche]">
+<title>[opportunite]</title>
+<detail>[explication]</detail>
+<ref>[reference]</ref>
+</item>
+<suggestion color="#D85A30" pill="[theme - d=XX]">
+<title>[titre activite]</title>
+<step1>[description etape 1]</step1>
+<ex1>[phrase modele a dire en classe]</ex1>
+<step2>[description etape 2]</step2>
+<ex2>[phrase modele]</ex2>
+<why>[justification scientifique courte]</why>
+</suggestion>
+<suggestion color="#1D9E75" pill="[theme - d=XX]">
+<title>[titre activite 2]</title>
+<step1>[etape]</step1>
+<ex1>[phrase]</ex1>
+<why>[justification]</why>
+</suggestion>
+</analyse>
 
-Regles : exactement 3 elements dans analyse, exactement 2 dans suggestions, signaler tout neuromythe avec status=warn, score entre 0 et 100. Ne jamais utiliser d apostrophes ni de guillemets dans les valeurs texte.`;
+Regles : signaler tout neuromythe avec status=warn, adapter au niveau et matiere, ne jamais utiliser d apostrophes.`;
 
   // Call Claude API
   try {
@@ -845,37 +880,80 @@ Regles : exactement 3 elements dans analyse, exactement 2 dans suggestions, sign
     if (!resp.ok) throw new Error('API ' + resp.status);
     const data = await resp.json();
     const raw = data.content.map(b => b.text || '').join('');
-    // Robust JSON extraction
-    const firstBrace = raw.indexOf('{');
-    const lastBrace  = raw.lastIndexOf('}');
-    if (firstBrace === -1 || lastBrace === -1) {
-      throw new Error('No JSON in response. Raw: ' + raw.substring(0, 100));
+    // Parse XML response
+    const xmlStart = raw.indexOf('<analyse>');
+    const xmlEnd   = raw.lastIndexOf('</analyse>');
+    if (xmlStart === -1 || xmlEnd === -1) {
+      throw new Error('Reponse invalide — reessayez. Debut: ' + raw.substring(0, 80));
     }
-    let cleaned = raw.slice(firstBrace, lastBrace + 1);
-    let parsed;
-    try {
-      parsed = JSON.parse(cleaned);
-    } catch(parseErr) {
-      console.warn('JSON.parse failed, trying fixes:', parseErr.message);
-      try {
-        // Remove control characters char by char
-        let fixed = '';
-        for (let i = 0; i < cleaned.length; i++) {
-          const code = cleaned.charCodeAt(i);
-          if (code === 10) fixed += '\\n';       // newline
-          else if (code === 13) fixed += '';       // carriage return
-          else if (code === 9) fixed += '\\t';   // tab
-          else if (code < 32) fixed += '';         // other control chars
-          else fixed += cleaned[i];
-        }
-        // Remove trailing commas before ] or }
-        fixed = fixed.replace(/,(\s*[}\]])/g, '$1');
-        parsed = JSON.parse(fixed);
-      } catch(e2) {
-        throw new Error('JSON invalide: ' + parseErr.message);
+    const xmlStr = raw.slice(xmlStart, xmlEnd + 10);
+
+    function getTag(str, tag) {
+      const m = str.match(new RegExp('<' + tag + '[^>]*>([\\s\\S]*?)<\/' + tag + '>'));
+      return m ? m[1].trim() : '';
+    }
+    function getAllTags(str, tag) {
+      const re = new RegExp('<' + tag + '([^>]*)>([\\s\\S]*?)<\/' + tag + '>', 'g');
+      const results = [];
+      let m;
+      while ((m = re.exec(str)) !== null) {
+        results.push({ attrs: m[1], content: m[2].trim() });
       }
+      return results;
     }
-    aiResults = parsed;
+    function getAttr(str, attr) {
+      const m = str.match(new RegExp(attr + '="([^"]*)"'));
+      return m ? m[1] : '';
+    }
+
+    const score = parseInt(getTag(xmlStr, 'score')) || 60;
+    const label = getTag(xmlStr, 'label') || 'Analyse terminee';
+    const t1 = getTag(xmlStr, 'tag1');
+    const t2 = getTag(xmlStr, 'tag2');
+    const t3 = getTag(xmlStr, 'tag3');
+
+    const statusIcons = {ok:'📖', warn:'⚠️', plus:'💡'};
+    const statusBadges = {ok:'✓ Point fort', warn:'⚠️ A renforcer', plus:'💡 Opportunite'};
+
+    const items = getAllTags(xmlStr, 'item').map(it => {
+      const status = getAttr(it.attrs, 'status') || 'warn';
+      return {
+        icon: statusIcons[status] || '📋',
+        status,
+        badge: statusBadges[status] || '',
+        title: getTag(it.content, 'title'),
+        detail: getTag(it.content, 'detail'),
+        refTxt: getTag(it.content, 'ref'),
+        refCls: status === 'warn' ? 'ref-warn' : '',
+        fiche:  getAttr(it.attrs, 'fiche'),
+      };
+    });
+
+    const suggestions = getAllTags(xmlStr, 'suggestion').map(s => {
+      const color = getAttr(s.attrs, 'color') || '#1D9E75';
+      const steps = [];
+      for (let i = 1; i <= 3; i++) {
+        const t = getTag(s.content, 'step' + i);
+        const ex = getTag(s.content, 'ex' + i);
+        if (t) steps.push({ t, ex, col: color });
+      }
+      return {
+        icon: '💡',
+        title: getTag(s.content, 'title'),
+        color,
+        pill: getAttr(s.attrs, 'pill'),
+        steps,
+        why: getTag(s.content, 'why'),
+      };
+    });
+
+    aiResults = {
+      score,
+      scoreLabel: label,
+      scoreTags: [t1, t2, t3].filter(Boolean),
+      analyse: items,
+      suggestions,
+    };
   } catch(e) {
     console.error('AI error:', e);
     aiResults = {
