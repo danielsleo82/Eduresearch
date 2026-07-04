@@ -165,6 +165,7 @@ body{font-family:var(--font);background:var(--bgs);color:var(--tx);min-height:10
 .prog-icon.run{background:var(--t50);animation:pulse 1s infinite;}
 .prog-icon.ok{background:var(--t50);}
 .prog-icon.wait{background:var(--bgs);}
+@keyframes spin{to{transform:rotate(360deg);}}
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.5;}}
 .prog-lbl{font-size:12px;color:var(--tx);flex:1;}
 .prog-sub{font-size:10px;color:var(--tf);margin-top:1px;}
@@ -470,6 +471,10 @@ body{font-family:var(--font);background:var(--bgs);color:var(--tx);min-height:10
       <div class="card-title"><div class="ctd" style="background:var(--p600);"></div>Analyse de votre séquence…</div>
       <div id="prog-items"></div>
       <div style="font-size:11px;color:var(--tf);text-align:center;margin-top:12px;" id="prog-hint">Lecture du texte pédagogique…</div>
+      <div id="api-wait" style="display:none;margin-top:14px;padding:10px 14px;background:var(--t50);border-radius:var(--r);font-size:11px;color:var(--t800);align-items:center;justify-content:center;gap:8px;">
+        <span style="display:inline-block;width:12px;height:12px;border:2px solid var(--t200);border-top-color:var(--t600);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0;"></span>
+        <span id="api-wait-txt">L'IA analyse votre texte — cela peut prendre 20 à 40 secondes…</span>
+      </div>
     </div>
   </div>
 
@@ -761,10 +766,17 @@ async function runProgress() {
     stepIdx++;
   }
   advanceStep();
+  // Advance steps slowly — stops at last step and waits for API
   const stepTimer = setInterval(() => {
-    if (stepIdx < steps.length) advanceStep();
+    if (stepIdx < steps.length - 1) advanceStep(); // stop one before last
     else clearInterval(stepTimer);
-  }, 1400);
+  }, 1800);
+
+  // Show waiting indicator after animation starts
+  setTimeout(() => {
+    const waitEl = document.getElementById('api-wait');
+    if (waitEl) waitEl.style.display = 'flex';
+  }, steps.length * 1800 + 500);
 
   // Build prompt
   const prompt = SCIENCE_CONTEXT + `
@@ -803,7 +815,7 @@ Règles strictes :
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
-        model: 'claude-sonnet-4-5',
+        model: 'claude-sonnet-4-6',
         max_tokens: 4000,
         messages: [{role: 'user', content: prompt}]
       })
@@ -835,7 +847,7 @@ Règles strictes :
 
   // Complete remaining steps
   clearInterval(stepTimer);
-  for (let i = stepIdx - 1; i < steps.length; i++) {
+  for (let i = Math.max(0, stepIdx - 1); i < steps.length; i++) {
     if (document.getElementById('pf'+i)) {
       document.getElementById('pf'+i).style.width = '100%';
       document.getElementById('pf'+i).style.background = 'var(--t400)';
@@ -845,7 +857,10 @@ Règles strictes :
       document.getElementById('pst'+i).style.color = 'var(--t600)';
     }
   }
-  setTimeout(goStep4, 600);
+  // Show completion message and go to results
+  const hintEl = document.getElementById('prog-hint');
+  if (hintEl) hintEl.textContent = '✓ Analyse terminée — affichage des résultats…';
+  setTimeout(goStep4, 800);
 }
 
 // ── DATA RÉSULTATS ──
