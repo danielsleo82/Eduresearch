@@ -89,6 +89,7 @@ body{font-family:var(--font);background:var(--bgs);color:var(--tx);min-height:10
 .mtext::placeholder{color:var(--tf);}
 .input-footer{display:flex;align-items:center;justify-content:space-between;margin-top:6px;}
 .char-count{font-size:10px;color:var(--tf);}
+.char-count.err{color:var(--c600);font-weight:600;}
 .char-ok{color:var(--t600);}
 
 /* EXEMPLES */
@@ -698,7 +699,41 @@ NEUROMYTHES à signaler impérativement : styles VAK (visuel/auditif/kinesthési
 let aiResults = null;
 
 async function runProgress() {
-  const txt = document.getElementById('mtext').value.trim();
+  let txt = document.getElementById('mtext').value.trim();
+
+  // If no text but a file was uploaded, give clear feedback
+  if (!txt && currentFile) {
+    const ext = currentFile.name.split('.').pop().toLowerCase();
+    if (ext === 'pdf') {
+      // Try extraction one more time
+      const charEl = document.getElementById('char-count');
+      charEl.textContent = 'Extraction PDF en cours — veuillez patienter…';
+      await extractPdfText(currentFile);
+      txt = document.getElementById('mtext').value.trim();
+    }
+    if (!txt) {
+      // Still empty - go back to step 1 with error message
+      hide('step3'); hide('step4');
+      document.getElementById('step3').classList.remove('show');
+      show('step1'); setStep(1); scroll();
+      const charEl = document.getElementById('char-count');
+      charEl.textContent = ext === 'pdf'
+        ? 'PDF non lisible — copiez-collez votre texte dans la zone ci-dessous.'
+        : 'Fichier Word : ouvrez le document, Ctrl+A → Ctrl+C → collez dans la zone de texte.';
+      charEl.className = 'char-count err';
+      document.getElementById('mtext').focus();
+      return;
+    }
+  }
+
+  if (!txt) {
+    hide('step3'); document.getElementById('step3').classList.remove('show');
+    show('step1'); setStep(1); scroll();
+    const charEl = document.getElementById('char-count');
+    charEl.textContent = 'Veuillez coller votre texte ou déposer un fichier.';
+    charEl.className = 'char-count err';
+    return;
+  }
   const niveau = document.getElementById('sel-niveau').value;
   const matiere = document.getElementById('sel-matiere').value;
   const focus = [...document.querySelectorAll('.fchip.on')].map(c=>c.textContent.trim()).join(', ');
