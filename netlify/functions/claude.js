@@ -49,7 +49,7 @@ exports.handler = async (event) => {
     const body = JSON.parse(event.body);
     
     // Use model from request, fallback to claude-3-haiku (most widely available)
-    const model = body.model || 'claude-haiku-4-5';
+    const model = body.model || 'claude-sonnet-4-6';
     const max_tokens = Math.min(body.max_tokens || 1000, 4000);
 
     console.log('Calling Anthropic with model:', model, 'max_tokens:', max_tokens);
