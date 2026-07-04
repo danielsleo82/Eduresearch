@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>Diagnostic modèles</title>
+<style>body{font-family:monospace;padding:20px;background:#1a1a18;color:#1D9E75;}
+pre{background:#111;padding:14px;border-radius:8px;overflow:auto;font-size:12px;}
+button{padding:10px 20px;background:#1D9E75;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:14px;margin-bottom:14px;}
+</style></head>
+<body>
+<button onclick="listModels()">Lister les modèles disponibles sur votre clé API</button>
+<pre id="out">Cliquez le bouton pour voir les modèles disponibles…</pre>
+<script>
+async function listModels() {
+  document.getElementById('out').textContent = 'Chargement…';
+  try {
+    const r = await fetch('/.netlify/functions/claude', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({list_models: true})
+    });
+    const data = await r.json();
+    const models = (data.data || []).map(m => m.id);
+    document.getElementById('out').textContent = 
+      'Modèles disponibles :\n' + models.join('\n') + 
+      '\n\nRéponse complète :\n' + JSON.stringify(data, null, 2);
+  } catch(e) {
+    document.getElementById('out').textContent = 'Erreur : ' + e.message;
+  }
+}
+</script>
+</body></html>
