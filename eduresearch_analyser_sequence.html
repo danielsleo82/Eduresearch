@@ -674,34 +674,18 @@ function showTab(tab) {
 }
 
 // ── CONTEXTE SCIENTIFIQUE EDURESEARCH ──
-const SCIENCE_CONTEXT = `Tu es l'assistant pédagogique d'EduResearch, outil de veille pédagogique fondée sur les preuves.
-Tu analyses des textes pédagogiques en les confrontant aux données de la recherche scientifique.
-
-BASE DE RÉFÉRENCE — 18 thèmes scientifiques :
-1. ENSEIGNEMENT EXPLICITE (d=0.59) — Modélisation → pratique guidée → pratique autonome. Vérification compréhension de tous.
-2. EVALUATION FORMATIVE (d=0.68) — Feedback sur les stratégies pas la personne. Critères co-construits.
-3. METACOGNITION (d=0.60) — Verbaliser le raisonnement. Journal apprentissage. 5 questions auto-questionnement.
-4. CHARGE COGNITIVE (d=0.72) — Éviter split-attention. Exemples résolus avant pratique. Consignes fragmentées.
-5. DIFFERENCIATION (d=0.41) — Différencier le processus pas le contenu. Groupes de besoin. UDL.
-6. AUTONOMIE (d=0.55) — Transfert progressif du contrôle. Objectifs SMART. Auto-évaluation critériée.
-7. EVALUATION CERTIFICATIVE — Feedback actionnable. Portfolio. Retrieval practice comme préparation.
-8. REVISION ESPACEE (d=0.71) — Rappel actif > relecture. J+3/J+10/J+25. ANTI-BACHOTAGE. Flashcards.
-9. APPRENTISSAGE COOPERATIF (d=0.54) — Rôles rotatifs précis. Jigsaw. Responsabilité individuelle.
-10. DIDACTIQUE MATHS CPA (d=0.59) — Concret → Pictural → Abstrait. Modèle barre. Sens avant procédures.
-11. NEUROSCIENCES (d=0.55) — Accroche cognitive. Sommeil consolidateur. STYLES VAK = NEUROMYTHE REFUTE.
-12. CONSCIENCE PHONOLOGIQUE (d=0.73) — Syllabe avant phonème. Textes 100% décodables. Intervention précoce.
-13. COMPREHENSION EN LECTURE (d=0.60) — Activation connaissances. Inférences explicites. Vocabulaire académique.
-14. LANGUES ETRANGERES CLIL (d=0.52) — Input compréhensible. Production guidée. Vocabulaire académique L2.
-15. INVESTIGATION SCIENTIFIQUE IBL (d=0.44) — Question avant réponse. Phase Expliquer critique.
-16. MENTALITE DE CROISSANCE (d=0.19-0.41) — Feedback sur STRATEGIES pas intelligence. PRAISE INTELLIGENCE = d=-0.08.
-17. TROUBLES DYS (d=0.55-0.75) — Adapter FORMAT pas contenu. Intervention phonique précoce. Structure TDAH.
-18. IA EN CLASSE — Outils évalués scientifiquement. Feedback augmenté. Données adaptatives.
-
-NEUROMYTHES A SIGNALER SYSTEMATIQUEMENT :
-- Styles VAK (visuel/auditif/kinesthésique) → REFUTE Howard-Jones 2014
-- Relire = réviser → INEFFICACE (bachotage)
-- Féliciter l'intelligence → CONTRE-PRODUCTIF Mueller & Dweck 1998 d=-0.08
-- Cerveau gauche/droit → REFUTE`;
+const SCIENCE_CONTEXT = `Tu es l'assistant EduResearch, expert en pédagogie fondée sur les preuves.
+Analyse le texte pédagogique ci-dessous en te basant sur ces références clés :
+- Enseignement explicite (d=0.59) : modélisation → pratique guidée → autonomie
+- Évaluation formative (d=0.68) : feedback sur stratégies, pas la personne
+- Révision espacée (d=0.71) : rappel actif > relecture, anti-bachotage
+- Charge cognitive (d=0.72) : éviter surcharge, exemples avant exercices
+- Métacognition (d=0.60) : verbaliser le raisonnement
+- Mentalité de croissance : feedback sur stratégies, PAS sur l'intelligence (d=-0.08)
+- Apprentissage coopératif (d=0.54) : rôles précis, responsabilité individuelle
+- Conscience phonologique (d=0.73) : syllabe avant phonème
+- Différenciation (d=0.41) : différencier le processus, pas le contenu
+NEUROMYTHES à signaler impérativement : styles VAK (visuel/auditif/kinesthésique), bachotage, praise intelligence, cerveau gauche/droit.`;
 
 // ── ANALYSE IA REELLE ──
 let aiResults = null;
@@ -822,7 +806,7 @@ Règles strictes :
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
         model: 'claude-sonnet-4-6',
-        max_tokens: 4000,
+        max_tokens: 1500,
         messages: [{role: 'user', content: prompt}]
       })
     });
