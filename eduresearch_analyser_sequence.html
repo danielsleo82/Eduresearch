@@ -587,11 +587,17 @@ function processFile(file) {
       updateCount();
     };
     reader.readAsText(file);
-  } else {
-    // PDF/docx: file will be processed server-side; enable the button
+  } else if (ext === 'docx' || ext === 'doc') {
+    // For Word files, ask user to copy-paste content
+    document.getElementById('mtext').placeholder = 
+      'Fichier Word détecté : ouvrez le document, sélectionnez tout (Ctrl+A), copiez (Ctrl+C) et collez ici (Ctrl+V).';
     document.getElementById('btn1').disabled = false;
-    document.getElementById('char-count').textContent = 'Fichier prêt ✓';
-    document.getElementById('char-count').className = 'char-count char-ok';
+    document.getElementById('char-count').textContent = 'Collez le contenu du fichier Word dans la zone de texte →';
+    document.getElementById('char-count').className = 'char-count';
+    showToast('Word : copiez-collez le contenu dans la zone de texte');
+  } else if (ext === 'pdf') {
+    // Extract text from PDF using PDF.js
+    extractPdfText(file);
   }
 
   showToast(icon + ' ' + file.name + ' prêt');
@@ -816,16 +822,19 @@ Regles : exactement 3 elements dans analyse, exactement 2 dans suggestions, sign
       parsed = JSON.parse(cleaned);
     } catch(parseErr) {
       console.warn('JSON.parse failed, trying fixes:', parseErr.message);
-      // Fix control characters and trailing commas
-      let fixed = cleaned;
-      fixed = fixed.replace(/[ -]/g, function(c) {
-        if (c === '\n') return '\\n';
-        if (c === '\t') return '\\t';
-        if (c === '\r') return '';
-        return '';
-      });
-      fixed = fixed.replace(/,[ \t\n\r]*([}\]])/g, '$1');
       try {
+        // Remove control characters char by char
+        let fixed = '';
+        for (let i = 0; i < cleaned.length; i++) {
+          const code = cleaned.charCodeAt(i);
+          if (code === 10) fixed += '\\n';       // newline
+          else if (code === 13) fixed += '';       // carriage return
+          else if (code === 9) fixed += '\\t';   // tab
+          else if (code < 32) fixed += '';         // other control chars
+          else fixed += cleaned[i];
+        }
+        // Remove trailing commas before ] or }
+        fixed = fixed.replace(/,(\s*[}\]])/g, '$1');
         parsed = JSON.parse(fixed);
       } catch(e2) {
         throw new Error('JSON invalide: ' + parseErr.message);
@@ -981,27 +990,77 @@ function selectIntent(el, val) {
   if (lbl) lbl.textContent = hints[val];
 }
 
+
+// ── PDF TEXT EXTRACTION ─────────────────────────────────────
+async function extractPdfText(file) {
+  const charEl = document.getElementById('char-count');
+  const txtEl  = document.getElementById('mtext');
+  charEl.textContent = 'Extraction du texte PDF en cours…';
+  charEl.className = 'char-count';
+
+  try {
+    // Load PDF.js from CDN
+    if (!window.pdfjsLib) {
+      await new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+        script.onload = resolve;
+        script.onerror = reject;
+        document.head.appendChild(script);
+      });
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc =
+        'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    }
+
+    const arrayBuffer = await file.arrayBuffer();
+    const pdf = await window.pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+    let fullText = '';
+    for (let i = 1; i <= Math.min(pdf.numPages, 10); i++) {
+      const page = await pdf.getPage(i);
+      const content = await page.getTextContent();
+      const pageText = content.items.map(item => item.str).join(' ');
+      fullText += pageText + '\n';
+    }
+    fullText = fullText.trim().slice(0, 4000);
+    if (fullText.length < 50) {
+      charEl.textContent = 'PDF scanné ou protégé — copiez-collez le texte manuellement.';
+      showToast('PDF non lisible — collez le texte manuellement');
+      return;
+    }
+    txtEl.value = fullText;
+    updateCount();
+    showToast('✓ Texte extrait du PDF (' + fullText.length + ' caractères)');
+  } catch(e) {
+    console.error('PDF extraction error:', e);
+    charEl.textContent = 'Extraction impossible — copiez-collez le texte manuellement.';
+    showToast('Erreur PDF — collez le texte manuellement');
+  }
+}
+
 // Init
 setStep(1);
 
 // Populate nav from localStorage
 (function() {
   try {
-    const contact = JSON.parse(localStorage.getItem('eduresearch_contact') || '{}');
+    const raw = localStorage.getItem('eduresearch_contact');
     const unlocked = localStorage.getItem('eduresearch_unlocked') === '1';
+    const contact = raw ? JSON.parse(raw) : {};
     const avatarEl = document.getElementById('nav-avatar');
     const nameEl   = document.getElementById('nav-name');
     const linkEl   = document.getElementById('nav-user-link');
-    if (unlocked && contact.firstname) {
-      const initials = ((contact.firstname||'').charAt(0) + (contact.lastname||'').charAt(0)).toUpperCase();
-      if (avatarEl) avatarEl.textContent = initials || '?';
-      if (nameEl)   nameEl.textContent   = contact.firstname;
-      if (linkEl)   linkEl.style.display = 'flex';
-    } else if (!unlocked) {
-      // Not logged in — hide nav-user or show generic
-      if (linkEl) linkEl.style.display = 'none';
+    if (!linkEl) return;
+    if (unlocked) {
+      const fn = contact.firstname || '';
+      const ln = contact.lastname  || '';
+      const initials = (fn.charAt(0) + ln.charAt(0)).toUpperCase() || '?';
+      if (avatarEl) avatarEl.textContent = initials;
+      if (nameEl)   nameEl.textContent   = fn || 'Mon compte';
+      linkEl.style.display = 'flex';
+    } else {
+      linkEl.style.display = 'none';
     }
-  } catch(e) {}
+  } catch(e) { console.warn('Nav init error:', e); }
 })();
 </script>
 </body>
