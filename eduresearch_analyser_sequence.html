@@ -21,8 +21,24 @@
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:var(--font);background:var(--bgs);color:var(--tx);min-height:100vh;}
 
+/* NAV */
+.nav{background:var(--bg);border-bottom:1px solid var(--bd);position:sticky;top:0;z-index:100;display:flex;flex-direction:column;height:auto;padding:0;}
+.nav-brand{display:flex;align-items:center;cursor:pointer;text-decoration:none;}
+.logo-edu{font-size:17px;font-weight:800;color:var(--b900);letter-spacing:-0.5px;}
+.logo-dot{width:5px;height:5px;border-radius:50%;background:var(--t400);margin:0 1px 6px;}
+.logo-res{font-size:17px;font-weight:800;color:var(--b600);letter-spacing:-0.5px;}
+.nav-right{display:flex;align-items:center;gap:8px;}
+.lang-sw{display:flex;gap:2px;background:var(--bgs);border:1px solid var(--bd);border-radius:8px;padding:3px;}
+.lb{font-size:11px;font-weight:500;padding:4px 9px;border-radius:6px;border:none;background:transparent;color:var(--tm);cursor:pointer;transition:all .15s;}
+.lb.on{background:var(--t600);color:#fff;}
+.lb:hover:not(.on){background:var(--t50);color:var(--t800);}
+.nbadge{font-size:10px;background:var(--t50);color:var(--t800);padding:3px 9px;border-radius:20px;border:1px solid var(--t100);}
+.nav-account-btn{display:flex;align-items:center;gap:7px;padding:4px 12px 4px 4px;border-radius:20px;background:rgba(255,255,255,.1);text-decoration:none;transition:background .15s;cursor:pointer;}
+.nav-account-btn:hover{background:rgba(255,255,255,.18);}
+.nav-avatar-sm{width:26px;height:26px;border-radius:50%;background:var(--t400);color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+#nav-account-lbl{font-size:11px;font-weight:500;color:rgba(255,255,255,.85);}
+
 /* ── MENU NAVIGATION ── */
-.nav{flex-direction:column;height:auto;padding:0;}
 .nav-top{display:flex;align-items:center;justify-content:space-between;width:100%;padding:0 28px;height:50px;border-bottom:1px solid var(--bd);}
 .nav-menu{display:flex;align-items:center;gap:2px;padding:0 28px;height:40px;background:var(--bgs);border-bottom:1px solid var(--bd);width:100%;}
 .nm-item{display:flex;align-items:center;gap:6px;padding:6px 14px;border-radius:8px;font-size:12px;font-weight:500;color:var(--tm);cursor:pointer;border:none;background:transparent;transition:all .15s;white-space:nowrap;text-decoration:none;}
@@ -32,25 +48,9 @@ body{font-family:var(--font);background:var(--bgs);color:var(--tx);min-height:10
 .nm-sep{width:1px;height:20px;background:var(--bd);margin:0 4px;flex-shrink:0;}
 @media(max-width:600px){
   .nav-top{padding:0 14px;}
-  .nav-menu{padding:0 8px;overflow-x:auto;}
+  .nav-menu{padding:0 8px;gap:0;overflow-x:auto;}
   .nm-item{padding:5px 10px;font-size:11px;}
-  .nav-center,.nav-name{display:none;}
 }
-
-/* NAV */
-.nav{background:var(--bg);border-bottom:1px solid var(--bd);padding:0 28px;display:flex;align-items:center;justify-content:space-between;height:56px;position:sticky;top:0;z-index:100;}
-.nav-brand{display:flex;align-items:center;gap:6px;cursor:pointer;}
-.logo-edu{font-size:17px;font-weight:800;color:var(--b900);letter-spacing:-.5px;}
-.logo-dot{width:5px;height:5px;border-radius:50%;background:var(--t400);margin-bottom:6px;}
-.logo-res{font-size:17px;font-weight:800;color:var(--b600);letter-spacing:-.5px;}
-.nav-center{display:flex;gap:2px;}
-.nav-tab{font-size:12px;font-weight:500;padding:6px 14px;border-radius:8px;border:none;background:transparent;color:var(--tm);cursor:pointer;transition:all .15s;}
-.nav-tab:hover{background:var(--bgs);color:var(--tx);}
-.nav-tab.active{background:var(--t50);color:var(--t800);}
-.nav-user{display:flex;align-items:center;gap:7px;padding:4px 12px 4px 4px;border-radius:20px;background:rgba(255,255,255,.1);transition:background .15s;}
-.nav-user:hover{background:rgba(255,255,255,.18);}
-.nav-avatar{width:30px;height:30px;border-radius:50%;background:var(--b600);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;}
-.nav-name{font-size:12px;color:var(--tm);}
 
 /* LAYOUT */
 .page{max-width:780px;margin:0 auto;padding:28px 24px 80px;}
@@ -251,7 +251,6 @@ body{font-family:var(--font);background:var(--bgs);color:var(--tx);min-height:10
 
 @media(max-width:600px){
   .page{padding:14px 12px 60px;}
-  .nav-center,.nav-name{display:none;}
   .exemples{grid-template-columns:1fr;}
   .score-head{grid-template-columns:64px 1fr;gap:12px;}
   .export-bar{flex-direction:column;}
@@ -273,16 +272,30 @@ body{font-family:var(--font);background:var(--bgs);color:var(--tx);min-height:10
     <a class="nav-brand" href="index.html">
       <span class="logo-edu">Edu</span><div class="logo-dot"></div><span class="logo-res">Research</span>
     </a>
-    <div class="nav-user" id="nav-user-link" onclick="window.location='mon-compte.html'" style="cursor:pointer;text-decoration:none;" title="Mon compte">
-      <div class="nav-avatar" id="nav-avatar">?</div>
-      <span class="nav-name" id="nav-name">Mon compte</span>
+    <div class="nav-right">
+      <div class="lang-sw">
+        <button class="lb on" onclick="setNavLang('fr',this)">FR</button>
+        <button class="lb" onclick="setNavLang('en',this)">EN</button>
+        <button class="lb" onclick="setNavLang('nl',this)">NL</button>
+      </div>
+      <div class="nbadge" id="nbadge">Données scientifiques réelles</div>
+      <a class="nav-account-btn" id="nav-account-btn" href="mon-compte.html" style="display:none;">
+        <div class="nav-avatar-sm" id="nav-avatar-sm">?</div>
+        <span id="nav-account-lbl">Mon compte</span>
+      </a>
     </div>
   </div>
   <div class="nav-menu">
-    <a class="nm-item" href="index.html">📚 Fiches thèmes</a>
-    <span class="nm-item active">🔍 Analyser ma séquence</span>
+    <a class="nm-item" id="nm-fiches" href="index.html">
+      📚 <span id="nm-fiches-lbl">Fiches thèmes</span>
+    </a>
+    <a class="nm-item active" id="nm-analyser" href="eduresearch_analyser_sequence.html">
+      🔍 <span id="nm-analyser-lbl">Analyser ma séquence</span>
+    </a>
     <div class="nm-sep"></div>
-    <a class="nm-item locked" href="index.html">⭐ Favoris</a>
+    <a class="nm-item locked" id="nm-favoris" href="index.html">
+      ⭐ <span id="nm-favoris-lbl">Favoris</span>
+    </a>
   </div>
 </nav>
 
@@ -1153,25 +1166,41 @@ async function extractPdfText(file) {
 // Init
 setStep(1);
 
-// Populate nav from localStorage
+// Sélecteur de langue de la nav (header uniquement — le contenu de cette page reste en FR)
+const NAV_UI = {
+  fr: {badge:'Données scientifiques réelles', fiches:'Fiches thèmes', analyser:'Analyser ma séquence', favoris:'Favoris'},
+  en: {badge:'Real scientific data', fiches:'Theme sheets', analyser:'Analyse my lesson', favoris:'Favourites'},
+  nl: {badge:'Echte wetenschappelijke gegevens', fiches:'Themafiches', analyser:'Analyseer mijn les', favoris:'Favorieten'},
+};
+function setNavLang(l, btn) {
+  document.querySelectorAll('.lb').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  const t = NAV_UI[l] || NAV_UI.fr;
+  document.getElementById('nbadge').textContent = t.badge;
+  document.getElementById('nm-fiches-lbl').textContent = t.fiches;
+  document.getElementById('nm-analyser-lbl').textContent = t.analyser;
+  document.getElementById('nm-favoris-lbl').textContent = t.favoris;
+}
+
+// Populate nav account button from localStorage
 (function() {
   try {
     const raw = localStorage.getItem('eduresearch_contact');
     const unlocked = localStorage.getItem('eduresearch_unlocked') === '1';
     const contact = raw ? JSON.parse(raw) : {};
-    const avatarEl = document.getElementById('nav-avatar');
-    const nameEl   = document.getElementById('nav-name');
-    const linkEl   = document.getElementById('nav-user-link');
-    if (!linkEl) return;
+    const btn      = document.getElementById('nav-account-btn');
+    const avatarEl = document.getElementById('nav-avatar-sm');
+    const lblEl    = document.getElementById('nav-account-lbl');
+    if (!btn) return;
     if (unlocked) {
       const fn = contact.firstname || '';
       const ln = contact.lastname  || '';
       const initials = (fn.charAt(0) + ln.charAt(0)).toUpperCase() || '?';
       if (avatarEl) avatarEl.textContent = initials;
-      if (nameEl)   nameEl.textContent   = fn || 'Mon compte';
-      linkEl.style.display = 'flex';
+      if (lblEl)    lblEl.textContent    = fn || 'Mon compte';
+      btn.style.display = 'flex';
     } else {
-      linkEl.style.display = 'none';
+      btn.style.display = 'none';
     }
   } catch(e) { console.warn('Nav init error:', e); }
 })();
