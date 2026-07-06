@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EduResearch — Analyser ma séquence · Prototype</title>
+<style>
+:root{
+  --b50:#E6F1FB;--b100:#B5D4F4;--b200:#85B7EB;--b400:#378ADD;--b600:#185FA5;--b800:#0C447C;--b900:#042C53;
+  --t50:#E1F5EE;--t100:#9FE1CB;--t200:#5DCAA5;--t400:#1D9E75;--t600:#0F6E56;--t800:#085041;
+  --a50:#FAEEDA;--a100:#FAC775;--a400:#BA7517;--a600:#854F0B;--a800:#633806;
+  --c50:#FAECE7;--c400:#D85A30;--c600:#993C1D;--c800:#712B13;
+  --p50:#EEEDFE;--p400:#7F77DD;--p600:#534AB7;--p800:#3C3489;
+  --g50:#F1EFE8;--g100:#D3D1C7;--g200:#B4B2A9;--g400:#888780;--g600:#5F5E5A;--g800:#444441;
+  --tx:#1a1a18;--tm:#5F5E5A;--tf:#888780;
+  --bg:#fff;--bgs:#F7F6F2;--bgc:#fff;
+  --bd:rgba(0,0,0,0.08);--bdm:rgba(0,0,0,0.13);
+  --r:10px;--rl:14px;--rx:18px;
+  --font:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font);background:var(--bgs);color:var(--tx);min-height:100vh;}
+
+/* NAV */
+.nav{background:var(--bg);border-bottom:1px solid var(--bd);position:sticky;top:0;z-index:100;display:flex;flex-direction:column;height:auto;padding:0;}
+.nav-brand{display:flex;align-items:center;cursor:pointer;text-decoration:none;}
+.logo-edu{font-size:17px;font-weight:800;color:var(--b900);letter-spacing:-0.5px;}
+.logo-dot{width:5px;height:5px;border-radius:50%;background:var(--t400);margin:0 1px 6px;}
+.logo-res{font-size:17px;font-weight:800;color:var(--b600);letter-spacing:-0.5px;}
+.nav-right{display:flex;align-items:center;gap:8px;}
+.lang-sw{display:flex;gap:2px;background:var(--bgs);border:1px solid var(--bd);border-radius:8px;padding:3px;}
+.lb{font-size:11px;font-weight:500;padding:4px 9px;border-radius:6px;border:none;background:transparent;color:var(--tm);cursor:pointer;transition:all .15s;}
+.lb.on{background:var(--t600);color:#fff;}
+.lb:hover:not(.on){background:var(--t50);color:var(--t800);}
+.nbadge{font-size:10px;background:var(--t50);color:var(--t800);padding:3px 9px;border-radius:20px;border:1px solid var(--t100);}
+.nav-account-btn{display:flex;align-items:center;gap:7px;padding:4px 12px 4px 4px;border-radius:20px;background:rgba(255,255,255,.1);text-decoration:none;transition:background .15s;cursor:pointer;}
+.nav-account-btn:hover{background:rgba(255,255,255,.18);}
+.nav-avatar-sm{width:26px;height:26px;border-radius:50%;background:var(--t400);color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+#nav-account-lbl{font-size:11px;font-weight:500;color:rgba(255,255,255,.85);}
+
+/* ── MENU NAVIGATION ── */
+.nav-top{display:flex;align-items:center;justify-content:space-between;width:100%;padding:0 28px;height:50px;border-bottom:1px solid var(--bd);}
+.nav-menu{display:flex;align-items:center;gap:2px;padding:0 28px;height:40px;background:var(--bgs);border-bottom:1px solid var(--bd);width:100%;}
+.nm-item{display:flex;align-items:center;gap:6px;padding:6px 14px;border-radius:8px;font-size:12px;font-weight:500;color:var(--tm);cursor:pointer;border:none;background:transparent;transition:all .15s;white-space:nowrap;text-decoration:none;}
+.nm-item:hover{background:var(--bgc);color:var(--tx);}
+.nm-item.active{background:var(--bgc);color:var(--tx);font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.07);}
+.nm-item.locked{color:var(--tf);}
+.nm-sep{width:1px;height:20px;background:var(--bd);margin:0 4px;flex-shrink:0;}
+@media(max-width:600px){
+  .nav-top{padding:0 14px;}
+  .nav-menu{padding:0 8px;gap:0;overflow-x:auto;}
+  .nm-item{padding:5px 10px;font-size:11px;}
+}
+
+/* LAYOUT */
+.page{max-width:780px;margin:0 auto;padding:28px 24px 80px;}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--t800),var(--t400));border-radius:var(--rx);padding:22px 26px;margin-bottom:22px;position:relative;overflow:hidden;}
+.hero::after{content:'🔍';position:absolute;right:22px;top:50%;transform:translateY(-50%);font-size:54px;opacity:.15;}
+.hero-eyebrow{font-size:9px;letter-spacing:1.4px;font-weight:700;color:rgba(255,255,255,.7);margin-bottom:7px;}
+.hero-title{font-size:21px;font-weight:800;color:#fff;letter-spacing:-.4px;margin-bottom:7px;}
+.hero-sub{font-size:12px;color:rgba(255,255,255,.82);line-height:1.65;max-width:480px;}
+.hero-pills{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap;}
+.hero-pill{font-size:10px;padding:3px 10px;border-radius:20px;background:rgba(255,255,255,.15);color:rgba(255,255,255,.9);font-weight:500;}
+
+/* STEPS */
+.steps-bar{display:flex;align-items:center;margin-bottom:20px;}
+.si{display:flex;align-items:center;gap:7px;flex:1;}
+.sn{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;transition:all .3s;}
+.sn.done{background:var(--t600);color:#fff;}
+.sn.active{background:var(--t400);color:#fff;box-shadow:0 0 0 4px var(--t50);}
+.sn.wait{background:var(--bgs);color:var(--tf);border:1.5px solid var(--bd);}
+.sl{font-size:11px;font-weight:500;}
+.sl.active{color:var(--t600);}
+.sl.done{color:var(--t400);}
+.sl.wait{color:var(--tf);}
+.sc{flex:1;height:2px;background:var(--bd);margin:0 7px;transition:background .3s;}
+.sc.done{background:var(--t400);}
+
+/* CARD */
+.card{background:var(--bgc);border:1.5px solid var(--bd);border-radius:var(--rl);padding:20px 22px;margin-bottom:14px;}
+.card-title{font-size:13px;font-weight:700;color:var(--tx);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.ctd{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+
+/* INPUT AREA */
+.mtext{width:100%;min-height:160px;padding:14px 16px;border-radius:var(--r);border:1.5px solid var(--bd);background:var(--bgs);color:var(--tx);font-size:13px;font-family:var(--font);line-height:1.7;outline:none;resize:vertical;transition:border-color .2s;}
+.mtext:focus{border-color:var(--t400);background:var(--bgc);}
+.mtext::placeholder{color:var(--tf);}
+.input-footer{display:flex;align-items:center;justify-content:space-between;margin-top:6px;}
+.char-count{font-size:10px;color:var(--tf);}
+.char-count.err{color:var(--c600);font-weight:600;}
+.char-ok{color:var(--t600);}
+
+/* EXEMPLES */
+
+
+/* INPUT GRID */
+.input-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:0;margin-bottom:14px;align-items:start;}
+.upload-col{display:flex;flex-direction:column;gap:8px;}
+.text-col{display:flex;flex-direction:column;gap:4px;}
+
+/* UPLOAD ZONE */
+.upload-zone{border:2px dashed var(--t200);border-radius:var(--rl);padding:28px 16px;text-align:center;background:var(--t50);cursor:pointer;transition:all .2s;min-height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;}
+.upload-zone:hover,.upload-zone.drag{border-color:var(--t600);background:var(--t50);}
+.upload-zone.has-file{border-color:var(--t400);background:var(--t50);border-style:solid;pointer-events:none;}
+.uz-icon{font-size:30px;margin-bottom:4px;}
+.uz-title{font-size:13px;font-weight:700;color:var(--tx);}
+.uz-sub{font-size:11px;color:var(--tm);}
+.uz-formats{display:flex;gap:5px;margin-top:8px;flex-wrap:wrap;justify-content:center;}
+.fmt-pill{font-size:9px;padding:2px 7px;border-radius:10px;background:var(--bgc);border:1px solid var(--t100);color:var(--t800);font-weight:600;}
+
+/* FILE PREVIEW */
+.file-preview{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--t50);border-radius:var(--r);border:1.5px solid var(--t100);}
+.fp-icon{font-size:22px;flex-shrink:0;}
+.fp-info{flex:1;min-width:0;}
+.fp-name{font-size:12px;font-weight:600;color:var(--tx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.fp-size{font-size:10px;color:var(--tm);margin-top:1px;}
+.fp-remove{flex-shrink:0;width:24px;height:24px;border-radius:50%;border:1px solid var(--t200);background:var(--bgc);cursor:pointer;font-size:11px;color:var(--tm);display:flex;align-items:center;justify-content:center;}
+.fp-remove:hover{background:var(--c50);color:var(--c600);border-color:var(--c400);}
+
+/* OR SEPARATOR (vertical) */
+.or-sep{display:flex;flex-direction:column;align-items:center;gap:6px;padding:0 14px;padding-top:40px;}
+.or-line{flex:1;width:1px;background:var(--bd);}
+.or-txt{font-size:11px;color:var(--tf);font-weight:500;padding:4px 0;}
+
+@media(max-width:600px){
+  .input-grid{grid-template-columns:1fr;gap:10px;}
+  .or-sep{flex-direction:row;padding:0;padding-left:0;}
+  .or-line{flex:1;height:1px;width:auto;}
+}
+
+/* INTENTION SELECTOR */
+.intent-grid{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
+.intent-item{display:flex;gap:14px;align-items:flex-start;border:1.5px solid var(--bd);border-radius:var(--rl);padding:13px 16px;cursor:pointer;transition:all .18s;background:var(--bgc);}
+.intent-item:hover{border-color:var(--t400);background:var(--t50);}
+.intent-item.selected{border-color:var(--t400);background:var(--t50);box-shadow:0 0 0 3px var(--t100);}
+.intent-icon{font-size:22px;flex-shrink:0;margin-top:1px;}
+.intent-right{}
+.intent-title{font-size:13px;font-weight:700;color:var(--tx);margin-bottom:3px;}
+.intent-sub{font-size:11px;color:var(--tm);line-height:1.6;}
+.intent-item.selected .intent-title{color:var(--t800);}
+.intent-item.selected .intent-sub{color:var(--t600);}
+
+/* PARAMS */
+.param-row{display:flex;gap:10px;margin-bottom:12px;}
+.param-sel{flex:1;padding:9px 12px;border-radius:var(--r);border:1.5px solid var(--bd);background:var(--bgs);color:var(--tx);font-size:12px;font-family:var(--font);outline:none;cursor:pointer;}
+.param-sel:focus{border-color:var(--t400);}
+.focus-chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;}
+.fchip{font-size:11px;padding:5px 12px;border-radius:20px;border:1.5px solid var(--bd);background:var(--bgc);cursor:pointer;transition:all .15s;color:var(--tm);}
+.fchip:hover{border-color:var(--t400);color:var(--t600);}
+.fchip.on{background:var(--t50);border-color:var(--t400);color:var(--t800);font-weight:600;}
+
+/* BTN */
+.main-btn{width:100%;padding:13px;background:var(--t600);color:#fff;border:none;border-radius:var(--rl);font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:9px;margin-top:14px;}
+.main-btn:hover:not(:disabled){background:var(--t800);transform:translateY(-1px);box-shadow:0 6px 20px rgba(15,110,86,.25);}
+.main-btn:disabled{background:var(--g200);cursor:not-allowed;transform:none;box-shadow:none;}
+.sec-btn{padding:10px 18px;border:1.5px solid var(--bd);border-radius:var(--r);background:var(--bgc);font-size:13px;cursor:pointer;color:var(--tm);transition:all .15s;}
+.sec-btn:hover{background:var(--bgs);}
+
+/* PROGRESS */
+.prog-wrap{display:none;}
+.prog-wrap.show{display:block;}
+.prog-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--bgs);}
+.prog-item:last-child{border:none;}
+.prog-icon{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;}
+.prog-icon.run{background:var(--t50);animation:pulse 1s infinite;}
+.prog-icon.ok{background:var(--t50);}
+.prog-icon.wait{background:var(--bgs);}
+@keyframes spin{to{transform:rotate(360deg);}}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.5;}}
+.prog-lbl{font-size:12px;color:var(--tx);flex:1;}
+.prog-sub{font-size:10px;color:var(--tf);margin-top:1px;}
+.prog-bar{width:100px;height:4px;background:var(--bgs);border-radius:2px;overflow:hidden;flex-shrink:0;}
+.prog-fill{height:100%;border-radius:2px;transition:width .3s;}
+.prog-stat{font-size:10px;font-weight:500;width:60px;text-align:right;flex-shrink:0;}
+
+/* RESULTS */
+.res-wrap{display:none;}
+.res-wrap.show{display:block;}
+
+/* SCORE HEADER */
+.score-head{display:grid;grid-template-columns:80px 1fr;gap:16px;align-items:center;background:var(--bgs);border-radius:var(--rl);padding:16px 18px;margin-bottom:16px;}
+.score-circle{width:72px;height:72px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.score-v{font-size:24px;font-weight:800;line-height:1;}
+.score-sub{font-size:10px;font-weight:600;margin-top:2px;}
+.score-right-title{font-size:14px;font-weight:700;color:var(--tx);margin-bottom:5px;}
+.score-right-sub{font-size:11px;color:var(--tm);line-height:1.55;margin-bottom:8px;}
+.score-tags{display:flex;gap:6px;flex-wrap:wrap;}
+.stag{font-size:10px;padding:2px 8px;border-radius:20px;font-weight:500;}
+.stag-ok{background:var(--t50);color:var(--t800);}
+.stag-warn{background:var(--a50);color:var(--a800);}
+.stag-plus{background:var(--p50);color:var(--p800);}
+
+/* TABS in results */
+.res-tabs{display:flex;gap:2px;background:var(--bgs);border-radius:10px;padding:3px;margin-bottom:16px;}
+.rt{flex:1;text-align:center;font-size:12px;font-weight:600;padding:8px;border-radius:8px;border:none;background:transparent;color:var(--tm);cursor:pointer;transition:all .15s;}
+.rt.on{background:var(--bgc);color:var(--tx);box-shadow:0 1px 4px rgba(0,0,0,.08);}
+
+/* ANALYSE PANEL */
+.analysis-section{display:flex;flex-direction:column;gap:10px;}
+.an-item{background:var(--bgc);border:1.5px solid var(--bd);border-radius:var(--rl);overflow:hidden;}
+.an-head{padding:11px 14px;display:flex;align-items:flex-start;gap:10px;cursor:pointer;transition:background .15s;}
+.an-head:hover{background:var(--bgs);}
+.an-icon{font-size:16px;flex-shrink:0;margin-top:1px;}
+.an-title{font-size:12px;font-weight:600;color:var(--tx);flex:1;line-height:1.4;}
+.an-badge{font-size:10px;padding:3px 10px;border-radius:20px;font-weight:600;flex-shrink:0;white-space:nowrap;}
+.b-ok{background:var(--t50);color:var(--t800);}
+.b-warn{background:var(--a50);color:var(--a800);}
+.b-plus{background:var(--p50);color:var(--p800);}
+.b-miss{background:var(--b50);color:var(--b800);}
+.an-chev{font-size:11px;color:var(--tf);flex-shrink:0;transition:transform .2s;margin-top:2px;}
+.an-body{display:none;padding:13px 16px;background:var(--bgs);border-top:1px solid var(--bd);}
+.an-body.open{display:block;}
+.an-detail{font-size:12px;color:var(--tm);line-height:1.7;margin-bottom:10px;}
+.an-detail strong{color:var(--tx);font-weight:600;}
+.an-ref{font-size:10px;color:var(--tf);padding:6px 10px;background:var(--bgc);border-radius:var(--r);border-left:3px solid var(--t400);margin-bottom:8px;}
+.an-ref.ref-warn{border-color:var(--a400);}
+.an-ref.ref-plus{border-color:var(--p400);}
+.an-fiche-link{display:inline-flex;align-items:center;gap:4px;font-size:10px;color:var(--t600);background:var(--t50);padding:2px 8px;border-radius:10px;border:1px solid var(--t100);cursor:pointer;margin-top:4px;}
+
+/* SUGGESTIONS PANEL */
+.sugg-section{display:none;flex-direction:column;gap:12px;}
+.sugg-section.open{display:flex;}
+.sugg-intro{font-size:12px;color:var(--tm);line-height:1.65;padding:12px 14px;background:var(--t50);border-radius:var(--r);border-left:3px solid var(--t400);}
+.sugg-intro strong{color:var(--t800);}
+.sugg-card{background:var(--bgc);border:1.5px solid var(--bd);border-radius:var(--rl);overflow:hidden;}
+.sugg-head{padding:11px 14px 11px 14px;display:flex;align-items:center;gap:10px;}
+.sugg-head-icon{font-size:18px;flex-shrink:0;}
+.sugg-head-title{font-size:12px;font-weight:700;color:#fff;flex:1;}
+.sugg-head-pill{font-size:9px;padding:2px 8px;border-radius:20px;background:rgba(255,255,255,.2);color:#fff;font-weight:500;}
+.sugg-body{padding:13px 16px;}
+.sugg-steps{display:flex;flex-direction:column;gap:8px;}
+.sugg-step{display:flex;gap:10px;align-items:flex-start;}
+.sugg-num{width:20px;height:20px;border-radius:50%;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;color:#fff;}
+.sugg-txt{font-size:12px;color:var(--tx);line-height:1.6;flex:1;}
+.sugg-ex{font-size:11px;color:var(--tm);line-height:1.55;background:var(--bgs);border-radius:var(--r);padding:7px 10px;margin-top:4px;border-left:3px solid;}
+.sugg-why{font-size:10px;color:var(--tm);background:var(--bgs);border-radius:var(--r);padding:8px 11px;margin-top:10px;border-top:1px solid var(--bd);}
+.sugg-why strong{color:var(--tx);}
+
+/* EXPORT */
+.export-bar{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap;}
+.exp-btn{flex:1;min-width:120px;padding:9px;border-radius:var(--r);border:1.5px solid var(--bd);background:var(--bgc);font-size:11px;font-weight:600;cursor:pointer;color:var(--tx);display:flex;align-items:center;justify-content:center;gap:5px;transition:all .15s;}
+.exp-btn:hover{background:var(--bgs);}
+.exp-btn.primary{background:var(--t600);color:#fff;border-color:var(--t600);}
+.exp-btn.primary:hover{background:var(--t800);}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;right:24px;background:var(--b900);color:#fff;padding:10px 16px;border-radius:var(--rl);font-size:12px;box-shadow:0 8px 24px rgba(0,0,0,.2);opacity:0;transform:translateY(10px);transition:all .3s;z-index:999;pointer-events:none;}
+.toast.show{opacity:1;transform:translateY(0);}
+
+@media(max-width:600px){
+  .page{padding:14px 12px 60px;}
+  .exemples{grid-template-columns:1fr;}
+  .score-head{grid-template-columns:64px 1fr;gap:12px;}
+  .export-bar{flex-direction:column;}
+}
+</style>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LV34TMMSWJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LV34TMMSWJ');
+</script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-top">
+    <a class="nav-brand" href="index.html">
+      <span class="logo-edu">Edu</span><div class="logo-dot"></div><span class="logo-res">Research</span>
+    </a>
+    <div class="nav-right">
+      <div class="lang-sw">
+        <button class="lb on" onclick="setNavLang('fr',this)">FR</button>
+        <button class="lb" onclick="setNavLang('en',this)">EN</button>
+        <button class="lb" onclick="setNavLang('nl',this)">NL</button>
+      </div>
+      <div class="nbadge" id="nbadge">Données scientifiques réelles</div>
+      <a class="nav-account-btn" id="nav-account-btn" href="mon-compte.html" style="display:none;">
+        <div class="nav-avatar-sm" id="nav-avatar-sm">?</div>
+        <span id="nav-account-lbl">Mon compte</span>
+      </a>
+    </div>
+  </div>
+  <div class="nav-menu">
+    <a class="nm-item" id="nm-fiches" href="index.html">
+      📚 <span id="nm-fiches-lbl">Fiches thèmes</span>
+    </a>
+    <a class="nm-item active" id="nm-analyser" href="eduresearch_analyser_sequence.html">
+      🔍 <span id="nm-analyser-lbl">Analyser ma séquence</span>
+    </a>
+    <div class="nm-sep"></div>
+    <a class="nm-item locked" id="nm-favoris" href="index.html">
+      ⭐ <span id="nm-favoris-lbl">Favoris</span>
+    </a>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">ANALYSER MA SÉQUENCE</div>
+    <div class="hero-title">Votre cours, analysé par la recherche</div>
+    <div class="hero-sub">Déposez n'importe quel texte pédagogique — séquence, support de cours, fiche activité. EduResearch identifie ce qui est scientifiquement solide, ce qui peut être renforcé, et vous propose des activités concrètes fondées sur les preuves.</div>
+    <div class="hero-pills">
+      <span class="hero-pill">✓ Points forts identifiés</span>
+      <span class="hero-pill">⚡ Pistes d'amélioration</span>
+      <span class="hero-pill">💡 Activités suggérées</span>
+      <span class="hero-pill">📚 Liens vers les fiches</span>
+    </div>
+  </div>
+
+  <!-- STEPS -->
+  <div class="steps-bar">
+    <div class="si"><div class="sn active" id="sn1">1</div><div class="sl active" id="sl1">Mon texte</div></div>
+    <div class="sc" id="sc1"></div>
+    <div class="si"><div class="sn wait" id="sn2">2</div><div class="sl wait" id="sl2">Contexte</div></div>
+    <div class="sc" id="sc2"></div>
+    <div class="si"><div class="sn wait" id="sn3">3</div><div class="sl wait" id="sl3">Analyse</div></div>
+    <div class="sc" id="sc3"></div>
+    <div class="si"><div class="sn wait" id="sn4">4</div><div class="sl wait" id="sl4">Résultats</div></div>
+  </div>
+
+  <!-- ÉTAPE 1 -->
+  <div id="step1">
+    <div class="card">
+      <div class="card-title"><div class="ctd" style="background:var(--t400);"></div>Collez ou déposez votre texte</div>
+
+      <!-- ZONE UPLOAD + TEXTE CÔTE À CÔTE -->
+      <div class="input-grid">
+
+        <!-- UPLOAD -->
+        <div class="upload-col">
+          <div class="upload-zone" id="upload-zone"
+               ondragover="onDragOver(event)"
+               ondragleave="onDragLeave(event)"
+               ondrop="onDrop(event)"
+               onclick="document.getElementById('file-input').click()">
+            <input type="file" id="file-input" style="display:none;"
+                   accept=".pdf,.docx,.txt"
+                   onchange="handleFile(event)"/>
+            <div class="uz-icon" id="uz-icon">📁</div>
+            <div class="uz-title" id="uz-title">Déposez votre fichier</div>
+            <div class="uz-sub" id="uz-sub">ou cliquez pour parcourir</div>
+            <div class="uz-formats">
+              <span class="fmt-pill">PDF</span>
+              <span class="fmt-pill">Word .docx</span>
+              <span class="fmt-pill">.txt</span>
+            </div>
+          </div>
+          <!-- File preview -->
+          <div class="file-preview" id="file-preview" style="display:none;">
+            <div class="fp-icon" id="fp-icon">📄</div>
+            <div class="fp-info">
+              <div class="fp-name" id="fp-name"></div>
+              <div class="fp-size" id="fp-size"></div>
+            </div>
+            <button class="fp-remove" onclick="removeFile(event)">✕</button>
+          </div>
+        </div>
+
+        <!-- SEPARATOR -->
+        <div class="or-sep"><div class="or-line"></div><div class="or-txt">ou</div><div class="or-line"></div></div>
+
+        <!-- TEXTAREA -->
+        <div class="text-col">
+          <textarea class="mtext" id="mtext"
+            placeholder="Collez votre texte ici — séquence de cours, support élève, fiche activité, protocole d'évaluation…"
+            oninput="updateCount()"></textarea>
+          <div class="input-footer">
+            <div class="char-count" id="char-count">0 caractères</div>
+          </div>
+        </div>
+
+      </div>
+
+      <button class="main-btn" id="btn1" onclick="goStep2()" disabled>
+        Continuer → Préciser le contexte
+      </button>
+    </div>
+  </div>
+
+  <!-- ÉTAPE 2 -->
+  <div id="step2" style="display:none;">
+    <div class="card">
+      <div class="card-title"><div class="ctd" style="background:var(--t400);"></div>Dites-nous ce que vous cherchez à faire</div>
+      <div style="font-size:11px;color:var(--tm);margin-bottom:16px;">Ces informations permettent d'adapter l'analyse à votre situation réelle.</div>
+
+      <div style="font-size:12px;font-weight:600;color:var(--tx);margin-bottom:10px;">Qu'est-ce que vous cherchez à faire ?</div>
+      <div class="intent-grid" id="intent-grid">
+        <div class="intent-item selected" onclick="selectIntent(this,'prepare')">
+          <div class="intent-icon">✏️</div>
+          <div class="intent-right">
+            <div class="intent-title">Préparer un cours</div>
+            <div class="intent-sub">Je construis quelque chose de nouveau et je veux m'assurer qu'il est solide avant de l'utiliser en classe.</div>
+          </div>
+        </div>
+        <div class="intent-item" onclick="selectIntent(this,'improve')">
+          <div class="intent-icon">🔧</div>
+          <div class="intent-right">
+            <div class="intent-title">Améliorer un cours existant</div>
+            <div class="intent-sub">J'ai déjà utilisé ce cours — je veux identifier ce qui peut être renforcé pour la prochaine fois.</div>
+          </div>
+        </div>
+        <div class="intent-item" onclick="selectIntent(this,'check')">
+          <div class="intent-icon">✅</div>
+          <div class="intent-right">
+            <div class="intent-title">Vérifier avant de distribuer</div>
+            <div class="intent-sub">Je m'apprête à utiliser ce support cette semaine — je veux un regard rapide avant de l'imprimer ou de le distribuer.</div>
+          </div>
+        </div>
+        <div class="intent-item" onclick="selectIntent(this,'after')">
+          <div class="intent-icon">📊</div>
+          <div class="intent-right">
+            <div class="intent-title">Comprendre après les résultats</div>
+            <div class="intent-sub">Mes élèves ont eu des difficultés — je cherche ce qui n'a pas fonctionné et comment l'ajuster.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="param-row">
+        <select class="param-sel" id="sel-niveau">
+          <option value="">Niveau scolaire…</option>
+          <option>Maternelle / Préscolaire</option>
+          <option>Primaire 1–2 (6–8 ans)</option>
+          <option>Primaire 3–4 (8–10 ans)</option>
+          <option>Primaire 5–6 (10–12 ans)</option>
+          <option>Secondaire — Degré inférieur (12–15 ans)</option>
+          <option>Secondaire — Degré supérieur (15–18 ans)</option>
+          <option>Supérieur / Formation adultes</option>
+        </select>
+        <select class="param-sel" id="sel-matiere">
+          <option value="">Matière…</option>
+          <option>Français / Lecture</option>
+          <option>Mathématiques</option>
+          <option>Sciences</option>
+          <option>Histoire-Géographie</option>
+          <option>Langues étrangères</option>
+          <option>Arts / EPS</option>
+          <option>Autre</option>
+        </select>
+      </div>
+
+      <div style="font-size:12px;font-weight:600;color:var(--tx);margin-bottom:8px;" id="focus-label">Sur quoi souhaitez-vous que l'analyse se concentre ? <span style="font-size:10px;font-weight:400;color:var(--tf);">(optionnel — plusieurs choix)</span></div>
+      <div class="focus-chips">
+        <div class="fchip on" onclick="this.classList.toggle('on')">📖 Charge cognitive</div>
+        <div class="fchip on" onclick="this.classList.toggle('on')">🔁 Révision & mémorisation</div>
+        <div class="fchip on" onclick="this.classList.toggle('on')">💬 Feedback & évaluation</div>
+        <div class="fchip" onclick="this.classList.toggle('on')">🤝 Coopération</div>
+        <div class="fchip" onclick="this.classList.toggle('on')">🧠 Métacognition</div>
+        <div class="fchip" onclick="this.classList.toggle('on')">🧩 Inclusion & DYS</div>
+        <div class="fchip" onclick="this.classList.toggle('on')">📈 Motivation</div>
+        <div class="fchip" onclick="this.classList.toggle('on')">🔬 Enseignement explicite</div>
+      </div>
+
+      <div style="font-size:12px;font-weight:600;color:var(--tx);margin:14px 0 8px;">Y a-t-il des élèves à besoins spécifiques dans votre classe ?</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <label style="display:flex;align-items:center;gap:6px;font-size:12px;cursor:pointer;padding:6px 12px;border:1.5px solid var(--bd);border-radius:20px;background:var(--bgs);">
+          <input type="checkbox" style="accent-color:var(--t600);"> Élèves DYS
+        </label>
+        <label style="display:flex;align-items:center;gap:6px;font-size:12px;cursor:pointer;padding:6px 12px;border:1.5px solid var(--bd);border-radius:20px;background:var(--bgs);">
+          <input type="checkbox" style="accent-color:var(--t600);"> TDA/H
+        </label>
+        <label style="display:flex;align-items:center;gap:6px;font-size:12px;cursor:pointer;padding:6px 12px;border:1.5px solid var(--bd);border-radius:20px;background:var(--bgs);">
+          <input type="checkbox" style="accent-color:var(--t600);"> Allophones
+        </label>
+        <label style="display:flex;align-items:center;gap:6px;font-size:12px;cursor:pointer;padding:6px 12px;border:1.5px solid var(--bd);border-radius:20px;background:var(--bgs);">
+          <input type="checkbox" style="accent-color:var(--t600);"> Classe hétérogène
+        </label>
+      </div>
+
+      <div style="display:flex;gap:10px;margin-top:16px;">
+        <button class="sec-btn" onclick="goStep1()">← Retour</button>
+        <button class="main-btn" onclick="goStep3()" style="margin-top:0;flex:1;">🔍 Lancer l'analyse</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ÉTAPE 3 : PROGRESSION -->
+  <div id="step3" class="prog-wrap">
+    <div class="card">
+      <div class="card-title"><div class="ctd" style="background:var(--p600);"></div>Analyse de votre séquence…</div>
+      <div id="prog-items"></div>
+      <div style="font-size:11px;color:var(--tf);text-align:center;margin-top:12px;" id="prog-hint">Lecture du texte pédagogique…</div>
+      <div id="api-wait" style="display:none;margin-top:14px;padding:10px 14px;background:var(--t50);border-radius:var(--r);font-size:11px;color:var(--t800);align-items:center;justify-content:center;gap:8px;">
+        <span style="display:inline-block;width:12px;height:12px;border:2px solid var(--t200);border-top-color:var(--t600);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0;"></span>
+        <span id="api-wait-txt">L'IA analyse votre texte — cela peut prendre 20 à 40 secondes…</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ÉTAPE 4 : RÉSULTATS -->
+  <div id="step4" class="res-wrap">
+
+    <div class="card">
+      <div class="card-title"><div class="ctd" style="background:var(--t400);"></div>Résultats de l'analyse</div>
+      <div class="score-head" id="score-head"></div>
+
+      <!-- TABS -->
+      <div class="res-tabs">
+        <button class="rt on" id="tab-analyse" onclick="showTab('analyse')">📊 Analyse · <span id="count-analyse">5 éléments</span></button>
+        <button class="rt" id="tab-sugg" onclick="showTab('sugg')">💡 Activités suggérées · <span id="count-sugg">3 activités</span></button>
+      </div>
+
+      <!-- ANALYSE -->
+      <div class="analysis-section" id="panel-analyse"></div>
+
+      <!-- SUGGESTIONS -->
+      <div class="sugg-section" id="panel-sugg"></div>
+
+      <div class="export-bar">
+        <button class="exp-btn" onclick="showToast('Export PDF en cours…')">📄 PDF</button>
+        <button class="exp-btn" onclick="showToast('Copié dans le presse-papier')">📋 Copier</button>
+        <button class="exp-btn" onclick="showToast('Email envoyé')">📧 Partager</button>
+        <button class="exp-btn primary" onclick="restart()">🔄 Nouvelle analyse</button>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+// ── STATE ──
+let txtLen = 0;
+let currentFile = null;
+
+// ── TOAST ──
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2400);
+}
+
+// ── EXEMPLES supprimés — interface simplifiée ──
+
+function updateCount() {
+  const v = document.getElementById('mtext').value;
+  txtLen = v.length;
+  const el = document.getElementById('char-count');
+  const hasFile = currentFile !== null;
+  const hasEnoughText = txtLen >= 50;
+  if (hasFile && txtLen === 0) {
+    // file loaded, no text — button enabled via processFile
+    return;
+  }
+  el.textContent = txtLen + ' caractères' + (txtLen >= 150 ? ' ✓' : ' · 150 minimum recommandés');
+  el.className = 'char-count' + (txtLen >= 150 ? ' char-ok' : '');
+  document.getElementById('btn1').disabled = !hasFile && !hasEnoughText;
+}
+
+function onDragOver(e) {
+  e.preventDefault();
+  document.getElementById('upload-zone').classList.add('drag');
+}
+function onDragLeave(e) {
+  document.getElementById('upload-zone').classList.remove('drag');
+}
+function onDrop(e) {
+  e.preventDefault();
+  document.getElementById('upload-zone').classList.remove('drag');
+  const file = e.dataTransfer.files[0];
+  if (file) processFile(file);
+}
+function handleFile(e) {
+  const file = e.target.files[0];
+  if (file) processFile(file);
+}
+function processFile(file) {
+  const ext = file.name.split('.').pop().toLowerCase();
+  const icons = {pdf:'📕', docx:'📘', doc:'📘', txt:'📄'};
+  const icon = icons[ext] || '📄';
+  const sizeTxt = file.size < 1024*1024
+    ? (file.size/1024).toFixed(1)+' Ko'
+    : (file.size/1024/1024).toFixed(1)+' Mo';
+
+  // Show preview
+  document.getElementById('fp-icon').textContent = icon;
+  document.getElementById('fp-name').textContent = file.name;
+  document.getElementById('fp-size').textContent = sizeTxt;
+  document.getElementById('file-preview').style.display = 'flex';
+
+  // Update upload zone appearance
+  const uz = document.getElementById('upload-zone');
+  uz.classList.add('has-file');
+  document.getElementById('uz-icon').textContent = icon;
+  document.getElementById('uz-title').textContent = file.name;
+  document.getElementById('uz-sub').textContent = 'Fichier prêt à analyser';
+
+  // For txt files, read content into textarea as fallback context
+  if (ext === 'txt') {
+    const reader = new FileReader();
+    reader.onload = ev => {
+      document.getElementById('mtext').value = ev.target.result.slice(0, 3000);
+      updateCount();
+    };
+    reader.readAsText(file);
+  } else if (ext === 'docx' || ext === 'doc') {
+    // For Word files, ask user to copy-paste content
+    document.getElementById('mtext').placeholder = 
+      'Fichier Word détecté : ouvrez le document, sélectionnez tout (Ctrl+A), copiez (Ctrl+C) et collez ici (Ctrl+V).';
+    document.getElementById('btn1').disabled = false;
+    document.getElementById('char-count').textContent = 'Collez le contenu du fichier Word dans la zone de texte →';
+    document.getElementById('char-count').className = 'char-count';
+    showToast('Word : copiez-collez le contenu dans la zone de texte');
+  } else if (ext === 'pdf') {
+    // Extract text from PDF using PDF.js
+    extractPdfText(file);
+  }
+
+  showToast(icon + ' ' + file.name + ' prêt');
+  currentFile = file;
+  updateCount();
+}
+function removeFile(e) {
+  e.stopPropagation();
+  currentFile = null;
+  document.getElementById('file-preview').style.display = 'none';
+  document.getElementById('file-input').value = '';
+  const uz = document.getElementById('upload-zone');
+  uz.classList.remove('has-file');
+  document.getElementById('uz-icon').textContent = '📁';
+  document.getElementById('uz-title').textContent = 'Déposez votre fichier';
+  document.getElementById('uz-sub').textContent = 'ou cliquez pour parcourir';
+  updateCount();
+  showToast('Fichier supprimé');
+}
+
+// ── STEPS ──
+function setStep(n) {
+  for (let i = 1; i <= 4; i++) {
+    const num = document.getElementById('sn'+i);
+    const lbl = document.getElementById('sl'+i);
+    if (i < n) {
+      num.className='sn done'; num.textContent='✓';
+      lbl.className='sl done';
+    } else if (i === n) {
+      num.className='sn active'; num.textContent=i;
+      lbl.className='sl active';
+    } else {
+      num.className='sn wait'; num.textContent=i;
+      lbl.className='sl wait';
+    }
+    if (i < 4) document.getElementById('sc'+i).className='sc'+(i<n?' done':'');
+  }
+}
+
+function goStep1() {
+  show('step1'); hide('step2'); hide('step3'); hide('step4');
+  setStep(1); scroll();
+}
+function goStep2() {
+  hide('step1'); show('step2'); hide('step3'); hide('step4');
+  setStep(2); scroll();
+}
+function goStep3() {
+  hide('step1'); hide('step2');
+  document.getElementById('step3').classList.add('show');
+  hide('step4'); setStep(3); scroll();
+  runProgress();  // async — no await needed here
+}
+function goStep4() {
+  console.log('goStep4 called, aiResults:', aiResults ? 'present' : 'NULL');
+  const s3 = document.getElementById('step3');
+  const s4 = document.getElementById('step4');
+  if (s3) s3.classList.remove('show');
+  if (s4) {
+    s4.classList.add('show');
+    s4.style.display = 'block'; // force visible
+  }
+  setStep(4); scroll();
+  renderResults();
+}
+function restart() {
+  document.getElementById('step4').classList.remove('show');
+  document.getElementById('mtext').value='';
+  updateCount(); goStep1();
+}
+function show(id){document.getElementById(id).style.display='block';}
+function hide(id){document.getElementById(id).style.display='none';}
+function scroll(){window.scrollTo({top:0,behavior:'smooth'});}
+
+// ── TABS ──
+function showTab(tab) {
+  document.getElementById('tab-analyse').classList.toggle('on', tab==='analyse');
+  document.getElementById('tab-sugg').classList.toggle('on', tab==='sugg');
+  document.getElementById('panel-analyse').style.display = tab==='analyse' ? 'flex' : 'none';
+  document.getElementById('panel-sugg').classList.toggle('open', tab==='sugg');
+}
+
+// ── CONTEXTE SCIENTIFIQUE EDURESEARCH ──
+const SCIENCE_CONTEXT = `Tu es l'assistant EduResearch, expert en pédagogie fondée sur les preuves.
+Analyse le texte pédagogique ci-dessous en te basant sur ces références clés :
+- Enseignement explicite (d=0.59) : modélisation → pratique guidée → autonomie
+- Évaluation formative (d=0.68) : feedback sur stratégies, pas la personne
+- Révision espacée (d=0.71) : rappel actif > relecture, anti-bachotage
+- Charge cognitive (d=0.72) : éviter surcharge, exemples avant exercices
+- Métacognition (d=0.60) : verbaliser le raisonnement
+- Mentalité de croissance : feedback sur stratégies, PAS sur l'intelligence (d=-0.08)
+- Apprentissage coopératif (d=0.54) : rôles précis, responsabilité individuelle
+- Conscience phonologique (d=0.73) : syllabe avant phonème
+- Différenciation (d=0.41) : différencier le processus, pas le contenu
+NEUROMYTHES à signaler impérativement : styles VAK (visuel/auditif/kinesthésique), bachotage, praise intelligence, cerveau gauche/droit.`;
+
+// ── ANALYSE IA REELLE ──
+let aiResults = null;
+
+async function runProgress() {
+  let txt = document.getElementById('mtext').value.trim();
+
+  // If no text but a file was uploaded, give clear feedback
+  if (!txt && currentFile) {
+    const ext = currentFile.name.split('.').pop().toLowerCase();
+    if (ext === 'pdf') {
+      // Try extraction one more time
+      const charEl = document.getElementById('char-count');
+      charEl.textContent = 'Extraction PDF en cours — veuillez patienter…';
+      await extractPdfText(currentFile);
+      txt = document.getElementById('mtext').value.trim();
+    }
+    if (!txt) {
+      // Still empty - go back to step 1 with error message
+      hide('step3'); hide('step4');
+      document.getElementById('step3').classList.remove('show');
+      show('step1'); setStep(1); scroll();
+      const charEl = document.getElementById('char-count');
+      charEl.textContent = ext === 'pdf'
+        ? 'PDF non lisible — copiez-collez votre texte dans la zone ci-dessous.'
+        : 'Fichier Word : ouvrez le document, Ctrl+A → Ctrl+C → collez dans la zone de texte.';
+      charEl.className = 'char-count err';
+      document.getElementById('mtext').focus();
+      return;
+    }
+  }
+
+  if (!txt) {
+    hide('step3'); document.getElementById('step3').classList.remove('show');
+    show('step1'); setStep(1); scroll();
+    const charEl = document.getElementById('char-count');
+    charEl.textContent = 'Veuillez coller votre texte ou déposer un fichier.';
+    charEl.className = 'char-count err';
+    return;
+  }
+  const niveau = document.getElementById('sel-niveau').value;
+  const matiere = document.getElementById('sel-matiere').value;
+  const focus = [...document.querySelectorAll('.fchip.on')].map(c=>c.textContent.trim()).join(', ');
+  const besoins = [...document.querySelectorAll('input[type=checkbox]:checked')].map(c=>c.parentElement.textContent.trim()).join(', ');
+  const intentLabels = {
+    prepare:"Préparer un cours (regard prospectif — solidité avant d'enseigner)",
+    improve:"Améliorer un cours existant (regard comparatif — ce qui peut être renforcé)",
+    check:"Vérifier avant de distribuer (regard express — risques immédiats)",
+    after:"Comprendre après les résultats (regard rétrospectif — ce qui explique les difficultés)"
+  };
+  const intention = intentLabels[currentIntent] || intentLabels.prepare;
+
+  // Animate progress
+  const steps = [
+    {lbl:"Lecture du texte pédagogique", sub:"Identification de la structure…"},
+    {lbl:"Repérage des pratiques", sub:"Enseignement, évaluation, feedback…"},
+    {lbl:"Confrontation avec les 18 fiches", sub:"Révision espacée, Charge cognitive…"},
+    {lbl:"Détection des neuromythes", sub:"Styles VAK, bachotage, éloge intelligence…"},
+    {lbl:"Génération des activités suggérées", sub:"Fondées sur les preuves…"},
+    {lbl:"Compilation du rapport", sub:"Points forts · Pistes · Liens fiches…"},
+  ];
+  const c = document.getElementById('prog-items');
+  c.innerHTML = '';
+  steps.forEach((s,i) => {
+    const d = document.createElement('div');
+    d.className = 'prog-item';
+    d.innerHTML = `<div class="prog-icon wait" id="pi${i}">⏳</div>
+      <div style="flex:1;"><div class="prog-lbl">${s.lbl}</div><div class="prog-sub">${s.sub}</div></div>
+      <div class="prog-bar"><div class="prog-fill" id="pf${i}" style="width:0%;background:var(--t400);"></div></div>
+      <div class="prog-stat" id="pst${i}" style="color:var(--tf);">En attente</div>`;
+    c.appendChild(d);
+  });
+
+  // Animate steps progressively while API runs
+  let stepIdx = 0;
+  function advanceStep() {
+    if (stepIdx > 0 && stepIdx <= steps.length) {
+      const prev = stepIdx - 1;
+      if (document.getElementById('pf'+prev)) {
+        document.getElementById('pf'+prev).style.width = '100%';
+        document.getElementById('pf'+prev).style.background = 'var(--t400)';
+        document.getElementById('pi'+prev).className = 'prog-icon ok';
+        document.getElementById('pi'+prev).textContent = '✓';
+        document.getElementById('pst'+prev).textContent = 'Terminé';
+        document.getElementById('pst'+prev).style.color = 'var(--t600)';
+      }
+    }
+    if (stepIdx < steps.length) {
+      document.getElementById('pi'+stepIdx).className = 'prog-icon run';
+      document.getElementById('pi'+stepIdx).textContent = '⚙️';
+      document.getElementById('pst'+stepIdx).textContent = 'En cours…';
+      document.getElementById('pst'+stepIdx).style.color = 'var(--t400)';
+      let w = 0;
+      const iv = setInterval(() => {
+        w = Math.min(w + Math.random() * 8 + 4, 88);
+        if (document.getElementById('pf'+stepIdx)) {
+          document.getElementById('pf'+stepIdx).style.width = w + '%';
+        }
+        if (w >= 88) clearInterval(iv);
+      }, 120);
+    }
+    stepIdx++;
+  }
+  advanceStep();
+  // Advance steps slowly — stops at last step and waits for API
+  const stepTimer = setInterval(() => {
+    if (stepIdx < steps.length - 1) advanceStep(); // stop one before last
+    else clearInterval(stepTimer);
+  }, 1800);
+
+  // Show waiting indicator after animation starts
+  setTimeout(() => {
+    const waitEl = document.getElementById('api-wait');
+    if (waitEl) waitEl.style.display = 'flex';
+  }, steps.length * 1800 + 500);
+
+  // Build prompt
+  const prompt = SCIENCE_CONTEXT + `
+
+---
+TEXTE A ANALYSER :
+Niveau : ${niveau || 'non précisé'}
+Matière : ${matiere || 'non précisée'}
+Intention : ${intention}
+Focus : ${focus || 'général'}
+Besoins spécifiques : ${besoins || 'aucun'}
+
+TEXTE :
+${txt || '[Fichier déposé sans texte extrait]'}
+
+---
+INSTRUCTIONS : Analyse le texte pedagogique. Reponds avec exactement ce format XML - remplace les [...] par ton analyse :
+
+<analyse>
+<score>[nombre entre 0 et 100]</score>
+<label>[jugement en une phrase sans apostrophe]</label>
+<tag1>[tag court ok]</tag1>
+<tag2>[tag court attention]</tag2>
+<tag3>[tag court opportunite]</tag3>
+<item status="ok" icon="ok" fiche="[nom fiche]">
+<title>[titre court]</title>
+<detail>[explication 2 phrases sans apostrophe]</detail>
+<ref>[reference auteur annee]</ref>
+</item>
+<item status="warn" icon="warn" fiche="[nom fiche]">
+<title>[titre]</title>
+<detail>[explication neuromythe ou point a renforcer]</detail>
+<ref>[reference]</ref>
+</item>
+<item status="plus" icon="plus" fiche="[nom fiche]">
+<title>[opportunite]</title>
+<detail>[explication]</detail>
+<ref>[reference]</ref>
+</item>
+<suggestion color="#D85A30" pill="[theme - d=XX]">
+<title>[titre activite]</title>
+<step1>[description etape 1]</step1>
+<ex1>[phrase modele a dire en classe]</ex1>
+<step2>[description etape 2]</step2>
+<ex2>[phrase modele]</ex2>
+<why>[justification scientifique courte]</why>
+</suggestion>
+<suggestion color="#1D9E75" pill="[theme - d=XX]">
+<title>[titre activite 2]</title>
+<step1>[etape]</step1>
+<ex1>[phrase]</ex1>
+<why>[justification]</why>
+</suggestion>
+</analyse>
+
+Regles : signaler tout neuromythe avec status=warn, adapter au niveau et matiere, ne jamais utiliser d apostrophes.`;
+
+  // Call Claude API
+  try {
+    const resp = await fetch('/.netlify/functions/claude', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-6',
+        max_tokens: 1500,
+        messages: [{role: 'user', content: prompt}]
+      })
+    });
+    if (!resp.ok) throw new Error('API ' + resp.status);
+    const data = await resp.json();
+    const raw = data.content.map(b => b.text || '').join('');
+    // Parse XML response
+    const xmlStart = raw.indexOf('<analyse>');
+    const xmlEnd   = raw.lastIndexOf('</analyse>');
+    if (xmlStart === -1 || xmlEnd === -1) {
+      throw new Error('Reponse invalide — reessayez. Debut: ' + raw.substring(0, 80));
+    }
+    const xmlStr = raw.slice(xmlStart, xmlEnd + 10);
+
+    function getTag(str, tag) {
+      const m = str.match(new RegExp('<' + tag + '[^>]*>([\\s\\S]*?)<\/' + tag + '>'));
+      return m ? m[1].trim() : '';
+    }
+    function getAllTags(str, tag) {
+      const re = new RegExp('<' + tag + '([^>]*)>([\\s\\S]*?)<\/' + tag + '>', 'g');
+      const results = [];
+      let m;
+      while ((m = re.exec(str)) !== null) {
+        results.push({ attrs: m[1], content: m[2].trim() });
+      }
+      return results;
+    }
+    function getAttr(str, attr) {
+      const m = str.match(new RegExp(attr + '="([^"]*)"'));
+      return m ? m[1] : '';
+    }
+
+    const score = parseInt(getTag(xmlStr, 'score')) || 60;
+    const label = getTag(xmlStr, 'label') || 'Analyse terminee';
+    const t1 = getTag(xmlStr, 'tag1');
+    const t2 = getTag(xmlStr, 'tag2');
+    const t3 = getTag(xmlStr, 'tag3');
+
+    const statusIcons = {ok:'📖', warn:'⚠️', plus:'💡'};
+    const statusBadges = {ok:'✓ Point fort', warn:'⚠️ A renforcer', plus:'💡 Opportunite'};
+
+    const items = getAllTags(xmlStr, 'item').map(it => {
+      const status = getAttr(it.attrs, 'status') || 'warn';
+      return {
+        icon: statusIcons[status] || '📋',
+        status,
+        badge: statusBadges[status] || '',
+        title: getTag(it.content, 'title'),
+        detail: getTag(it.content, 'detail'),
+        refTxt: getTag(it.content, 'ref'),
+        refCls: status === 'warn' ? 'ref-warn' : '',
+        fiche:  getAttr(it.attrs, 'fiche'),
+      };
+    });
+
+    const suggestions = getAllTags(xmlStr, 'suggestion').map(s => {
+      const color = getAttr(s.attrs, 'color') || '#1D9E75';
+      const steps = [];
+      for (let i = 1; i <= 3; i++) {
+        const t = getTag(s.content, 'step' + i);
+        const ex = getTag(s.content, 'ex' + i);
+        if (t) steps.push({ t, ex, col: color });
+      }
+      return {
+        icon: '💡',
+        title: getTag(s.content, 'title'),
+        color,
+        pill: getAttr(s.attrs, 'pill'),
+        steps,
+        why: getTag(s.content, 'why'),
+      };
+    });
+
+    aiResults = {
+      score,
+      scoreLabel: label,
+      scoreTags: [t1, t2, t3].filter(Boolean),
+      analyse: items,
+      suggestions,
+    };
+  } catch(e) {
+    console.error('AI error:', e);
+    aiResults = {
+      score: 0,
+      scoreLabel: "Erreur d'analyse — réessayez",
+      scoreTags: ["Erreur de connexion"],
+      analyse: [{
+        icon: '⚠️', status: 'warn', badge: '⚠️ Erreur',
+        title: "Impossible de contacter l'API",
+        detail: `<strong>Erreur :</strong> ${e.message}. Vérifiez votre connexion et réessayez.`,
+        refTxt: '', refCls: '', fiche: ''
+      }],
+      suggestions: []
+    };
+  }
+
+  // Complete remaining steps
+  clearInterval(stepTimer);
+  for (let i = Math.max(0, stepIdx - 1); i < steps.length; i++) {
+    if (document.getElementById('pf'+i)) {
+      document.getElementById('pf'+i).style.width = '100%';
+      document.getElementById('pf'+i).style.background = 'var(--t400)';
+      document.getElementById('pi'+i).className = 'prog-icon ok';
+      document.getElementById('pi'+i).textContent = '✓';
+      document.getElementById('pst'+i).textContent = 'Terminé';
+      document.getElementById('pst'+i).style.color = 'var(--t600)';
+    }
+  }
+  // Show completion message and go to results
+  const hintEl = document.getElementById('prog-hint');
+  if (hintEl) hintEl.textContent = '✓ Analyse terminée — affichage des résultats…';
+  setTimeout(goStep4, 800);
+}
+
+// ── DATA RÉSULTATS ──
+// Data supprimée — résultats générés par l'IA en temps réel
+
+function renderResults() {
+  const r = aiResults;
+  console.log('renderResults called, aiResults:', r ? 'present (score:'+r.score+')' : 'NULL');
+  if (!r) {
+    document.getElementById('score-head').innerHTML = '<div style="color:#D85A30;padding:20px;font-size:13px;">⚠️ Erreur : pas de résultat reçu. Réessayez.</div>';
+    return;
+  }
+  console.log('analyse items:', (r.analyse||[]).length, 'suggestions:', (r.suggestions||[]).length);
+
+  // Score color
+  const scoreColor = r.score >= 80 ? '#1D9E75' : r.score >= 60 ? '#BA7517' : '#D85A30';
+  const nOk   = (r.analyse||[]).filter(a=>a.status==='ok').length;
+  const nWarn = (r.analyse||[]).filter(a=>a.status==='warn').length;
+  const nPlus = (r.analyse||[]).filter(a=>a.status==='plus').length;
+  const tagsCls = {ok:'stag-ok', warn:'stag-warn', plus:'stag-plus'};
+
+  document.getElementById('score-head').innerHTML = `
+    <div class="score-circle" style="background:${scoreColor}18;border:3px solid ${scoreColor};">
+      <div class="score-v" style="color:${scoreColor};">${r.score}</div>
+      <div class="score-sub" style="color:${scoreColor};">/100</div>
+    </div>
+    <div>
+      <div class="score-right-title">${r.scoreLabel||''}</div>
+      <div class="score-right-sub">${nOk} point${nOk>1?'s':''} fort${nOk>1?'s':''} · ${nWarn} à renforcer · ${nPlus} opportunité${nPlus>1?'s':''}</div>
+      <div class="score-tags">${(r.scoreTags||[]).map((t,i)=>`<span class="stag ${i===0?'stag-ok':i===1?'stag-warn':'stag-plus'}">${t}</span>`).join('')}</div>
+    </div>`;
+
+  // Update tab counts
+  document.getElementById('count-analyse').textContent = (r.analyse||[]).length + ' éléments';
+  document.getElementById('count-sugg').textContent = (r.suggestions||[]).length + ' activités';
+
+  // Analyse items
+  const bMap = {ok:'b-ok', warn:'b-warn', plus:'b-plus'};
+  document.getElementById('panel-analyse').innerHTML = (r.analyse||[]).map((a,i) => `
+    <div class="an-item">
+      <div class="an-head" onclick="toggleAn(${i})">
+        <div class="an-icon">${a.icon||'📋'}</div>
+        <div class="an-title">${a.title||''}</div>
+        <div class="an-badge ${bMap[a.status]||'b-warn'}">${a.badge||''}</div>
+        <div class="an-chev" id="ach${i}">▼</div>
+      </div>
+      <div class="an-body ${a.status!=='ok'?'open':''}" id="ab${i}">
+        <div class="an-detail">${a.detail||''}</div>
+        ${a.refTxt ? `<div class="an-ref ${a.refCls||''}">${a.refTxt}</div>` : ''}
+        ${a.fiche ? `<div class="an-fiche-link" onclick="openMainSite('${a.fiche}')">📖 Fiche ${a.fiche} →</div>` : ''}
+      </div>
+    </div>`).join('');
+
+  // Suggestions
+  const suggIntro = {
+    fr:"Sur la base de votre texte et du contexte indiqué, voici des activités directement applicables fondées sur la recherche.",
+    en:"Based on your text and context, here are directly applicable evidence-based activities.",
+    nl:"Op basis van uw tekst en context, hier zijn direct toepasbare evidence-based activiteiten."
+  };
+  document.getElementById('panel-sugg').innerHTML =
+    `<div class="sugg-intro"><strong>Activités suggérées</strong> — ${suggIntro[currentLang]||suggIntro.fr}</div>` +
+    (r.suggestions||[]).map(s => {
+      const col = s.color || '#1D9E75';
+      const stepsHtml = (s.steps||[]).map((st,i) => `
+        <div class="sugg-step">
+          <div class="sugg-num" style="background:${col};">${i+1}</div>
+          <div>
+            <div class="sugg-txt">${st.t||''}</div>
+            ${st.ex ? `<div class="sugg-ex" style="border-color:${st.col||col};">${st.ex}</div>` : ''}
+          </div>
+        </div>`).join('');
+      return `<div class="sugg-card">
+        <div class="sugg-head" style="background:${col};">
+          <div class="sugg-head-icon">${s.icon||'💡'}</div>
+          <div class="sugg-head-title">${s.title||''}</div>
+          <div class="sugg-head-pill">${s.pill||''}</div>
+        </div>
+        <div class="sugg-body">
+          <div class="sugg-steps">${stepsHtml}</div>
+          <div class="sugg-why">🔬 <strong>Pourquoi ça marche :</strong> ${s.why||''}</div>
+        </div>
+      </div>`;
+    }).join('');
+
+  // Show the analyse tab by default
+  showTab('analyse');
+}
+
+function openMainSite(fiche) {
+  window.open('index.html#' + encodeURIComponent(fiche), '_blank');
+}
+
+function toggleAn(i) {
+  const b = document.getElementById('ab'+i);
+  const c = document.getElementById('ach'+i);
+  const open = b.classList.contains('open');
+  b.classList.toggle('open',!open);
+  c.textContent = open ? '▼' : '▲';
+}
+
+// ── INTENT ──
+let currentIntent = 'prepare';
+let currentLang = 'fr';
+function selectIntent(el, val) {
+  document.querySelectorAll('.intent-item').forEach(i => i.classList.remove('selected'));
+  el.classList.add('selected');
+  currentIntent = val;
+  const hints = {
+    prepare: "Sur quoi souhaitez-vous que l'analyse se concentre ?",
+    improve: "Quel aspect voulez-vous améliorer en priorité ?",
+    check:   "Que souhaitez-vous vérifier avant de distribuer ?",
+    after:   "Qu'est-ce qui n'a pas fonctionné selon vous ?",
+  };
+  const lbl = document.getElementById('focus-label');
+  if (lbl) lbl.textContent = hints[val];
+}
+
+
+// ── PDF TEXT EXTRACTION ─────────────────────────────────────
+async function extractPdfText(file) {
+  const charEl = document.getElementById('char-count');
+  const txtEl  = document.getElementById('mtext');
+  charEl.textContent = 'Extraction du texte PDF en cours…';
+  charEl.className = 'char-count';
+
+  try {
+    // Load PDF.js from CDN
+    if (!window.pdfjsLib) {
+      await new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+        script.onload = resolve;
+        script.onerror = reject;
+        document.head.appendChild(script);
+      });
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc =
+        'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    }
+
+    const arrayBuffer = await file.arrayBuffer();
+    const pdf = await window.pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+    let fullText = '';
+    for (let i = 1; i <= Math.min(pdf.numPages, 10); i++) {
+      const page = await pdf.getPage(i);
+      const content = await page.getTextContent();
+      const pageText = content.items.map(item => item.str).join(' ');
+      fullText += pageText + '\n';
+    }
+    fullText = fullText.trim().slice(0, 4000);
+    if (fullText.length < 50) {
+      charEl.textContent = 'PDF scanné ou protégé — copiez-collez le texte manuellement.';
+      showToast('PDF non lisible — collez le texte manuellement');
+      return;
+    }
+    txtEl.value = fullText;
+    updateCount();
+    showToast('✓ Texte extrait du PDF (' + fullText.length + ' caractères)');
+  } catch(e) {
+    console.error('PDF extraction error:', e);
+    charEl.textContent = 'Extraction impossible — copiez-collez le texte manuellement.';
+    showToast('Erreur PDF — collez le texte manuellement');
+  }
+}
+
+// Init
+setStep(1);
+
+// Sélecteur de langue de la nav (header uniquement — le contenu de cette page reste en FR)
+const NAV_UI = {
+  fr: {badge:'Données scientifiques réelles', fiches:'Fiches thèmes', analyser:'Analyser ma séquence', favoris:'Favoris'},
+  en: {badge:'Real scientific data', fiches:'Theme sheets', analyser:'Analyse my lesson', favoris:'Favourites'},
+  nl: {badge:'Echte wetenschappelijke gegevens', fiches:'Themafiches', analyser:'Analyseer mijn les', favoris:'Favorieten'},
+};
+function setNavLang(l, btn) {
+  document.querySelectorAll('.lb').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  const t = NAV_UI[l] || NAV_UI.fr;
+  document.getElementById('nbadge').textContent = t.badge;
+  document.getElementById('nm-fiches-lbl').textContent = t.fiches;
+  document.getElementById('nm-analyser-lbl').textContent = t.analyser;
+  document.getElementById('nm-favoris-lbl').textContent = t.favoris;
+}
+
+// Populate nav account button from localStorage
+(function() {
+  try {
+    const raw = localStorage.getItem('eduresearch_contact');
+    const unlocked = localStorage.getItem('eduresearch_unlocked') === '1';
+    const contact = raw ? JSON.parse(raw) : {};
+    const btn      = document.getElementById('nav-account-btn');
+    const avatarEl = document.getElementById('nav-avatar-sm');
+    const lblEl    = document.getElementById('nav-account-lbl');
+    if (!btn) return;
+    if (unlocked) {
+      const fn = contact.firstname || '';
+      const ln = contact.lastname  || '';
+      const initials = (fn.charAt(0) + ln.charAt(0)).toUpperCase() || '?';
+      if (avatarEl) avatarEl.textContent = initials;
+      if (lblEl)    lblEl.textContent    = fn || 'Mon compte';
+      btn.style.display = 'flex';
+    } else {
+      btn.style.display = 'none';
+    }
+  } catch(e) { console.warn('Nav init error:', e); }
+})();
+</script>
+</body>
+</html>

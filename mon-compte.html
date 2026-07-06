@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EduResearch — Mon compte</title>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LV34TMMSWJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LV34TMMSWJ');
+</script>
+<style>
+:root{
+  --b50:#E6F1FB;--b100:#B5D4F4;--b200:#85B7EB;--b400:#378ADD;--b600:#185FA5;--b800:#0C447C;--b900:#042C53;
+  --t50:#E1F5EE;--t100:#9FE1CB;--t200:#5DCAA5;--t400:#1D9E75;--t600:#0F6E56;--t800:#085041;
+  --a50:#FAEEDA;--a100:#FAC775;--a400:#BA7517;--a600:#854F0B;--a800:#633806;
+  --c50:#FAECE7;--c400:#D85A30;--c600:#993C1D;--c800:#712B13;
+  --p50:#EEEDFE;--p400:#7F77DD;--p600:#534AB7;--p800:#3C3489;
+  --g50:#F1EFE8;--g100:#D3D1C7;--g200:#B4B2A9;--g400:#888780;--g600:#5F5E5A;--g800:#444441;
+  --tx:#1a1a18;--tm:#5F5E5A;--tf:#888780;
+  --bg:#fff;--bgs:#F7F6F2;--bgc:#fff;
+  --bd:rgba(0,0,0,0.08);--bdm:rgba(0,0,0,0.13);
+  --r:10px;--rl:14px;--rx:18px;
+  --font:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font);background:var(--bgs);color:var(--tx);min-height:100vh;}
+
+/* ── NAV ── */
+.nav{background:var(--b900);padding:0 28px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.nav-brand{display:flex;align-items:center;cursor:pointer;text-decoration:none;}
+.logo-edu{font-size:17px;font-weight:800;color:#fff;letter-spacing:-.5px;}
+.logo-dot{width:5px;height:5px;border-radius:50%;background:var(--t400);margin:0 1px 6px;}
+.logo-res{font-size:17px;font-weight:800;color:var(--b200);letter-spacing:-.5px;}
+.nav-right{display:flex;align-items:center;gap:12px;}
+.lang-sw{display:flex;gap:2px;background:rgba(255,255,255,.1);border-radius:8px;padding:3px;}
+.lb{font-size:11px;font-weight:600;padding:4px 9px;border-radius:6px;border:none;background:transparent;cursor:pointer;color:rgba(255,255,255,.5);transition:all .15s;}
+.lb.on{background:rgba(255,255,255,.18);color:#fff;}
+.nav-user{display:flex;align-items:center;gap:8px;cursor:pointer;}
+.nav-avatar{width:30px;height:30px;border-radius:50%;background:var(--t400);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.nav-username{font-size:12px;color:rgba(255,255,255,.75);}
+
+/* ── LAYOUT ── */
+.page{max-width:680px;margin:0 auto;padding:28px 24px 60px;}
+
+/* ── PROFILE CARD ── */
+.profile-card{background:var(--bgc);border:1.5px solid var(--bd);border-radius:var(--rl);padding:22px 24px;display:flex;gap:18px;align-items:flex-start;margin-bottom:14px;}
+.profile-avatar{width:56px;height:56px;border-radius:50%;background:var(--b900);color:#fff;font-size:20px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.profile-info{flex:1;}
+.profile-name{font-size:18px;font-weight:700;color:var(--tx);margin-bottom:4px;}
+.profile-meta{font-size:11px;color:var(--tm);margin-bottom:8px;display:flex;gap:12px;flex-wrap:wrap;}
+.profile-tags{display:flex;gap:6px;flex-wrap:wrap;}
+.ptag{font-size:10px;padding:3px 9px;border-radius:20px;font-weight:500;}
+.ptag-blue{background:var(--b50);color:var(--b800);}
+.ptag-green{background:var(--t50);color:var(--t800);}
+.edit-btn{flex-shrink:0;padding:7px 14px;border:1.5px solid var(--bd);border-radius:var(--r);font-size:12px;font-weight:500;color:var(--tm);background:var(--bgc);cursor:pointer;transition:all .15s;}
+.edit-btn:hover{background:var(--bgs);}
+
+/* ── STATS ── */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;}
+.stat{background:var(--bgc);border:1.5px solid var(--bd);border-radius:var(--rl);padding:14px 16px;}
+.stat-v{font-size:24px;font-weight:800;color:var(--tx);margin-bottom:2px;}
+.stat-l{font-size:11px;color:var(--tm);}
+.stat-sub{font-size:10px;color:var(--t600);font-weight:500;margin-top:3px;}
+
+/* ── SECTION ── */
+.section-lbl{font-size:10px;font-weight:700;color:var(--tf);letter-spacing:.8px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;}
+.section-lbl::after{content:'';flex:1;height:1px;background:var(--bd);margin-left:10px;}
+
+/* ── FICHES ── */
+.fiches-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;}
+.fiche{background:var(--bgc);border:1.5px solid var(--bd);border-radius:var(--rl);padding:11px 13px;display:flex;gap:10px;align-items:flex-start;position:relative;overflow:hidden;cursor:pointer;transition:all .15s;}
+.fiche:hover{box-shadow:0 3px 10px rgba(0,0,0,.08);transform:translateY(-1px);}
+.fiche-acc{position:absolute;top:0;left:0;right:0;height:3px;}
+.fiche-em{font-size:16px;flex-shrink:0;margin-top:1px;}
+.fiche-title{font-size:12px;font-weight:600;color:var(--tx);margin-bottom:2px;line-height:1.3;}
+.fiche-score{font-size:10px;color:var(--tm);}
+.fiche-date{font-size:9px;color:var(--tf);margin-top:3px;}
+.empty-fiches{background:var(--bgs);border-radius:var(--rl);padding:24px;text-align:center;font-size:12px;color:var(--tm);margin-bottom:16px;}
+
+/* ── EDIT FORM ── */
+.edit-form{background:var(--bgc);border:1.5px solid var(--bd);border-radius:var(--rl);padding:20px 22px;margin-bottom:14px;display:none;}
+.edit-form.open{display:block;}
+.form-title{font-size:13px;font-weight:700;color:var(--tx);margin-bottom:16px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
+.form-field{display:flex;flex-direction:column;gap:4px;}
+.form-lbl{font-size:11px;color:var(--tm);font-weight:500;}
+.form-input{padding:9px 12px;border:1.5px solid var(--bd);border-radius:var(--r);font-size:12px;color:var(--tx);background:var(--bgs);outline:none;font-family:var(--font);transition:border-color .2s;}
+.form-input:focus{border-color:var(--t400);background:var(--bgc);}
+.form-sel{padding:9px 12px;border:1.5px solid var(--bd);border-radius:var(--r);font-size:12px;color:var(--tx);background:var(--bgs);width:100%;font-family:var(--font);outline:none;}
+.form-sel:focus{border-color:var(--t400);}
+.form-msg{font-size:11px;padding:8px 12px;border-radius:var(--r);margin-top:10px;display:none;}
+.form-msg.ok{background:var(--t50);color:var(--t800);border:1px solid var(--t100);}
+.form-msg.err{background:var(--c50);color:var(--c800);border:1px solid var(--c400);}
+.form-actions{display:flex;gap:8px;margin-top:14px;}
+.btn-save{padding:9px 20px;background:var(--t600);color:#fff;border:none;border-radius:var(--r);font-size:13px;font-weight:600;cursor:pointer;transition:background .18s;}
+.btn-save:hover{background:var(--t800);}
+.btn-save:disabled{background:var(--g200);cursor:not-allowed;}
+.btn-cancel{padding:9px 16px;border:1.5px solid var(--bd);border-radius:var(--r);font-size:13px;color:var(--tm);background:var(--bgc);cursor:pointer;}
+
+/* ── DANGER ZONE ── */
+.danger-zone{background:var(--bgc);border:1.5px solid var(--c50);border-radius:var(--rl);padding:16px 18px;display:flex;align-items:center;justify-content:space-between;gap:16px;}
+.dz-title{font-size:12px;font-weight:600;color:var(--tx);margin-bottom:3px;}
+.dz-sub{font-size:11px;color:var(--tm);}
+.btn-delete{padding:7px 14px;background:transparent;border:1.5px solid var(--c400);border-radius:var(--r);font-size:11px;font-weight:600;color:var(--c600);cursor:pointer;transition:all .18s;}
+.btn-delete:hover{background:var(--c50);}
+
+/* ── NOT LOGGED IN ── */
+.not-logged{text-align:center;padding:60px 20px;}
+.not-logged-icon{font-size:48px;margin-bottom:16px;}
+.not-logged-title{font-size:20px;font-weight:700;color:var(--tx);margin-bottom:8px;}
+.not-logged-sub{font-size:13px;color:var(--tm);margin-bottom:24px;line-height:1.6;}
+.btn-home{padding:12px 28px;background:var(--b600);color:#fff;border:none;border-radius:var(--rl);font-size:14px;font-weight:600;cursor:pointer;}
+
+@media(max-width:600px){
+  .page{padding:16px 14px 40px;}
+  .profile-card{flex-wrap:wrap;}
+  .stats{grid-template-columns:1fr 1fr;}
+  .fiches-grid{grid-template-columns:1fr;}
+  .form-row{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-brand" href="index.html">
+    <span class="logo-edu">Edu</span><div class="logo-dot"></div><span class="logo-res">Research</span>
+  </a>
+  <div class="nav-right">
+    <div class="lang-sw">
+      <button class="lb on" onclick="setLang('fr',this)">FR</button>
+      <button class="lb" onclick="setLang('en',this)">EN</button>
+      <button class="lb" onclick="setLang('nl',this)">NL</button>
+    </div>
+    <div class="nav-user" onclick="window.location='index.html'">
+      <div class="nav-avatar" id="nav-avatar">?</div>
+      <span class="nav-username" id="nav-username">Mon compte</span>
+    </div>
+  </div>
+</nav>
+
+<div class="page" id="page-content"></div>
+
+<script>
+// ── CONFIG ────────────────────────────────────────────────────
+const UNLOCKED_KEY = 'eduresearch_unlocked';
+const QUOTA_KEY    = 'eduresearch_seen';
+const CONTACT_KEY  = 'eduresearch_contact';
+let LANG = 'fr';
+
+// ── TRANSLATIONS ─────────────────────────────────────────────
+const UI = {
+  fr: {
+    memberSince: 'Membre depuis',
+    fichesConsulted: 'Fiches consultées',
+    analyses: 'Analyses de séquence',
+    available: 'Fiches disponibles',
+    fullAccess: 'Accès complet ✓',
+    recentFiches: 'FICHES RÉCEMMENT CONSULTÉES',
+    noFiches: 'Aucune fiche consultée pour le moment. Retournez sur le site pour explorer les 18 thèmes.',
+    editProfile: 'Modifier mon profil',
+    firstname: 'Prénom *', lastname: 'Nom *', email: 'Email *',
+    country: 'Pays *', profile: 'Profil *', org: 'Organisation',
+    save: 'Enregistrer', cancel: 'Annuler',
+    saving: 'Enregistrement…',
+    saveOk: '✓ Profil mis à jour avec succès.',
+    saveErr: 'Erreur lors de la sauvegarde. Réessayez.',
+    dangerTitle: 'Supprimer mon compte',
+    dangerSub: 'Toutes vos données locales seront effacées.',
+    dangerBtn: 'Supprimer',
+    dangerConfirm: 'Êtes-vous sûr ? Cette action est irréversible.',
+    editBtn: '✏️ Modifier',
+    profiles: ['Enseignant', 'Éditeur scolaire', 'Formateur', 'Chercheur'],
+    countries: {'BE':'🇧🇪 Belgique','FR':'🇫🇷 France','NL':'🇳🇱 Pays-Bas','CH':'🇨🇭 Suisse','LU':'🇱🇺 Luxembourg','CA':'🇨🇦 Canada','OTHER':'Autre'},
+    notLoggedTitle: "Vous n'êtes pas encore inscrit",
+    notLoggedSub: 'Créez un compte gratuit pour accéder à toutes les fiches EduResearch et consulter votre espace personnel.',
+    notLoggedBtn: 'Retour au site',
+    goBack: '← Fiches thèmes',
+    thisMonth: 'ce mois',
+    lastSeen: 'Consulté il y a',
+    days: 'jours', day: 'jour', hours: 'heures', hour: 'heure', minutes: 'min',
+  },
+  en: {
+    memberSince: 'Member since',
+    fichesConsulted: 'Sheets consulted',
+    analyses: 'Sequence analyses',
+    available: 'Sheets available',
+    fullAccess: 'Full access ✓',
+    recentFiches: 'RECENTLY CONSULTED SHEETS',
+    noFiches: 'No sheets consulted yet. Go back to the site to explore the 18 themes.',
+    editProfile: 'Edit my profile',
+    firstname: 'First name *', lastname: 'Last name *', email: 'Email *',
+    country: 'Country *', profile: 'Profile *', org: 'Organisation',
+    save: 'Save', cancel: 'Cancel',
+    saving: 'Saving…',
+    saveOk: '✓ Profile updated successfully.',
+    saveErr: 'Error saving. Please try again.',
+    dangerTitle: 'Delete my account',
+    dangerSub: 'All your local data will be erased.',
+    dangerBtn: 'Delete',
+    dangerConfirm: 'Are you sure? This action is irreversible.',
+    editBtn: '✏️ Edit',
+    profiles: ['Teacher', 'School publisher', 'Trainer', 'Researcher'],
+    countries: {'BE':'🇧🇪 Belgium','FR':'🇫🇷 France','NL':'🇳🇱 Netherlands','CH':'🇨🇭 Switzerland','LU':'🇱🇺 Luxembourg','CA':'🇨🇦 Canada','OTHER':'Other'},
+    notLoggedTitle: 'You are not registered yet',
+    notLoggedSub: 'Create a free account to access all EduResearch sheets and view your personal space.',
+    notLoggedBtn: 'Back to site',
+    goBack: '← Theme sheets',
+    thisMonth: 'this month',
+    lastSeen: 'Consulted',
+    days: 'days', day: 'day', hours: 'hours', hour: 'hour', minutes: 'min',
+  },
+  nl: {
+    memberSince: 'Lid sinds',
+    fichesConsulted: 'Geraadpleegde fiches',
+    analyses: 'Sequentie-analyses',
+    available: 'Beschikbare fiches',
+    fullAccess: 'Volledige toegang ✓',
+    recentFiches: 'RECENT GERAADPLEEGDE FICHES',
+    noFiches: "Nog geen fiches geraadpleegd. Ga terug naar de site om de 18 thema's te verkennen.",
+    editProfile: 'Profiel bewerken',
+    firstname: 'Voornaam *', lastname: 'Naam *', email: 'E-mail *',
+    country: 'Land *', profile: 'Profiel *', org: 'Organisatie',
+    save: 'Opslaan', cancel: 'Annuleren',
+    saving: 'Opslaan…',
+    saveOk: '✓ Profiel succesvol bijgewerkt.',
+    saveErr: 'Fout bij opslaan. Probeer opnieuw.',
+    dangerTitle: 'Mijn account verwijderen',
+    dangerSub: 'Alle lokale gegevens worden gewist.',
+    dangerBtn: 'Verwijderen',
+    dangerConfirm: 'Weet u het zeker? Deze actie is onomkeerbaar.',
+    editBtn: '✏️ Bewerken',
+    profiles: ['Leerkracht', 'Schooluitgever', 'Opleider', 'Onderzoeker'],
+    countries: {'BE':'🇧🇪 België','FR':'🇫🇷 Frankrijk','NL':'🇳🇱 Nederland','CH':'🇨🇭 Zwitserland','LU':'🇱🇺 Luxemburg','CA':'🇨🇦 Canada','OTHER':'Andere'},
+    notLoggedTitle: 'U bent nog niet ingeschreven',
+    notLoggedSub: 'Maak een gratis account aan om toegang te krijgen tot alle EduResearch-fiches.',
+    notLoggedBtn: 'Terug naar de site',
+    goBack: '← Themafiches',
+    thisMonth: 'deze maand',
+    lastSeen: 'Geraadpleegd',
+    days: 'dagen', day: 'dag', hours: 'uur', hour: 'uur', minutes: 'min',
+  },
+};
+
+// Fiche metadata for display (accent colors + emojis)
+const FICHE_META = {
+  ee:{em:'📖',color:'#185FA5',title:{fr:'Enseignement explicite',en:'Explicit teaching',nl:'Expliciet onderwijs'},score:'d=0.59'},
+  ef:{em:'💬',color:'#1D9E75',title:{fr:'Évaluation formative',en:'Formative assessment',nl:'Formatieve evaluatie'},score:'d=0.68'},
+  mc:{em:'🧠',color:'#534AB7',title:{fr:'Métacognition',en:'Metacognition',nl:'Metacognitie'},score:'d=0.60'},
+  cc:{em:'⚡',color:'#BA7517',title:{fr:'Charge cognitive',en:'Cognitive load',nl:'Cognitieve belasting'},score:'d=0.72'},
+  df:{em:'🎯',color:'#D85A30',title:{fr:'Différenciation',en:'Differentiation',nl:'Differentiatie'},score:'d=0.41'},
+  ia:{em:'🤖',color:'#534AB7',title:{fr:'IA en classe',en:'AI in class',nl:'AI in de klas'},score:'Émergent'},
+  au:{em:'🚀',color:'#1D9E75',title:{fr:'Autonomie des élèves',en:'Student autonomy',nl:'Autonomie leerlingen'},score:'d=0.55'},
+  ec:{em:'📋',color:'#185FA5',title:{fr:'Évaluation certificative',en:'Summative assessment',nl:'Summatieve evaluatie'},score:'Variable'},
+  rs:{em:'🔁',color:'#D85A30',title:{fr:'Révision espacée',en:'Spaced retrieval',nl:'Gespreide herhaling'},score:'d=0.71'},
+  ac:{em:'🤝',color:'#1D9E75',title:{fr:'Apprentissage coopératif',en:'Cooperative learning',nl:'Coöperatief leren'},score:'d=0.54'},
+  dm:{em:'🔢',color:'#BA7517',title:{fr:'Didactique mathématiques',en:'Maths didactics',nl:'Wiskunde didactiek'},score:'d=0.59'},
+  ns:{em:'🧬',color:'#534AB7',title:{fr:'Neurosciences',en:'Neuroscience',nl:'Neurowetenschappen'},score:'d=0.55'},
+  cp:{em:'🔤',color:'#185FA5',title:{fr:'Conscience phonologique',en:'Phonological awareness',nl:'Fonologisch bewustzijn'},score:'d=0.73'},
+  cl:{em:'📚',color:'#1D9E75',title:{fr:'Compréhension en lecture',en:'Reading comprehension',nl:'Leesbegrip'},score:'d=0.60'},
+  l2:{em:'🌍',color:'#D85A30',title:{fr:'Langues étrangères',en:'Foreign languages',nl:'Vreemde talen'},score:'d=0.52'},
+  ib:{em:'🔬',color:'#BA7517',title:{fr:'Investigation scientifique',en:'Scientific inquiry',nl:'Wetenschappelijk onderzoek'},score:'d=0.44'},
+  gm:{em:'📈',color:'#534AB7',title:{fr:'Mentalité de croissance',en:'Growth mindset',nl:'Groeimindset'},score:'d=0.19-0.41'},
+  dy:{em:'🧩',color:'#D85A30',title:{fr:'Troubles dys & besoins spéc.',en:'Learning difficulties',nl:'Leerstoornissen'},score:'d=0.55-0.75'},
+};
+
+// ── UTILS ─────────────────────────────────────────────────────
+function getContact() {
+  try { return JSON.parse(localStorage.getItem(CONTACT_KEY) || 'null'); } catch(e) { return null; }
+}
+function isUnlocked() {
+  try { return localStorage.getItem(UNLOCKED_KEY) === '1'; } catch(e) { return false; }
+}
+function getSeen() {
+  try { return JSON.parse(localStorage.getItem(QUOTA_KEY) || '[]'); } catch(e) { return []; }
+}
+function getInitials(contact) {
+  const f = (contact.firstname||'').charAt(0).toUpperCase();
+  const l = (contact.lastname||'').charAt(0).toUpperCase();
+  return f + l || '?';
+}
+function timeAgo(ts) {
+  const t = UI[LANG];
+  if (!ts) return '';
+  const diff = Math.floor((Date.now() - ts) / 1000);
+  if (diff < 3600) return Math.floor(diff/60) + ' ' + t.minutes;
+  if (diff < 86400) return Math.floor(diff/3600) + ' ' + (diff<7200?t.hour:t.hours);
+  const days = Math.floor(diff/86400);
+  return days + ' ' + (days===1?t.day:t.days);
+}
+
+function setLang(l, btn) {
+  LANG = l;
+  document.querySelectorAll('.lb').forEach(b => b.classList.remove('on'));
+  if(btn) btn.classList.add('on');
+  renderPage();
+}
+
+// ── RENDER ────────────────────────────────────────────────────
+function renderPage() {
+  const t = UI[LANG];
+  const page = document.getElementById('page-content');
+
+  if (!isUnlocked()) {
+    page.innerHTML = `
+      <div class="not-logged">
+        <div class="not-logged-icon">🔒</div>
+        <div class="not-logged-title">${t.notLoggedTitle}</div>
+        <div class="not-logged-sub">${t.notLoggedSub}</div>
+        <button class="btn-home" onclick="window.location='index.html'">${t.notLoggedBtn}</button>
+      </div>`;
+    return;
+  }
+
+  const contact = getContact() || {};
+  const seen = getSeen();
+  const initials = getInitials(contact);
+
+  // Update nav
+  document.getElementById('nav-avatar').textContent = initials;
+  document.getElementById('nav-username').textContent = (contact.firstname||'Mon compte');
+
+  // Member since — use registration date if stored, else today
+  const memberDate = contact.memberSince
+    ? new Date(contact.memberSince).toLocaleDateString(LANG==='fr'?'fr-BE':LANG==='nl'?'nl-BE':'en-GB', {month:'long',year:'numeric'})
+    : new Date().toLocaleDateString(LANG==='fr'?'fr-BE':LANG==='nl'?'nl-BE':'en-GB', {month:'long',year:'numeric'});
+
+  // Fiches récemment consultées
+  const ficheCards = seen.length === 0
+    ? `<div class="empty-fiches">${t.noFiches}</div>`
+    : `<div class="fiches-grid">${seen.slice().reverse().slice(0,6).map(entry => {
+        const key = typeof entry === 'string' ? entry : entry.key;
+        const ts  = typeof entry === 'object' ? entry.ts : null;
+        const m   = FICHE_META[key];
+        if (!m) return '';
+        return `<div class="fiche" onclick="window.location='index.html'">
+          <div class="fiche-acc" style="background:${m.color};"></div>
+          <div class="fiche-em">${m.em}</div>
+          <div>
+            <div class="fiche-title">${m.title[LANG]||m.title.fr}</div>
+            <div class="fiche-score">${m.score}</div>
+            ${ts ? `<div class="fiche-date">${t.lastSeen} ${timeAgo(ts)}</div>` : ''}
+          </div>
+        </div>`;
+      }).join('')}</div>`;
+
+  // Country display
+  const countryMap = t.countries;
+  const countryDisplay = countryMap[contact.country] || contact.country || '';
+
+  // Profile display
+  const profileMap = {publisher:'fr'=='fr'?'Éditeur scolaire':'School publisher', teacher:'Enseignant', trainer:'Formateur', researcher:'Chercheur'};
+  const profileDisplay = contact.profile || '';
+
+  // Country options
+  const countryOptions = Object.entries(countryMap).map(([v,l]) =>
+    `<option value="${v}" ${contact.country===v?'selected':''}>${l}</option>`
+  ).join('');
+
+  // Profile options
+  const profileOptions = [
+    ['teacher', t.profiles[0]],
+    ['publisher', t.profiles[1]],
+    ['trainer', t.profiles[2]],
+    ['researcher', t.profiles[3]],
+  ].map(([v,l]) => `<option value="${v}" ${contact.profile===v?'selected':''}>${l}</option>`).join('');
+
+  page.innerHTML = `
+    <div class="profile-card">
+      <div class="profile-avatar">${initials}</div>
+      <div class="profile-info">
+        <div class="profile-name">${(contact.firstname||'')+' '+(contact.lastname||'')}</div>
+        <div class="profile-meta">
+          ${contact.email ? `<span>📧 ${contact.email}</span>` : ''}
+          ${countryDisplay ? `<span>${countryDisplay}</span>` : ''}
+          ${contact.org ? `<span>🏫 ${contact.org}</span>` : ''}
+        </div>
+        <div class="profile-tags">
+          <span class="ptag ptag-blue">${profileDisplay}</span>
+          <span class="ptag ptag-green">✓ ${t.memberSince} ${memberDate}</span>
+        </div>
+      </div>
+      <button class="edit-btn" onclick="toggleEdit()">${t.editBtn}</button>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-v">${seen.length}</div>
+        <div class="stat-l">${t.fichesConsulted}</div>
+        <div class="stat-sub">${t.fullAccess}</div>
+      </div>
+      <div class="stat">
+        <div class="stat-v">${contact.analysesCount||0}</div>
+        <div class="stat-l">${t.analyses}</div>
+      </div>
+      <div class="stat">
+        <div class="stat-v">18</div>
+        <div class="stat-l">${t.available}</div>
+        <div class="stat-sub">${t.fullAccess}</div>
+      </div>
+    </div>
+
+    <div class="section-lbl">${t.recentFiches}</div>
+    ${ficheCards}
+
+    <div class="edit-form" id="edit-form">
+      <div class="form-title">${t.editProfile}</div>
+      <div class="form-row">
+        <div class="form-field">
+          <div class="form-lbl">${t.firstname}</div>
+          <input class="form-input" id="ef-firstname" value="${contact.firstname||''}"/>
+        </div>
+        <div class="form-field">
+          <div class="form-lbl">${t.lastname}</div>
+          <input class="form-input" id="ef-lastname" value="${contact.lastname||''}"/>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <div class="form-lbl">${t.email}</div>
+          <input class="form-input" id="ef-email" type="email" value="${contact.email||''}" readonly style="opacity:.6;cursor:not-allowed;" title="L'email ne peut pas être modifié"/>
+        </div>
+        <div class="form-field">
+          <div class="form-lbl">${t.country}</div>
+          <select class="form-sel" id="ef-country">${countryOptions}</select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <div class="form-lbl">${t.profile}</div>
+          <select class="form-sel" id="ef-profile">${profileOptions}</select>
+        </div>
+        <div class="form-field">
+          <div class="form-lbl">${t.org}</div>
+          <input class="form-input" id="ef-org" value="${contact.org||''}"/>
+        </div>
+      </div>
+      <div class="form-msg" id="form-msg"></div>
+      <div class="form-actions">
+        <button class="btn-save" id="btn-save" onclick="saveProfile()">${t.save}</button>
+        <button class="btn-cancel" onclick="toggleEdit()">${t.cancel}</button>
+      </div>
+    </div>
+
+    <div class="danger-zone">
+      <div>
+        <div class="dz-title">${t.dangerTitle}</div>
+        <div class="dz-sub">${t.dangerSub}</div>
+      </div>
+      <button class="btn-delete" onclick="deleteAccount()">${t.dangerBtn}</button>
+    </div>`;
+}
+
+function toggleEdit() {
+  const form = document.getElementById('edit-form');
+  form.classList.toggle('open');
+  if (form.classList.contains('open')) {
+    form.scrollIntoView({behavior:'smooth', block:'nearest'});
+  }
+}
+
+async function saveProfile() {
+  const t = UI[LANG];
+  const btn = document.getElementById('btn-save');
+  const msg = document.getElementById('form-msg');
+
+  const contact = getContact() || {};
+  const updated = {
+    ...contact,
+    firstname: document.getElementById('ef-firstname').value.trim(),
+    lastname:  document.getElementById('ef-lastname').value.trim(),
+    email:     contact.email,
+    country:   document.getElementById('ef-country').value,
+    profile:   document.getElementById('ef-profile').value,
+    org:       document.getElementById('ef-org').value.trim(),
+    lang:      LANG,
+  };
+
+  if (!updated.firstname || !updated.lastname) {
+    msg.textContent = t.firstname + ' et ' + t.lastname + ' sont obligatoires.';
+    msg.className = 'form-msg err';
+    msg.style.display = 'block';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = t.saving;
+  msg.style.display = 'none';
+
+  // Save to localStorage
+  try { localStorage.setItem(CONTACT_KEY, JSON.stringify(updated)); } catch(e) {}
+
+  // Send update to Brevo via proxy
+  try {
+    await fetch('/.netlify/functions/brevo', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(updated),
+    });
+  } catch(e) { console.error('Brevo update error:', e); }
+
+  msg.textContent = t.saveOk;
+  msg.className = 'form-msg ok';
+  msg.style.display = 'block';
+  btn.disabled = false;
+  btn.textContent = t.save;
+
+  // Re-render profile card
+  setTimeout(() => {
+    document.getElementById('edit-form').classList.remove('open');
+    renderPage();
+  }, 1500);
+}
+
+function deleteAccount() {
+  const t = UI[LANG];
+  if (!confirm(t.dangerConfirm)) return;
+  try {
+    localStorage.removeItem(UNLOCKED_KEY);
+    localStorage.removeItem(QUOTA_KEY);
+    localStorage.removeItem(CONTACT_KEY);
+  } catch(e) {}
+  window.location.href = 'index.html';
+}
+
+// ── INIT ─────────────────────────────────────────────────────
+// Detect language from localStorage contact or browser
+const savedContact = getContact();
+if (savedContact && savedContact.lang) LANG = savedContact.lang;
+else {
+  const bl = navigator.language || 'fr';
+  if (bl.startsWith('nl')) LANG = 'nl';
+  else if (bl.startsWith('en')) LANG = 'en';
+  else LANG = 'fr';
+}
+document.querySelectorAll('.lb').forEach(b => {
+  b.classList.toggle('on', b.textContent.toLowerCase() === LANG);
+});
+renderPage();
+</script>
+</body>
+</html>
