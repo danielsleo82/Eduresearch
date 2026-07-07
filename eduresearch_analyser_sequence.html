@@ -529,6 +529,7 @@ body{font-family:var(--font);background:var(--bgs);color:var(--tx);min-height:10
 // ── STATE ──
 let txtLen = 0;
 let currentFile = null;
+const MAX_ANALYSE_CHARS = 8000;
 
 // ── TOAST ──
 function showToast(msg) {
@@ -550,8 +551,13 @@ function updateCount() {
     // file loaded, no text — button enabled via processFile
     return;
   }
-  el.textContent = txtLen + ' caractères' + (txtLen >= 150 ? ' ✓' : ' · 150 minimum recommandés');
-  el.className = 'char-count' + (txtLen >= 150 ? ' char-ok' : '');
+  if (txtLen > MAX_ANALYSE_CHARS) {
+    el.textContent = txtLen + ' caractères · seuls les ' + MAX_ANALYSE_CHARS + ' premiers seront analysés (texte trop long)';
+    el.className = 'char-count err';
+  } else {
+    el.textContent = txtLen + ' caractères' + (txtLen >= 150 ? ' ✓' : ' · 150 minimum recommandés');
+    el.className = 'char-count' + (txtLen >= 150 ? ' char-ok' : '');
+  }
   document.getElementById('btn1').disabled = !hasFile && !hasEnoughText;
 }
 
@@ -747,6 +753,8 @@ async function runProgress() {
     charEl.className = 'char-count err';
     return;
   }
+  const wasTruncated = txt.length > MAX_ANALYSE_CHARS;
+  if (wasTruncated) txt = txt.slice(0, MAX_ANALYSE_CHARS);
   const niveau = document.getElementById('sel-niveau').value;
   const matiere = document.getElementById('sel-matiere').value;
   const focus = [...document.querySelectorAll('.fchip.on')].map(c=>c.textContent.trim()).join(', ');
@@ -811,6 +819,7 @@ async function runProgress() {
     stepIdx++;
   }
   advanceStep();
+  if (wasTruncated) showToast('Texte long : seuls les ' + MAX_ANALYSE_CHARS + ' premiers caractères sont analysés');
   // Advance steps slowly — stops at last step and waits for API
   const stepTimer = setInterval(() => {
     if (stepIdx < steps.length - 1) advanceStep(); // stop one before last
@@ -886,7 +895,7 @@ Regles : signaler tout neuromythe avec status=warn, adapter au niveau et matiere
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
         model: 'claude-sonnet-4-6',
-        max_tokens: 1500,
+        max_tokens: 2200,
         messages: [{role: 'user', content: prompt}]
       })
     });
