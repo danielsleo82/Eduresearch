@@ -719,6 +719,22 @@ NEUROMYTHES à signaler impérativement : styles VAK (visuel/auditif/kinesthési
 // ── ANALYSE IA REELLE ──
 let aiResults = null;
 
+// Retries once on transient gateway errors (504/502/503/529) before giving up
+async function fetchClaudeWithRetry(body, retriesLeft) {
+  if (retriesLeft === undefined) retriesLeft = 1;
+  const resp = await fetch('/.netlify/functions/claude', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(body)
+  });
+  if (!resp.ok && retriesLeft > 0 && [502, 503, 504, 529].includes(resp.status)) {
+    const waitTxt = document.getElementById('api-wait-txt');
+    if (waitTxt) waitTxt.textContent = 'Nouvelle tentative en cours…';
+    return fetchClaudeWithRetry(body, retriesLeft - 1);
+  }
+  return resp;
+}
+
 async function runProgress() {
   let txt = document.getElementById('mtext').value.trim();
 
@@ -903,18 +919,14 @@ INSTRUCTIONS : Analyse le texte pedagogique. Reponds avec exactement ce format X
 </suggestion>
 </analyse>
 
-Regles : signaler tout neuromythe avec status=warn, adapter au niveau et matiere, ne jamais utiliser d apostrophes.`;
+Regles : genere EXACTEMENT 3 items (1 ok, 1 warn, 1 plus, pas plus) et EXACTEMENT 2 suggestions (pas plus), reste concis (1-2 phrases par detail/why), signale tout neuromythe avec status=warn, adapte au niveau et matiere, ne jamais utiliser d apostrophes.`;
 
   // Call Claude API
   try {
-    const resp = await fetch('/.netlify/functions/claude', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({
-        model: 'claude-haiku-4-5-20251001',
-        max_tokens: 3000,
-        messages: [{role: 'user', content: prompt}]
-      })
+    const resp = await fetchClaudeWithRetry({
+      model: 'claude-haiku-4-5-20251001',
+      max_tokens: 3000,
+      messages: [{role: 'user', content: prompt}]
     });
     if (!resp.ok) throw new Error('API ' + resp.status);
     const data = await resp.json();
