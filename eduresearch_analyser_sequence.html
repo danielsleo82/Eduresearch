@@ -790,9 +790,12 @@ async function runProgress() {
 
   // Animate steps progressively while API runs
   let stepIdx = 0;
+  const stepIntervals = {};
+  const hintEl0 = document.getElementById('prog-hint');
   function advanceStep() {
     if (stepIdx > 0 && stepIdx <= steps.length) {
       const prev = stepIdx - 1;
+      clearInterval(stepIntervals[prev]);
       if (document.getElementById('pf'+prev)) {
         document.getElementById('pf'+prev).style.width = '100%';
         document.getElementById('pf'+prev).style.background = 'var(--t400)';
@@ -803,26 +806,32 @@ async function runProgress() {
       }
     }
     if (stepIdx < steps.length) {
-      document.getElementById('pi'+stepIdx).className = 'prog-icon run';
-      document.getElementById('pi'+stepIdx).textContent = '⚙️';
-      document.getElementById('pst'+stepIdx).textContent = 'En cours…';
-      document.getElementById('pst'+stepIdx).style.color = 'var(--t400)';
+      const idx = stepIdx;
+      const isLast = idx === steps.length - 1;
+      document.getElementById('pi'+idx).className = 'prog-icon run';
+      document.getElementById('pi'+idx).textContent = '⚙️';
+      document.getElementById('pst'+idx).textContent = 'En cours…';
+      document.getElementById('pst'+idx).style.color = 'var(--t400)';
+      if (hintEl0) hintEl0.textContent = steps[idx].lbl + ' — ' + steps[idx].sub;
       let w = 0;
-      const iv = setInterval(() => {
-        w = Math.min(w + Math.random() * 8 + 4, 88);
-        if (document.getElementById('pf'+stepIdx)) {
-          document.getElementById('pf'+stepIdx).style.width = w + '%';
+      stepIntervals[idx] = setInterval(() => {
+        w = Math.min(w + Math.random() * 8 + 4, isLast ? 94 : 88);
+        if (document.getElementById('pf'+idx)) {
+          document.getElementById('pf'+idx).style.width = w + '%';
         }
-        if (w >= 88) clearInterval(iv);
+        // Last step keeps looping (indeterminate) since its real duration is unknown
+        if (w >= (isLast ? 94 : 88)) {
+          if (isLast) w = 55; else clearInterval(stepIntervals[idx]);
+        }
       }, 120);
     }
     stepIdx++;
   }
   advanceStep();
   if (wasTruncated) showToast('Texte long : seuls les ' + MAX_ANALYSE_CHARS + ' premiers caractères sont analysés');
-  // Advance steps slowly — stops at last step and waits for API
+  // Advance steps slowly, then hand off the last step to the indeterminate loop while the API runs
   const stepTimer = setInterval(() => {
-    if (stepIdx < steps.length - 1) advanceStep(); // stop one before last
+    if (stepIdx < steps.length) advanceStep();
     else clearInterval(stepTimer);
   }, 1800);
 
@@ -831,6 +840,12 @@ async function runProgress() {
     const waitEl = document.getElementById('api-wait');
     if (waitEl) waitEl.style.display = 'flex';
   }, steps.length * 1800 + 500);
+
+  // Reassure the user if the API is taking longer than the usual ~20-26s
+  const longWaitTimer = setTimeout(() => {
+    const waitTxt = document.getElementById('api-wait-txt');
+    if (waitTxt) waitTxt.textContent = "Ça prend un peu plus de temps que prévu — l'analyse est toujours en cours, merci de patienter…";
+  }, 24000);
 
   // Build prompt
   const prompt = SCIENCE_CONTEXT + `
@@ -994,6 +1009,8 @@ Regles : signaler tout neuromythe avec status=warn, adapter au niveau et matiere
 
   // Complete remaining steps
   clearInterval(stepTimer);
+  clearTimeout(longWaitTimer);
+  Object.values(stepIntervals).forEach(clearInterval);
   for (let i = Math.max(0, stepIdx - 1); i < steps.length; i++) {
     if (document.getElementById('pf'+i)) {
       document.getElementById('pf'+i).style.width = '100%';
