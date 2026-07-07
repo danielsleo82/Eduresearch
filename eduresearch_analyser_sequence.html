@@ -667,7 +667,9 @@ function goStep2() {
 }
 function goStep3() {
   hide('step1'); hide('step2');
-  document.getElementById('step3').classList.add('show');
+  const s3 = document.getElementById('step3');
+  s3.classList.add('show');
+  s3.style.display = 'block'; // force visible — overrides any leftover inline display:none from hide('step3')
   hide('step4'); setStep(3); scroll();
   runProgress();  // async — no await needed here
 }
