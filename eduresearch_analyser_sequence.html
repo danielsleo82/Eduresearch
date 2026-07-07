@@ -677,7 +677,7 @@ function goStep4() {
   console.log('goStep4 called, aiResults:', aiResults ? 'present' : 'NULL');
   const s3 = document.getElementById('step3');
   const s4 = document.getElementById('step4');
-  if (s3) s3.classList.remove('show');
+  if (s3) { s3.classList.remove('show'); s3.style.display = 'none'; }
   if (s4) {
     s4.classList.add('show');
     s4.style.display = 'block'; // force visible
