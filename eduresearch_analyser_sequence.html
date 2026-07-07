@@ -607,14 +607,17 @@ function processFile(file) {
       updateCount();
     };
     reader.readAsText(file);
-  } else if (ext === 'docx' || ext === 'doc') {
-    // For Word files, ask user to copy-paste content
-    document.getElementById('mtext').placeholder = 
-      'Fichier Word détecté : ouvrez le document, sélectionnez tout (Ctrl+A), copiez (Ctrl+C) et collez ici (Ctrl+V).';
+  } else if (ext === 'docx') {
+    // Extract text from the modern (XML-based) Word format using mammoth.js
+    extractDocxText(file);
+  } else if (ext === 'doc') {
+    // Legacy binary Word format — no reliable in-browser extraction, ask user to copy-paste
+    document.getElementById('mtext').placeholder =
+      'Fichier Word (.doc) détecté : ouvrez le document, sélectionnez tout (Ctrl+A), copiez (Ctrl+C) et collez ici (Ctrl+V).';
     document.getElementById('btn1').disabled = false;
-    document.getElementById('char-count').textContent = 'Collez le contenu du fichier Word dans la zone de texte →';
+    document.getElementById('char-count').textContent = 'Format .doc non pris en charge automatiquement — collez le contenu dans la zone de texte →';
     document.getElementById('char-count').className = 'char-count';
-    showToast('Word : copiez-collez le contenu dans la zone de texte');
+    showToast('.doc : copiez-collez le contenu dans la zone de texte');
   } else if (ext === 'pdf') {
     // Extract text from PDF using PDF.js
     extractPdfText(file);
@@ -747,6 +750,11 @@ async function runProgress() {
       charEl.textContent = 'Extraction PDF en cours — veuillez patienter…';
       await extractPdfText(currentFile);
       txt = document.getElementById('mtext').value.trim();
+    } else if (ext === 'docx') {
+      const charEl = document.getElementById('char-count');
+      charEl.textContent = 'Extraction Word en cours — veuillez patienter…';
+      await extractDocxText(currentFile);
+      txt = document.getElementById('mtext').value.trim();
     }
     if (!txt) {
       // Still empty - go back to step 1 with error message
@@ -756,7 +764,9 @@ async function runProgress() {
       const charEl = document.getElementById('char-count');
       charEl.textContent = ext === 'pdf'
         ? 'PDF non lisible — copiez-collez votre texte dans la zone ci-dessous.'
-        : 'Fichier Word : ouvrez le document, Ctrl+A → Ctrl+C → collez dans la zone de texte.';
+        : ext === 'docx'
+        ? 'Document Word illisible — copiez-collez votre texte dans la zone ci-dessous.'
+        : 'Fichier Word (.doc) : ouvrez le document, Ctrl+A → Ctrl+C → collez dans la zone de texte.';
       charEl.className = 'char-count err';
       document.getElementById('mtext').focus();
       return;
@@ -1200,6 +1210,42 @@ async function extractPdfText(file) {
     console.error('PDF extraction error:', e);
     charEl.textContent = 'Extraction impossible — copiez-collez le texte manuellement.';
     showToast('Erreur PDF — collez le texte manuellement');
+  }
+}
+
+async function extractDocxText(file) {
+  const charEl = document.getElementById('char-count');
+  const txtEl  = document.getElementById('mtext');
+  charEl.textContent = 'Extraction du texte Word en cours…';
+  charEl.className = 'char-count';
+
+  try {
+    // Load mammoth.js from CDN (reads .docx — the modern XML-based Word format)
+    if (!window.mammoth) {
+      await new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js';
+        script.onload = resolve;
+        script.onerror = reject;
+        document.head.appendChild(script);
+      });
+    }
+
+    const arrayBuffer = await file.arrayBuffer();
+    const result = await window.mammoth.extractRawText({ arrayBuffer });
+    const fullText = (result.value || '').trim().slice(0, 4000);
+    if (fullText.length < 50) {
+      charEl.textContent = 'Document Word vide ou illisible — copiez-collez le texte manuellement.';
+      showToast('Word non lisible — collez le texte manuellement');
+      return;
+    }
+    txtEl.value = fullText;
+    updateCount();
+    showToast('✓ Texte extrait du Word (' + fullText.length + ' caractères)');
+  } catch(e) {
+    console.error('Word extraction error:', e);
+    charEl.textContent = 'Extraction impossible — copiez-collez le texte manuellement.';
+    showToast('Erreur Word — collez le texte manuellement');
   }
 }
 
