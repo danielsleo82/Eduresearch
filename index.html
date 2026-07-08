@@ -508,7 +508,8 @@ const THEME_COLORS={
   ib:{bg:'#26215C',pill:'#1A1640',dot:'#AFA9EC',ins:'#3C3489',eff:'#534AB7',accentHex:'#534AB7'},
   gm:{bg:'#993C1D',pill:'#5A1E08',dot:'#F0997B',ins:'#712B13',eff:'#D85A30',accentHex:'#D85A30'},
   dy:{bg:'#3C3489',pill:'#26215C',dot:'#AFA9EC',ins:'#3C3489',eff:'#534AB7',accentHex:'#534AB7'},
-  ct:{bg:'#085041',pill:'#042C53',dot:'#5DCAA5',ins:'#085041',eff:'#1D9E75',accentHex:'#1D9E75'}
+  ct:{bg:'#085041',pill:'#042C53',dot:'#5DCAA5',ins:'#085041',eff:'#1D9E75',accentHex:'#1D9E75'},
+  ls:{bg:'#0C447C',pill:'#042C53',dot:'#85B7EB',ins:'#0C447C',eff:'#185FA5',accentHex:'#185FA5'}
 };
 
 const BADGE_STYLES={
@@ -541,7 +542,7 @@ fr:[
   {icon:'🧩',label:'Inclusion & besoins spécifiques',keys:['dy','ct']},
   {icon:'🔢',label:'Didactiques disciplinaires',keys:['dm','ib']},
   {icon:'🏫',label:'Neurosciences & cerveau',keys:['ns']},
-  {icon:'📚',label:'Littératie, lecture & langues',keys:['cp','cl','l2']}
+  {icon:'📚',label:'Littératie, lecture & langues',keys:['cp','cl','l2','ls']}
 ],
 en:[
   {icon:'📖',label:'Teaching & instruction',keys:['ee','cc','df']},
@@ -552,7 +553,7 @@ en:[
   {icon:'🧩',label:'Inclusion & specific needs',keys:['dy','ct']},
   {icon:'🔢',label:'Subject didactics',keys:['dm','ib']},
   {icon:'🏫',label:'Neuroscience & the brain',keys:['ns']},
-  {icon:'📚',label:'Literacy, reading & languages',keys:['cp','cl','l2']}
+  {icon:'📚',label:'Literacy, reading & languages',keys:['cp','cl','l2','ls']}
 ],
 nl:[
   {icon:'📖',label:'Onderwijs & instructie',keys:['ee','cc','df']},
@@ -563,7 +564,7 @@ nl:[
   {icon:'🧩',label:'Inclusie & specifieke behoeften',keys:['dy','ct']},
   {icon:'🔢',label:'Vakdidactieken',keys:['dm','ib']},
   {icon:'🏫',label:'Neurowetenschappen & brein',keys:['ns']},
-  {icon:'📚',label:'Geletterdheid, lezen & talen',keys:['cp','cl','l2']}
+  {icon:'📚',label:'Geletterdheid, lezen & talen',keys:['cp','cl','l2','ls']}
 ]};
 
 const TC={
@@ -586,7 +587,8 @@ fr:[
   {key:'cp',em:'📚',tt:'Conscience phonologique & lecture',sb:'Science of Reading · Scarborough · phonics',bd:'d = 0.73',bdCls:'bt'},
   {key:'cl',em:'💡',tt:'Compréhension en lecture',sb:'Simple View · Gough & Tunmer · vocabulaire',bd:'d = 0.60',bdCls:'ba'},
   {key:'l2',em:'🌍',tt:'Langues étrangères & CLIL',sb:'Krashen · Cummins · immersion · Belgique',bd:'d = 0.52',bdCls:'bb'},
-  {key:'ct',em:'👥',tt:'Coenseignement (team teaching)',sb:'Cook & Friend · inclusion · besoins spécifiques',bd:'d = 0.19',bdCls:'bt'}
+  {key:'ct',em:'👥',tt:'Coenseignement (team teaching)',sb:'Cook & Friend · inclusion · besoins spécifiques',bd:'d = 0.19',bdCls:'bt'},
+  {key:'ls',em:'🗣️',tt:'Langue de scolarisation',sb:'Cummins · BICS/CALP · primo-arrivants · DASPA/OKAN',bd:'d = 0.36',bdCls:'bb'}
 ],
 en:[
   {key:'ee',em:'📖',tt:'Explicit Teaching',sb:'Direct Instruction · Rosenshine · Hattie',bd:'d = 0.59',bdCls:'bb'},
@@ -607,7 +609,8 @@ en:[
   {key:'cp',em:'📚',tt:'Phonological Awareness & Reading',sb:'Science of Reading · Scarborough · phonics',bd:'d = 0.73',bdCls:'bt'},
   {key:'cl',em:'💡',tt:'Reading Comprehension',sb:'Simple View · Gough & Tunmer · vocabulary',bd:'d = 0.60',bdCls:'ba'},
   {key:'l2',em:'🌍',tt:'Foreign Languages & CLIL',sb:'Krashen · Cummins · immersion · Belgium',bd:'d = 0.52',bdCls:'bb'},
-  {key:'ct',em:'👥',tt:'Co-Teaching (Team Teaching)',sb:'Cook & Friend · inclusion · special needs',bd:'d = 0.19',bdCls:'bt'}
+  {key:'ct',em:'👥',tt:'Co-Teaching (Team Teaching)',sb:'Cook & Friend · inclusion · special needs',bd:'d = 0.19',bdCls:'bt'},
+  {key:'ls',em:'🗣️',tt:'Language of Schooling',sb:'Cummins · BICS/CALP · newcomer students · DASPA/OKAN',bd:'d = 0.36',bdCls:'bb'}
 ],
 nl:[
   {key:'ee',em:'📖',tt:'Expliciete instructie',sb:'Direct Instruction · Rosenshine · Hattie',bd:'d = 0.59',bdCls:'bb'},
@@ -628,7 +631,8 @@ nl:[
   {key:'cp',em:'📚',tt:'Fonologisch bewustzijn & lezen',sb:'Science of Reading · Scarborough · fonetisch',bd:'d = 0.73',bdCls:'bt'},
   {key:'cl',em:'💡',tt:'Leesbegrip',sb:'Simple View · Gough & Tunmer · woordenschat',bd:'d = 0.60',bdCls:'ba'},
   {key:'l2',em:'🌍',tt:'Vreemde talen & CLIL',sb:'Krashen · Cummins · immersie · België',bd:'d = 0.52',bdCls:'bb'},
-  {key:'ct',em:'👥',tt:'Co-teaching (team teaching)',sb:'Cook & Friend · inclusie · specifieke behoeften',bd:'d = 0.19',bdCls:'bt'}
+  {key:'ct',em:'👥',tt:'Co-teaching (team teaching)',sb:'Cook & Friend · inclusie · specifieke behoeften',bd:'d = 0.19',bdCls:'bt'},
+  {key:'ls',em:'🗣️',tt:'Onderwijstaal',sb:'Cummins · BICS/CALP · nieuwkomers · DASPA/OKAN',bd:'d = 0.36',bdCls:'bb'}
 ]};
 const D={
 ee:{
@@ -1969,6 +1973,97 @@ debateCon:["Hatties synthese plaatst team teaching bij de strategieën met een l
 opp:{t:"Een modelgerichte implementatiegids ontbreekt grotendeels in Nederlandstalige bronnen",d:"De meeste Nederlandstalige co-teachingbronnen beschrijven enkel het model 'één leidt, één helpt', zonder station-, parallel- of gedifferentieerd onderwijs voor te stellen als concrete, planbare opties. Een korte praktijkgids die de zes modellen van Cook en Friend vertaalt naar direct bruikbare lessjablonen — met een protocol voor gezamenlijke plantijd — zou een echte, praktische leemte opvullen voor zorgcoördinatoren."},
 warn:{t:"Presenteer co-teaching niet als een gegarandeerde inclusieoplossing",d:"Hatties gepoolde cijfer (d = 0.19) en de meta-analyse van Murawski & Swanson tonen dat de loutere aanwezigheid van twee volwassenen in een klas, zonder modelkeuze, rolgelijkwaardigheid en gezamenlijke planning, zwakke effecten oplevert. De data ondersteunen specifieke, goed uitgevoerde vormen — niet 'co-teaching' als ongedifferentieerd label."},
 related:["Differentiatie","Leerstoornissen & specifieke behoeften","Coöperatief leren","Formatieve evaluatie"],key:'ct'}
+},
+ls:{
+fr:{title:"Langue de scolarisation",tags:["Littératie & langue seconde","Primaire · Secondaire","Élèves allophones & primo-arrivants","Enjeu majeur en contexte migratoire"],score:"d = 0.36",scoreLbl:"Hattie — programmes bilingues, effet sur la réussite scolaire",
+summary:"La langue de scolarisation est la langue dans laquelle un élève reçoit son enseignement — qui n'est pas toujours sa langue maternelle. Deux traditions de recherche, l'une nord-américaine, l'autre francophone, convergent sur ce constat. Cummins (1979, 2000) distingue la maîtrise conversationnelle courante (BICS), acquise en 1 à 2 ans, de la maîtrise de la langue académique nécessaire pour réussir à l'école (CALP), qui demande 5 à 7 ans. De son côté, Vigner (1989) puis Verdelhan-Bourgade (2002) théorisent la langue de scolarisation comme une fonction transversale — apprendre la langue et apprendre à travers la langue — distincte à la fois du français langue étrangère et du français langue maternelle, et appelant une didactique spécifique. Cet écart entre aisance orale et maîtrise académique explique pourquoi des élèves qui « parlent bien » restent souvent en difficulté scolaire durable — et pourquoi les dispositifs d'accueil de courte durée (DASPA, OKAN) ne suffisent pas, à eux seuls, à combler l'écart de réussite.",
+metrics:[{l:"Effet Hattie — programmes bilingues",v:"d = 0.36",s:"Effet modéré, sous le seuil de 0.40"},{l:"Délai pour l'aisance conversationnelle (BICS)",v:"1–2 ans",s:"Cummins 1979, 2000"},{l:"Délai pour la langue académique (CALP)",v:"5–7 ans",s:"Cummins 1979, 2000"},{l:"Écart de réussite comblé par une éducation bilingue prolongée",v:"Après 4–7 ans",s:"Thomas & Collier 1997–2002"}],
+insights:[
+{t:"Parler couramment n'est pas la même chose qu'être prêt pour l'école",d:"Cummins distingue les compétences interpersonnelles de base (BICS), acquises en 1 à 2 ans, de la maîtrise de la langue académique (CALP), qui exige 5 à 7 ans. Un élève à l'aise en cour de récréation peut rester des années en difficulté face au vocabulaire abstrait et disciplinaire d'un cours de sciences ou d'histoire.",lvl:'all'},
+{t:"La langue maternelle est un levier à mobiliser, pas un obstacle à corriger",d:"L'hypothèse d'interdépendance de Cummins montre que les compétences cognitivo-linguistiques se transfèrent d'une langue à l'autre via une compétence sous-jacente commune. La recherche-action de Nathalie Auger, menée depuis plus de vingt ans auprès des élèves nouvellement arrivés en France, va plus loin : les ressources plurilingues et pluriculturelles des élèves doivent être mobilisées activement comme appui pédagogique — dans toutes les disciplines — et non simplement tolérées le temps que l'élève les abandonne.",lvl:'all'},
+{t:"Seule une bilinguisation de qualité et prolongée referme l'écart de réussite",d:"Les études longitudinales de Thomas & Collier (1997, 2002) montrent que les programmes tout-immersion ou de transition rapide ne comblent jamais plus de la moitié de l'écart de réussite des élèves allophones ; seuls les dispositifs bilingues de qualité, poursuivis 4 à 7 ans, permettent un rattrapage complet.",lvl:'all'},
+{t:"En Belgique francophone, le problème n'est pas seulement la durée de l'accueil, mais l'absence de pont organisé avec la classe ordinaire",d:"Le DASPA (français langue d'apprentissage) accueille un élève primo-arrivant de 1 semaine à 1 an, prolongeable ; en Flandre, l'OKAN suit un format comparable — des durées bien plus courtes que les 5 à 7 ans que la recherche associe à la maîtrise de la langue académique. L'étude de terrain de Deborah Meunier (2020, ULiège) montre que la transition DASPA → classe ordinaire souffre d'obstacles supplémentaires, structurels, didactiques et idéologiques : absence de concertation formalisée entre enseignants d'accueil et enseignants ordinaires, absence de progression pédagogique commune, communication informelle et non planifiée, et persistance d'une idéologie monolingue qui peine à accueillir le plurilinguisme réel des élèves.",lvl:'all'}],
+effects:[{l:"Programmes bilingues (Hattie)",v:0.36},{l:"Pour comparaison — différenciation pédagogique",v:0.41},{l:"Pour comparaison — apprentissage coopératif",v:0.54},{l:"Pour comparaison — enseignement explicite",v:0.59},{l:"Pour comparaison — coenseignement",v:0.19}],
+principles:[
+{n:"P1",t:"Ne pas confondre aisance orale et maîtrise académique",d:"Poursuivre le soutien linguistique bien après que l'élève communique couramment à l'oral"},
+{n:"P2",t:"Valoriser et mobiliser les ressources plurilingues des élèves",d:"Autoriser la traduction, le code-switching et les ressources bilingues comme étais cognitifs dans toutes les disciplines — une approche plurilingue et plurinormative, pas des béquilles à éliminer (Auger 2024)"},
+{n:"P3",t:"Enseigner explicitement le vocabulaire académique de chaque discipline",d:"Chaque matière a son propre registre — les mots du cours de sciences ne s'apprennent pas en cour de récréation"},
+{n:"P4",t:"Prévoir un accompagnement sur plusieurs années",d:"Planifier le soutien linguistique sur 5 à 7 ans, pas seulement pendant l'année du dispositif d'accueil"},
+{n:"P5",t:"Formaliser la concertation entre dispositif d'accueil et classe ordinaire",d:"Mettre en place une concertation planifiée et une progression pédagogique commune entre enseignants DASPA/OKAN et enseignants ordinaires — l'informalité de cette articulation est le premier obstacle identifié par la recherche de terrain (Meunier 2020)"},
+{n:"P6",t:"Séparer l'évaluation du contenu de l'évaluation de la langue",d:"Un élève peut maîtriser un concept mathématique sans pouvoir encore le formuler dans la langue de scolarisation"},
+{n:"P7",t:"Former les enseignants disciplinaires, pas seulement les enseignants de langue",d:"L'intégration du langage académique dans chaque cours dépend de tous les enseignants, pas du seul professeur de français ou de néerlandais langue de scolarisation"},
+{n:"P8",t:"Suivre les élèves au-delà de la sortie du dispositif d'accueil",d:"L'essentiel de l'écart de réussite se joue dans les années qui suivent l'intégration en classe ordinaire, pas pendant l'accueil initial"}],
+refs:[
+{t:"Cummins, J. — Linguistic Interdependence and the Educational Development of Bilingual Children (1979)",m:"Review of Educational Research · Hypothèse fondatrice",f:"Formalise la distinction BICS/CALP et l'hypothèse d'interdépendance linguistique entre langue première et langue de scolarisation."},
+{t:"Cummins, J. — Language, Power and Pedagogy: Bilingual Children in the Crossfire (2000)",m:"Multilingual Matters · Synthèse théorique",f:"Approfondit le concept de compétence sous-jacente commune et ses implications pour l'enseignement des élèves allophones."},
+{t:"Thomas, W.P., & Collier, V.P. — School Effectiveness for Language Minority Students (1997) ; A National Study of School Effectiveness for Language Minority Students' Long-Term Academic Achievement (2002)",m:"CREDE · Études longitudinales nationales",f:"Suit des élèves sur 4 à 7 ans et montre que seule une éducation bilingue prolongée et de qualité referme l'écart de réussite."},
+{t:"Hattie, J. — Visible Learning (synthèse mise à jour)",m:"Visible Learning MetaX · Méta-analyse",f:"Situe l'effet des programmes bilingues à d = 0.36, un effet modéré mais significatif sur la réussite en langue seconde."},
+{t:"Vigner, G. — « Le français, langue de scolarisation » (1989)",m:"Diagonales, n°12, p. 41-45 · Article fondateur",f:"Introduit l'expression « langue de scolarisation » en analysant le rôle du français en Afrique francophone : une langue d'abord apprise et utilisée en situation scolaire."},
+{t:"Verdelhan-Bourgade, M. — Le français de scolarisation : pour une didactique réaliste (2002)",m:"PUF · Ouvrage de référence",f:"Théorise la fonction transversale du français de scolarisation, commune au français langue maternelle et au français langue seconde, et pose les bases d'une didactique spécifique centrée sur ce que l'élève apprend à travers la langue."},
+{t:"Auger, N., & Guiraud-Robert, F. — Accueillir les élèves nouvellement arrivés (2024)",m:"ESF Sciences Humaines · Guide fondé sur la recherche",f:"Synthétise plus de vingt ans de recherche-action sur les élèves allophones nouvellement arrivés en France et propose des pistes concrètes pour les cycles 2, 3 et UPE2A."},
+{t:"Meunier, D. — Du dispositif d'accueil des élèves primo-arrivants à la scolarisation dans la classe ordinaire (2020)",m:"Colloque international DIDACTIfen · Université de Liège",f:"Identifie les obstacles structurels, didactiques et idéologiques — dont l'absence de concertation entre DASPA et classe ordinaire — qui freinent la transition des primo-arrivants en Fédération Wallonie-Bruxelles."}
+],
+debatePro:["Le maintien et la valorisation des ressources plurilingues des élèves accélèrent, plutôt qu'ils ne ralentissent, l'acquisition de la langue de scolarisation (Cummins ; Auger 2024)","Les dispositifs d'accueil (DASPA, OKAN) offrent un cadre structuré et une intensité linguistique difficiles à recréer en classe ordinaire","Une éducation bilingue prolongée referme l'écart de réussite plus efficacement qu'une immersion totale précoce","La distinction BICS/CALP donne aux enseignants un outil concret pour ne pas relâcher le soutien trop tôt","La tradition francophone de didactique du français de scolarisation — Vigner (1989), Verdelhan-Bourgade (2002) — offre un cadre conceptuel propre, non calqué sur le FLE ni sur le FLM"],
+debateCon:["Les dispositifs d'accueil belges (DASPA, OKAN) sont structurellement plus courts que les 5 à 7 ans requis pour la maîtrise académique","Le manque de formation des enseignants disciplinaires à l'intégration du langage limite l'impact des meilleurs dispositifs","La pression du calendrier scolaire pousse parfois à une sortie prématurée du dispositif d'accueil, dès l'aisance orale acquise","Le corpus de preuves quantitatif (effets chiffrés) reste dominé par le contexte nord-américain ; sa transférabilité au système belge est encore peu documentée","En Fédération Wallonie-Bruxelles, l'absence de concertation formalisée et de progression pédagogique commune entre DASPA et classe ordinaire constitue, selon la recherche de terrain, un obstacle au moins aussi structurant que la durée du dispositif (Meunier 2020)"],
+opp:{t:"Un pont manque entre les dispositifs d'accueil et la classe ordinaire en Belgique francophone",d:"L'étude de terrain de Meunier (2020, ULiège) documente précisément ce vide : absence de concertation formalisée entre enseignants DASPA et enseignants ordinaires, absence de progression pédagogique commune, communication informelle et non planifiée, manque de temps dédié. Une ressource pratique — protocole de collaboration DASPA/classe ordinaire, grille de suivi pluriannuel du vocabulaire académique, outils d'évaluation dissociant contenu et langue — comblerait un vide identifié à la fois par la recherche et par les acteurs de terrain."},
+warn:{t:"Ne pas relâcher le soutien dès que l'élève « parle bien »",d:"La confusion entre BICS et CALP est l'erreur la plus documentée dans l'accompagnement des élèves allophones : un enseignant peut légitimement croire qu'un élève fluide à l'oral n'a plus besoin de soutien, alors que la maîtrise de la langue académique nécessaire pour réussir en histoire, en sciences ou en mathématiques reste, à ce stade, largement inachevée."},
+related:["Différenciation pédagogique","Langues étrangères & CLIL","Compréhension en lecture","Conscience phonologique & lecture"],key:'ls'},
+en:{title:"Language of Schooling",tags:["Literacy & second-language learners","Primary · Secondary","Newcomer & multilingual students","Major issue in migration contexts"],score:"d = 0.36",scoreLbl:"Hattie — bilingual programmes, effect on achievement",
+summary:"The language of schooling is the language in which a student receives instruction — which is not always their home language. For newcomer and multilingual students, Cummins' research (1979, 2000) established a distinction that has become central to the field: conversational fluency (BICS) develops within 1 to 2 years, but the academic language proficiency needed to succeed at school (CALP) takes 5 to 7 years. This gap explains why students who 'speak well' often remain in long-term academic difficulty — and why short-term reception programmes (such as Belgium's DASPA or OKAN) cannot close the achievement gap on their own.",
+metrics:[{l:"Hattie effect — bilingual programmes",v:"d = 0.36",s:"Moderate effect, below the 0.40 hinge point"},{l:"Time to conversational fluency (BICS)",v:"1–2 years",s:"Cummins 1979, 2000"},{l:"Time to academic language proficiency (CALP)",v:"5–7 years",s:"Cummins 1979, 2000"},{l:"Achievement gap closed by sustained bilingual education",v:"After 4–7 years",s:"Thomas & Collier 1997–2002"}],
+insights:[
+{t:"Speaking fluently is not the same as being ready for school",d:"Cummins distinguishes Basic Interpersonal Communicative Skills (BICS), acquired in 1 to 2 years, from Cognitive Academic Language Proficiency (CALP), which takes 5 to 7 years. A student who is at ease on the playground can remain in difficulty for years when facing the abstract, subject-specific vocabulary of a science or history class.",lvl:'all'},
+{t:"The home language is a lever, not an obstacle",d:"Cummins' interdependence hypothesis shows that cognitive-linguistic skills transfer across languages through a common underlying proficiency. Devaluing or banning the home language deprives students of a real cognitive support rather than speeding up their acquisition of the language of schooling.",lvl:'all'},
+{t:"Only sustained, high-quality bilingual education closes the achievement gap",d:"Thomas & Collier's longitudinal studies (1997, 2002) show that immersion-only or fast-transition programmes never close more than half of language-minority students' achievement gap; only high-quality bilingual programmes, sustained over 4 to 7 years, allow a full catch-up.",lvl:'all'},
+{t:"Belgium's reception programmes are built around a short stay — worth questioning",d:"In the French Community of Belgium, the DASPA (French as a learning language) welcomes a newly arrived student for 1 week to 1 year, extendable; Flanders' OKAN follows a comparable format. These programmes respond to an urgent integration need but remain, structurally, far shorter than the 5 to 7 years research associates with academic language proficiency.",lvl:'all'}],
+effects:[{l:"Bilingual programmes (Hattie)",v:0.36},{l:"For comparison — differentiated instruction",v:0.41},{l:"For comparison — cooperative learning",v:0.54},{l:"For comparison — explicit teaching",v:0.59},{l:"For comparison — co-teaching",v:0.19}],
+principles:[
+{n:"P1",t:"Don't confuse oral fluency with academic proficiency",d:"Keep providing language support well after a student communicates fluently in speech"},
+{n:"P2",t:"Value and mobilise the home language",d:"Allow translation, code-switching and bilingual resources as cognitive scaffolds, not as crutches to be removed"},
+{n:"P3",t:"Explicitly teach the academic vocabulary of each subject",d:"Every subject has its own register — the words of a science class aren't learned on the playground"},
+{n:"P4",t:"Plan support across several years",d:"Schedule language support over 5 to 7 years, not just during the reception-programme year"},
+{n:"P5",t:"Bridge the reception programme and the mainstream classroom",d:"Multiply shared lessons and activities between DASPA/OKAN and mainstream classes to avoid prolonged isolation"},
+{n:"P6",t:"Separate content assessment from language assessment",d:"A student can master a mathematical concept without yet being able to express it in the language of schooling"},
+{n:"P7",t:"Train subject teachers, not only language teachers",d:"Integrating academic language into every class depends on all teachers, not solely the language-of-schooling teacher"},
+{n:"P8",t:"Track students beyond their exit from the reception programme",d:"Most of the achievement gap plays out in the years following mainstream integration, not during the initial reception period"}],
+refs:[
+{t:"Cummins, J. — Linguistic Interdependence and the Educational Development of Bilingual Children (1979)",m:"Review of Educational Research · Founding hypothesis",f:"Formalises the BICS/CALP distinction and the linguistic interdependence hypothesis between the home language and the language of schooling."},
+{t:"Cummins, J. — Language, Power and Pedagogy: Bilingual Children in the Crossfire (2000)",m:"Multilingual Matters · Theoretical synthesis",f:"Develops the concept of common underlying proficiency and its implications for teaching multilingual students."},
+{t:"Thomas, W.P., & Collier, V.P. — School Effectiveness for Language Minority Students (1997); A National Study of School Effectiveness for Language Minority Students' Long-Term Academic Achievement (2002)",m:"CREDE · National longitudinal studies",f:"Tracks students over 4 to 7 years and shows that only sustained, high-quality bilingual education closes the achievement gap."},
+{t:"Hattie, J. — Visible Learning (updated synthesis)",m:"Visible Learning MetaX · Meta-analysis",f:"Places the effect of bilingual programmes at d = 0.36, a moderate but significant effect on second-language achievement."}],
+debatePro:["Maintaining and valuing the home language speeds up, rather than slows down, acquisition of the language of schooling","Reception programmes (DASPA, OKAN) offer a structured setting and linguistic intensity hard to recreate in a mainstream classroom","Sustained bilingual education closes the achievement gap more effectively than early total immersion","The BICS/CALP distinction gives teachers a concrete tool for not withdrawing support too soon"],
+debateCon:["Belgium's reception programmes (DASPA, OKAN) are structurally shorter than the 5 to 7 years required for academic proficiency","Insufficient training of subject teachers in language-integration limits the impact of even the best programmes","School-calendar pressure sometimes pushes an early exit from the reception programme as soon as oral fluency is reached","The evidence base remains dominated by the North American context; its transferability to the Belgian system is still thinly documented"],
+opp:{t:"A bridge between reception programmes and mainstream classes is largely missing from French- and Dutch-language resources",d:"Field analyses of the DASPA highlight a blurry regulatory framework and few concrete bridges between reception classes and mainstream classes. A practical resource — a DASPA/mainstream-class collaboration protocol, a multi-year academic-vocabulary tracking grid, assessment tools that separate content from language — would fill a gap identified by both research and practitioners in Belgium."},
+warn:{t:"Don't withdraw support as soon as a student 'speaks well'",d:"Confusing BICS with CALP is the most documented mistake in supporting multilingual students: a teacher may reasonably believe a fluent-sounding student no longer needs support, when the academic language proficiency needed to succeed in history, science or mathematics remains, at that stage, largely unfinished."},
+related:["Differentiated Instruction","Foreign Languages & CLIL","Reading Comprehension","Phonological Awareness & Reading"],key:'ls'},
+nl:{title:"Onderwijstaal",tags:["Geletterdheid & tweedetaalleerders","Lager · Secundair","Nieuwkomers & meertalige leerlingen","Grote uitdaging in migratiecontext"],score:"d = 0.36",scoreLbl:"Hattie — tweetalige programma's, effect op leerresultaten",
+summary:"De onderwijstaal is de taal waarin een leerling instructie krijgt — die niet altijd zijn of haar thuistaal is. Voor nieuwkomers en meertalige leerlingen legde Cummins (1979, 2000) een onderscheid vast dat centraal is blijven staan: conversatievaardigheid (BICS) ontwikkelt zich binnen 1 tot 2 jaar, maar de cognitief-academische taalvaardigheid die nodig is om op school te slagen (CALP) vraagt 5 tot 7 jaar. Dit verschil — in de Vlaamse onderwijspraktijk vaak omschreven als het verschil tussen 'thuistaal' en 'schooltaal' — verklaart waarom leerlingen die 'goed spreken' vaak jarenlang schools achterblijven, en waarom kortdurende onthaaltrajecten (DASPA, OKAN) de leerachterstand niet op zichzelf kunnen wegwerken.",
+metrics:[{l:"Hattie-effect — tweetalige programma's",v:"d = 0.36",s:"Matig effect, onder de drempel van 0.40"},{l:"Tijd tot conversatievaardigheid (BICS)",v:"1–2 jaar",s:"Cummins 1979, 2000"},{l:"Tijd tot schooltaalvaardigheid (CALP)",v:"5–7 jaar",s:"Cummins 1979, 2000"},{l:"Leerachterstand weggewerkt door langdurig tweetalig onderwijs",v:"Na 4–7 jaar",s:"Thomas & Collier 1997–2002"}],
+insights:[
+{t:"Vlot spreken is niet hetzelfde als klaar zijn voor school",d:"Cummins onderscheidt basale conversatievaardigheden (BICS), verworven in 1 tot 2 jaar, van cognitief-academische taalvaardigheid (CALP), die 5 tot 7 jaar vergt. Een leerling die zich vlot voelt op de speelplaats kan jarenlang moeite blijven hebben met de abstracte, vakspecifieke woordenschat van een les wetenschappen of geschiedenis.",lvl:'all'},
+{t:"De thuistaal is een hefboom, geen hindernis",d:"Cummins' interdependentiehypothese toont dat cognitief-linguïstische vaardigheden overgedragen worden tussen talen via een gemeenschappelijke onderliggende vaardigheid. De thuistaal afwaarderen of verbieden ontneemt de leerling een reële cognitieve steun, in plaats van de verwerving van de onderwijstaal te versnellen.",lvl:'all'},
+{t:"Enkel langdurig en kwalitatief tweetalig onderwijs dicht de leerachterstand volledig",d:"De longitudinale studies van Thomas & Collier (1997, 2002) tonen dat volledige onderdompeling of snelle transitieprogramma's nooit meer dan de helft van de leerachterstand van taalminderheidsleerlingen wegwerken; enkel kwalitatieve tweetalige trajecten, volgehouden gedurende 4 tot 7 jaar, maken een volledige inhaalbeweging mogelijk.",lvl:'all'},
+{t:"De Belgische onthaaltrajecten zetten in op een korte opvang — een keuze die vragen oproept",d:"In de Federatie Wallonië-Brussel vangt het DASPA (Frans als leertaal) een nieuwkomer op gedurende 1 week tot 1 jaar, verlengbaar; in Vlaanderen volgt OKAN een vergelijkbaar traject. Deze trajecten beantwoorden aan een dringende integratiebehoefte, maar blijven structureel veel korter dan de 5 tot 7 jaar die onderzoek koppelt aan schooltaalvaardigheid.",lvl:'all'}],
+effects:[{l:"Tweetalige programma's (Hattie)",v:0.36},{l:"Ter vergelijking — differentiatie",v:0.41},{l:"Ter vergelijking — coöperatief leren",v:0.54},{l:"Ter vergelijking — expliciete instructie",v:0.59},{l:"Ter vergelijking — co-teaching",v:0.19}],
+principles:[
+{n:"P1",t:"Verwar mondelinge vlotheid niet met schooltaalvaardigheid",d:"Blijf taalondersteuning bieden lang nadat een leerling vlot mondeling communiceert"},
+{n:"P2",t:"Waardeer en benut de thuistaal",d:"Sta vertaling, code-switching en tweetalige hulpmiddelen toe als cognitieve steun, niet als krukken die weggenomen moeten worden"},
+{n:"P3",t:"Onderwijs de academische woordenschat van elk vak expliciet",d:"Elk vak heeft zijn eigen register — de woorden van een wetenschapsles worden niet op de speelplaats geleerd"},
+{n:"P4",t:"Plan ondersteuning over meerdere jaren",d:"Plan taalondersteuning over 5 tot 7 jaar, niet enkel tijdens het jaar in het onthaaltraject"},
+{n:"P5",t:"Verbind onthaaltraject en gewone klas",d:"Vermenigvuldig gedeelde lessen en activiteiten tussen DASPA/OKAN en de gewone klas om langdurig isolement te vermijden"},
+{n:"P6",t:"Scheid inhoudsevaluatie van taalevaluatie",d:"Een leerling kan een wiskundig concept beheersen zonder het al in de onderwijstaal te kunnen verwoorden"},
+{n:"P7",t:"Vorm vakleerkrachten, niet enkel taalleerkrachten",d:"De integratie van schooltaal in elke les hangt af van alle leerkrachten, niet enkel van de leerkracht onderwijstaal"},
+{n:"P8",t:"Volg leerlingen op na het onthaaltraject",d:"Het grootste deel van de leerachterstand speelt zich af in de jaren na integratie in de gewone klas, niet tijdens het initiële onthaal"}],
+refs:[
+{t:"Cummins, J. — Linguistic Interdependence and the Educational Development of Bilingual Children (1979)",m:"Review of Educational Research · Grondleggende hypothese",f:"Formaliseert het BICS/CALP-onderscheid en de linguïstische interdependentiehypothese tussen thuistaal en onderwijstaal."},
+{t:"Cummins, J. — Language, Power and Pedagogy: Bilingual Children in the Crossfire (2000)",m:"Multilingual Matters · Theoretische synthese",f:"Werkt het concept van gemeenschappelijke onderliggende vaardigheid verder uit, met implicaties voor het onderwijs aan meertalige leerlingen."},
+{t:"Thomas, W.P., & Collier, V.P. — School Effectiveness for Language Minority Students (1997); A National Study of School Effectiveness for Language Minority Students' Long-Term Academic Achievement (2002)",m:"CREDE · Nationale longitudinale studies",f:"Volgt leerlingen gedurende 4 tot 7 jaar en toont dat enkel langdurig, kwalitatief tweetalig onderwijs de leerachterstand wegwerkt."},
+{t:"Hattie, J. — Visible Learning (bijgewerkte synthese)",m:"Visible Learning MetaX · Meta-analyse",f:"Plaatst het effect van tweetalige programma's op d = 0.36, een matig maar significant effect op tweedetaalprestaties."}],
+debatePro:["Het behoud en de waardering van de thuistaal versnellen, in plaats van vertragen, de verwerving van de onderwijstaal","Onthaaltrajecten (DASPA, OKAN) bieden een gestructureerd kader en een taalintensiteit die moeilijk te herscheppen zijn in de gewone klas","Langdurig tweetalig onderwijs dicht de leerachterstand doeltreffender dan vroege volledige onderdompeling","Het BICS/CALP-onderscheid geeft leerkrachten een concreet instrument om ondersteuning niet te vroeg af te bouwen"],
+debateCon:["De Belgische onthaaltrajecten (DASPA, OKAN) zijn structureel korter dan de 5 tot 7 jaar die nodig zijn voor schooltaalvaardigheid","Onvoldoende vorming van vakleerkrachten in taalintegratie beperkt de impact van zelfs de beste trajecten","De druk van het schooljaar leidt soms tot een voortijdige uitstroom uit het onthaaltraject, zodra mondelinge vlotheid bereikt is","Het onderzoek blijft overwegend Noord-Amerikaans; de overdraagbaarheid naar het Belgische systeem is nog weinig gedocumenteerd"],
+opp:{t:"Een brug tussen onthaaltrajecten en de gewone klas ontbreekt grotendeels in Franstalige en Nederlandstalige bronnen",d:"Terreinanalyses van het DASPA wijzen op een vaag regelgevend kader en weinig concrete bruggen tussen onthaalklassen en gewone klassen. Een praktische hulpbron — een samenwerkingsprotocol tussen DASPA/OKAN en de gewone klas, een meerjarig opvolgingsrooster voor academische woordenschat, evaluatie-instrumenten die inhoud en taal scheiden — zou een leemte opvullen die zowel door onderzoek als door terreinactoren in België wordt vastgesteld."},
+warn:{t:"Bouw ondersteuning niet af zodra een leerling 'goed spreekt'",d:"De verwarring tussen BICS en CALP is de best gedocumenteerde vergissing in de begeleiding van meertalige leerlingen: een leerkracht kan terecht denken dat een vlot sprekende leerling geen ondersteuning meer nodig heeft, terwijl de schooltaalvaardigheid die nodig is om te slagen voor geschiedenis, wetenschappen of wiskunde op dat moment nog grotendeels onvolledig is."},
+related:["Differentiatie","Vreemde talen & CLIL","Leesbegrip","Fonologisch bewustzijn & lezen"],key:'ls'}
 }
 
 };
@@ -2593,13 +2688,13 @@ const QUOTA_UI = {
   fr: {
     ok:   (rem) => `<strong>${rem} fiche${rem>1?'s':''} gratuite${rem>1?'s':''} restante${rem>1?'s':''}</strong> — consultez librement les thèmes qui vous intéressent.`,
     warn: () => `<strong>Plus qu'1 fiche gratuite</strong> — créez un compte pour accéder à l'intégralité du catalogue.`,
-    done: () => `<strong>Quota atteint</strong> — créez un compte gratuit pour accéder aux 16 fiches restantes.`,
+    done: () => `<strong>Quota atteint</strong> — créez un compte gratuit pour accéder aux 17 fiches restantes.`,
     btn:  {ok:'Accès complet', warn:'Créer un compte', done:'Débloquer tout'},
     modalTitle: 'Accédez à toutes les fiches',
-    modalSub: 'Vous avez consulté vos 3 fiches gratuites. Créez un compte pour accéder aux 16 fiches restantes — gratuitement.',
+    modalSub: 'Vous avez consulté vos 3 fiches gratuites. Créez un compte pour accéder aux 17 fiches restantes — gratuitement.',
     modalBtn: 'Accéder à toutes les fiches →',
     modalSkip: 'Rester sur les fiches gratuites',
-    perks: ['📚 19 fiches complètes','✏️ Onglet En pratique','🌍 FR · EN · NL','🤖 Génération IA'],
+    perks: ['📚 20 fiches complètes','✏️ Onglet En pratique','🌍 FR · EN · NL','🤖 Génération IA'],
     seen: 'Consulté',
     locked: 'Compte requis',
     emailPlaceholder: 'votre@email.com',
@@ -2608,13 +2703,13 @@ const QUOTA_UI = {
   en: {
     ok:   (rem) => `<strong>${rem} free sheet${rem>1?'s':''} remaining</strong> — browse the themes that interest you.`,
     warn: () => `<strong>Only 1 free sheet left</strong> — create an account to access the full catalogue.`,
-    done: () => `<strong>Quota reached</strong> — create a free account to access the 16 remaining sheets.`,
+    done: () => `<strong>Quota reached</strong> — create a free account to access the 17 remaining sheets.`,
     btn:  {ok:'Full access', warn:'Create account', done:'Unlock all'},
     modalTitle: 'Access all sheets',
-    modalSub: 'You have viewed your 3 free sheets. Create an account to access the 16 remaining sheets — free of charge.',
+    modalSub: 'You have viewed your 3 free sheets. Create an account to access the 17 remaining sheets — free of charge.',
     modalBtn: 'Access all sheets →',
     modalSkip: 'Stay on free sheets',
-    perks: ['📚 19 complete sheets','✏️ In practice tab','🌍 FR · EN · NL','🤖 AI generation'],
+    perks: ['📚 20 complete sheets','✏️ In practice tab','🌍 FR · EN · NL','🤖 AI generation'],
     seen: 'Viewed',
     locked: 'Account required',
     emailPlaceholder: 'your@email.com',
@@ -2623,13 +2718,13 @@ const QUOTA_UI = {
   nl: {
     ok:   (rem) => `<strong>${rem} gratis fiche${rem>1?'s':''} over</strong> — bekijk de thema's die u interesseren.`,
     warn: () => `<strong>Nog maar 1 gratis fiche</strong> — maak een account aan voor toegang tot de volledige catalogus.`,
-    done: () => `<strong>Limiet bereikt</strong> — maak een gratis account aan voor de 16 overige fiches.`,
+    done: () => `<strong>Limiet bereikt</strong> — maak een gratis account aan voor de 17 overige fiches.`,
     btn:  {ok:'Volledige toegang', warn:'Account aanmaken', done:'Alles ontgrendelen'},
     modalTitle: 'Toegang tot alle fiches',
-    modalSub: 'U hebt uw 3 gratis fiches bekeken. Maak een account aan voor de 16 overige fiches — volledig gratis.',
+    modalSub: 'U hebt uw 3 gratis fiches bekeken. Maak een account aan voor de 17 overige fiches — volledig gratis.',
     modalBtn: 'Toegang tot alle fiches →',
     modalSkip: 'Blijf op gratis fiches',
-    perks: ['📚 19 volledige fiches','✏️ In de praktijk tab','🌍 FR · EN · NL','🤖 AI-generatie'],
+    perks: ['📚 20 volledige fiches','✏️ In de praktijk tab','🌍 FR · EN · NL','🤖 AI-generatie'],
     seen: 'Bekeken',
     locked: 'Account vereist',
     emailPlaceholder: 'uw@email.com',
@@ -3319,9 +3414,9 @@ updateNavAccount();
   <div class="modal-box" id="modal-box">
     <div style="font-size:34px;text-align:center;margin-bottom:12px;">🔓</div>
     <div class="modal-title" id="modal-title">Accédez à toutes les fiches</div>
-    <div class="modal-sub" id="modal-sub">Vous avez consulté vos 3 fiches gratuites. Créez un compte pour accéder aux 16 fiches restantes — gratuitement.</div>
+    <div class="modal-sub" id="modal-sub">Vous avez consulté vos 3 fiches gratuites. Créez un compte pour accéder aux 17 fiches restantes — gratuitement.</div>
     <div class="modal-perks">
-      <div class="modal-perk"><div class="modal-perk-icon">📚</div><div class="modal-perk-txt"><strong>19 fiches complètes</strong>Méta-analyses réelles</div></div>
+      <div class="modal-perk"><div class="modal-perk-icon">📚</div><div class="modal-perk-txt"><strong>20 fiches complètes</strong>Méta-analyses réelles</div></div>
       <div class="modal-perk"><div class="modal-perk-icon">✏️</div><div class="modal-perk-txt"><strong>En pratique</strong>Applications directes</div></div>
       <div class="modal-perk"><div class="modal-perk-icon">🌍</div><div class="modal-perk-txt"><strong>3 langues</strong>FR · EN · NL</div></div>
       <div class="modal-perk"><div class="modal-perk-icon">🤖</div><div class="modal-perk-txt"><strong>Génération IA</strong>Tout nouveau thème</div></div>
