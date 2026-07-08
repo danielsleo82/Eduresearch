@@ -300,6 +300,82 @@ body{font-family:var(--font);background:var(--bgs);color:var(--tx);min-height:10
 .lp-s{background:#E1F5EE;color:#085041;}
 .lp-all{background:#F1EFE8;color:#444441;}
 
+/* ── FICHE V2 · synthèse visuelle ── */
+.v2-def{font-family:Georgia,'Times New Roman',serif;font-size:15px;line-height:1.7;}
+.v2-gauge-block{display:grid;grid-template-columns:1fr 240px;gap:26px;align-items:start;}
+@media(max-width:700px){.v2-gauge-block{grid-template-columns:1fr;}}
+.v2-gauge{margin-top:52px;}
+.v2-gtrack{position:relative;height:14px;border-radius:7px;}
+.v2-gthresh{position:absolute;top:-8px;bottom:-8px;width:2px;background:var(--tx);opacity:.55;transform:translateX(-50%);}
+.v2-gmark{position:absolute;top:50%;transform:translate(-50%,-50%);width:10px;height:10px;border-radius:50%;background:var(--g400);border:2px solid var(--bgc);}
+.v2-gmark.main{width:20px;height:20px;}
+.v2-gflag{position:absolute;bottom:22px;transform:translateX(-50%);text-align:center;white-space:nowrap;}
+.v2-gflag .gv{font-size:19px;font-weight:800;line-height:1;font-variant-numeric:tabular-nums;}
+.v2-gflag .gl{font-size:10.5px;font-weight:600;color:var(--tm);}
+.v2-gsub{position:absolute;top:22px;transform:translateX(-50%);text-align:center;white-space:nowrap;font-size:10.5px;color:var(--tm);line-height:1.35;}
+.v2-gsub b{display:block;font-size:12px;color:var(--tx);font-variant-numeric:tabular-nums;}
+.v2-gscale{display:flex;justify-content:space-between;font-size:10px;color:var(--tf);margin-top:44px;font-variant-numeric:tabular-nums;}
+.v2-gnote{display:flex;align-items:center;gap:7px;margin-top:10px;font-size:11px;color:var(--tm);}
+.v2-gnote .tickd{flex-shrink:0;width:2px;height:14px;background:var(--tx);opacity:.55;border-radius:1px;}
+.v2-months{margin-top:16px;border-radius:var(--r);padding:12px 15px;font-size:12.5px;color:var(--tx);}
+.v2-months b{font-size:15px;color:var(--mv,var(--b800));}
+.v2-baro{background:var(--bgs);border:1px solid var(--bd);border-radius:var(--r);padding:16px 18px;}
+.v2-baro-t{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--tm);margin-bottom:10px;}
+.v2-dots{display:flex;gap:5px;margin-bottom:8px;}
+.v2-dot{width:16px;height:16px;border-radius:50%;background:var(--g100);}
+.v2-dot.on{background:var(--t400);}
+.v2-baro-v{font-size:14px;font-weight:800;color:var(--t600);margin-bottom:8px;}
+.v2-baro-why{font-size:11.5px;color:var(--tm);line-height:1.55;}
+.v2-baro-why b{color:var(--tx);font-variant-numeric:tabular-nums;}
+.v2-grr{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:0;align-items:stretch;}
+@media(max-width:700px){.v2-grr{grid-template-columns:1fr;}.v2-gate{transform:rotate(90deg);margin:2px auto;}}
+.v2-phase{border:1px solid var(--bd);border-radius:var(--r);padding:16px;background:var(--bgs);}
+.v2-phase-k{font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;}
+.v2-phase-t{font-size:16px;font-weight:800;margin-bottom:8px;}
+.v2-phase-d{font-size:12px;color:var(--tm);line-height:1.6;min-height:58px;}
+.v2-share{margin-top:12px;}
+.v2-share-bar{height:9px;border-radius:5px;overflow:hidden;display:flex;}
+.v2-share-lbl{display:flex;justify-content:space-between;font-size:10px;color:var(--tm);margin-top:5px;font-variant-numeric:tabular-nums;}
+.v2-gate{align-self:center;padding:0 8px;text-align:center;color:var(--tm);}
+.v2-gate .ga{font-size:18px;line-height:1;}
+.v2-gate .gt{font-size:9.5px;font-weight:700;white-space:nowrap;}
+.v2-legend{display:flex;gap:18px;font-size:11px;color:var(--tm);margin-top:14px;}
+.v2-swatch{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px;}
+.v2-lesson{display:flex;height:52px;border-radius:var(--r);overflow:hidden;margin-bottom:10px;}
+.v2-lseg{display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700;white-space:nowrap;overflow:hidden;}
+.v2-llbls{display:flex;font-size:10.5px;color:var(--tm);font-variant-numeric:tabular-nums;}
+.v2-llbl{padding:0 4px;line-height:1.4;}
+.v2-llbl b{color:var(--tx);}
+.v2-lnote{font-size:11.5px;color:var(--tm);margin-top:12px;max-width:70ch;}
+.v2-lnote b{color:var(--tx);}
+.v2-pref{display:inline-block;font-size:9.5px;font-weight:800;border-radius:4px;padding:1px 5px;margin-left:4px;vertical-align:1px;background:var(--b50);color:var(--b800);}
+.v2-tl-scroll{overflow-x:auto;padding-bottom:6px;}
+.v2-tl{position:relative;min-width:560px;height:118px;margin-top:8px;}
+.v2-tl-line{position:absolute;left:0;right:0;top:58px;height:2px;background:var(--bdm);}
+.v2-tl-node{position:absolute;top:52px;width:120px;transform:translateX(-50%);text-align:center;}
+.v2-tl-node .nd{width:12px;height:12px;border-radius:50%;border:3px solid var(--bgc);box-shadow:0 0 0 1px var(--bdm);margin:0 auto;}
+.v2-tl-node .yr{font-size:12px;font-weight:800;font-variant-numeric:tabular-nums;}
+.v2-tl-node .lb{font-size:10.5px;color:var(--tm);line-height:1.35;}
+.v2-tl-node .top{position:absolute;bottom:20px;left:0;right:0;}
+.v2-tl-node .bot{position:absolute;top:20px;left:0;right:0;}
+.v2-pgs{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+@media(max-width:760px){.v2-pgs{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:440px){.v2-pgs{grid-template-columns:1fr;}}
+.v2-pg{border:1px solid var(--bd);border-radius:var(--r);padding:13px 14px;background:var(--bgs);}
+.v2-pg-t{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin-bottom:9px;}
+.v2-pchip{display:flex;gap:7px;align-items:flex-start;font-size:11.5px;color:var(--tx);margin-bottom:7px;line-height:1.45;}
+.v2-pn{flex-shrink:0;font-size:9.5px;font-weight:800;border-radius:4px;padding:1px 5px;margin-top:1.5px;font-variant-numeric:tabular-nums;}
+.v2-path{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px;}
+@media(max-width:700px){.v2-path{grid-template-columns:1fr;}}
+.v2-step{border:1px solid var(--bd);border-radius:var(--r);padding:15px 16px;background:var(--bgs);position:relative;}
+.v2-step-k{font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--tm);margin-bottom:6px;}
+.v2-step-t{font-size:13px;font-weight:700;margin-bottom:5px;}
+.v2-step-d{font-size:11.5px;color:var(--tm);line-height:1.55;}
+.v2-step .lv{position:absolute;top:13px;right:14px;font-size:16px;}
+.v2-biblio{font-size:11px;color:var(--tm);line-height:1.8;columns:2;column-gap:26px;}
+@media(max-width:640px){.v2-biblio{columns:1;}}
+.v2-biblio b{color:var(--tx);font-weight:600;}
+
 /* ── OPTION C : QUOTA FREEMIUM ── */
 .quota-bar{background:var(--bgs);border:1.5px solid var(--bd);border-radius:var(--rl);padding:11px 16px;display:flex;align-items:center;gap:12px;margin-bottom:20px;}
 .quota-bar.quota-ok{border-color:var(--t100);}
@@ -637,40 +713,147 @@ nl:[
 const D={
 ee:{
 fr:{title:"Enseignement explicite & Direct Instruction",tags:["Pédagogie fondée sur preuves","Primaire · Secondaire","Consensus fort","Débat idéologique"],score:"d = 0.59",scoreLbl:"Effet Hattie 2023",
-summary:"L'enseignement explicite est l'une des approches pédagogiques les mieux documentées. De Rosenshine (1970–2012) à Hattie (2009–2023) : structurer l'enseignement, modéliser, vérifier la compréhension et pratiquer guidément produit des effets significatifs et robustes, particulièrement pour les élèves en difficulté.",
-metrics:[{l:"Effet Hattie 2023",v:"d = 0.59",s:"Seuil sig. : d = 0.40"},{l:"Méta-analyses",v:"800+",s:"Visible Learning"},{l:"Project Follow Through",v:"200 000",s:"élèves · 1968–1977"},{l:"Ancrage scientifique",v:"50 ans",s:"Rosenshine 1970+"}],
-insights:[{t:"L'effet est maximal pour les élèves en difficulté",d:"Project Follow Through montre que la Direct Instruction surpasse les 21 autres approches testées, avec des écarts maximaux chez les élèves défavorisés.",lvl:'all'},{t:"La pratique guidée est le cœur du dispositif",d:"Rosenshine insiste : l'EE n'est pas du cours magistral. C'est modelage → pratique guidée → vérification → pratique autonome.",lvl:'all'},{t:"Les effets sont concentrés sur les savoirs fondamentaux",d:"Lecture, calcul, grammaire : effets massifs et répliqués. Un positionnement éditorial sur les fondamentaux est scientifiquement défendable.",lvl:'p'},{t:"Rosenshine (2012) est la référence incontournable",d:"Les 'Principles of Instruction' : 10 principes en 10 pages. Texte le plus cité dans les débats pédagogiques actuels.",lvl:'all'}],
+summary:"L'enseignement explicite est l'approche pédagogique la mieux documentée des cinquante dernières années. Né des recherches processus-produit sur les enseignants efficaces (Rosenshine, 1976–2012), validé à grande échelle par le Project Follow Through (1968–1977), puis confirmé par les synthèses de Hattie et la méta-analyse d'un demi-siècle de Stockard et al. (2018), il structure la leçon en trois temps — modelage (« je fais »), pratique guidée (« nous faisons »), pratique autonome (« tu fais ») — avec une vérification constante de la compréhension de tous les élèves. Son efficacité s'explique par l'architecture cognitive : la mémoire de travail d'un novice est vite saturée, et rendre les raisonnements visibles avant de faire pratiquer réduit cette charge. Formalisé dans le monde francophone par Gauthier, Bissonnette et Richard, il est particulièrement efficace pour les élèves en difficulté — et ne se réduit pas, contrairement à la caricature, à un exposé magistral.",
+metrics:[{l:"Effet Hattie 2023",v:"d = 0.59",s:"Seuil sig. : d = 0.40"},{l:"Méta-analyse Stockard et al. 2018",v:"328 études",s:"50 ans de recherche · effets positifs et durables"},{l:"Mégaanalyse francophone (Bissonnette et al. 2010)",v:"362 études",s:"30 000+ élèves en difficulté"},{l:"Project Follow Through",v:"200 000",s:"élèves · 1968–1977"}],
+insights:[
+{t:"L'effet est maximal pour les élèves en difficulté — et l'écart se creuse sans lui",d:"Project Follow Through montre que la Direct Instruction surpasse les 21 autres approches testées, avec des écarts maximaux chez les élèves défavorisés. La mégaanalyse francophone de Bissonnette, Richard, Gauthier et Bouchard (2010) — 11 méta-analyses, 362 études, plus de 30 000 élèves en difficulté — arrive à la même conclusion : l'enseignement explicite et l'enseignement réciproque dominent toutes les autres stratégies en lecture, en écriture et en mathématiques. Les pédagogies de la découverte, elles, avantagent surtout les élèves qui disposent déjà d'un soutien à la maison : l'explicitation est un outil d'équité.",lvl:'all'},
+{t:"Pourquoi ça marche : la mémoire de travail d'un novice sature vite",d:"Kirschner, Sweller et Clark (2006) l'expliquent par l'architecture cognitive : la mémoire de travail ne peut traiter que quelques éléments nouveaux à la fois, et un novice n'a pas encore les schémas en mémoire à long terme qui permettent aux experts de « penser par blocs ». Chercher seul par tâtonnement consomme cette capacité limitée sans construire d'apprentissage durable. Le modelage et les exemples résolus la libèrent : l'élève consacre ses ressources à comprendre le raisonnement, pas à deviner la démarche. D'où une règle concrète : devant une notion nouvelle, montrer un exemple entièrement résolu avant de demander de résoudre.",lvl:'all'},
+{t:"L'enseignement explicite n'est pas un exposé : c'est « je fais, nous faisons, tu fais »",d:"Gauthier, Bissonnette et Richard structurent la leçon en trois temps. Le modelage : l'enseignant résout en pensant à voix haute, rendant visibles les raisonnements invisibles, y compris les erreurs typiques à éviter. La pratique guidée : les élèves s'exercent sous supervision immédiate, avec feedback correctif, et l'enseignant vérifie la compréhension de tous — pas seulement des volontaires. La pratique autonome n'arrive que lorsque le taux de réussite atteint environ 80 %. Le cours magistral seul plafonne à d = 0.17 ; c'est la séquence complète qui produit l'effet.",lvl:'all'},
+{t:"Les effets durent et se renforcent avec l'exposition",d:"La méta-analyse de Stockard et al. (2018) — 328 études sur un demi-siècle, près de 4 000 effets mesurés — montre des effets positifs et significatifs dans toutes les matières, qui persistent après la fin des programmes et augmentent avec la durée d'exposition. Les retombées affectives (confiance, image de soi scolaire) sont également positives, ce qui contredit l'idée reçue selon laquelle un enseignement structuré démotiverait les élèves : réussir régulièrement est en soi un puissant moteur de motivation.",lvl:'all'},
+{t:"Pour aller plus loin : un parcours de lecture en trois étapes",d:"Commencer par Rosenshine (2012) : les 10 « Principles of Instruction » en 10 pages, le texte le plus accessible et le plus cité. Poursuivre avec Gauthier, Bissonnette et Richard (2013), la référence francophone qui détaille la gestion des trois temps de la leçon et la vérification de la compréhension. Approfondir enfin avec Archer et Hughes (2011), qui déclinent l'approche en 16 éléments et en routines de classe concrètes : réponses chorales, ardoises, désignation aléatoire, correction immédiate des erreurs.",lvl:'all'}],
 effects:[{l:"Modelage + pratique guidée",v:0.74},{l:"Vérification fréquente",v:0.68},{l:"Révision espacée",v:0.64},{l:"Objectifs clairs",v:0.59},{l:"Feedback correctif immédiat",v:0.58},{l:"Pratique autonome progressive",v:0.52},{l:"Cours magistral seul",v:0.17}],
-principles:[{n:"P1",t:"Révision quotidienne",d:"Commencer par une révision brève des apprentissages récents"},{n:"P2",t:"Petits pas progressifs",d:"Nouvelles notions en étapes avec pratique après chaque étape"},{n:"P3",t:"Questions fréquentes",d:"Poser beaucoup de questions, vérifier la compréhension de tous"},{n:"P4",t:"Modelage explicite",d:"Exemples résolus avant la pratique autonome"},{n:"P5",t:"Pratique guidée",d:"Guider jusqu'à un niveau de maîtrise élevé (80%+)"},{n:"P6",t:"Vérification systématique",d:"Vérifier la compréhension à chaque étape avant de progresser"},{n:"P7",t:"Taux de réussite élevé",d:"Les élèves doivent réussir ~80% des exercices"},{n:"P8",t:"Échafaudages",d:"Soutiens fournis lors de l'apprentissage, retirés progressivement"},{n:"P9",t:"Pratique autonome",d:"Pratique indépendante extensive jusqu'à l'automatisation"},{n:"P10",t:"Révisions hebdomadaires",d:"Révisions hebdomadaires et mensuelles pour la mémoire à long terme"}],
-refs:[{t:"Hattie, J. — Visible Learning (2009) & The Sequel (2023)",m:"Méta-analyse · 1 400+ méta-analyses · 300M+ élèves",f:"L'EE parmi les 20 pratiques les plus efficaces (d = 0.59). Hattie distingue l'EE du cours magistral passif."},{t:"Rosenshine, B. — Principles of Instruction (2012)",m:"American Educator · Synthèse de 40 ans",f:"10 principes issus de la psychologie cognitive, d'enseignants experts et de la recherche sur le tutorat."},{t:"Kirschner, Sweller & Clark (2006)",m:"Educational Psychologist",f:"Les approches à guidance minimale ignorent les limites de la mémoire de travail — effets inférieurs pour les novices."},{t:"Engelmann & Becker — Project Follow Through (1968–1977)",m:"US Dept. of Education · 200 000 élèves",f:"La Direct Instruction surpasse les 21 autres approches testées. Résultats ignorés politiquement des décennies."}],
-debatePro:["EE supérieur pour les novices et l'acquisition initiale","Pratique guidée avec feedback bat la pratique autonome immédiate","Effets robustes en lecture et calcul fondamentaux","Élèves en difficulté bénéficient davantage"],
-debateCon:["Favorise-t-il la motivation intrinsèque à long terme?","Transfert vers tâches complexes : données mixtes","Expertise Reversal Effect : moins efficace pour les experts","Compatibilité avec développement de l'autonomie?"],
-opp:{t:"Ancrage scientifique explicite — différenciant",d:"Les manuels citant Rosenshine et Hattie se distinguent. Un cahier structuré selon les 10 principes est scientifiquement défendable et commercialement différenciant."},
-warn:{t:"Tension idéologique en France et en Belgique",d:"L'EE est associé politiquement à une droite conservatrice. Le terme 'pédagogie fondée sur les preuves' passe mieux que 'enseignement explicite' dans ces contextes."},
+principles:[{n:"P1",t:"Révision quotidienne",d:"Ouvrir chaque cours par 5–8 minutes de rappel des notions récentes et antérieures (questions rapides, ardoises) : réactive la mémoire à long terme et libère la mémoire de travail pour la suite"},{n:"P2",t:"Petits pas progressifs",d:"Présenter les notions nouvelles par étapes courtes, avec pratique après chacune ; n'avancer que lorsque l'étape précédente est maîtrisée"},{n:"P3",t:"Questions fréquentes",d:"Interroger tous les élèves, pas seulement les volontaires : réponse chorale, ardoises, désignation aléatoire — chaque question est une prise d'information"},{n:"P4",t:"Modelage explicite",d:"Résoudre en pensant à voix haute : rendre visibles les raisonnements, montrer les erreurs typiques, multiplier les exemples résolus avant de faire résoudre"},{n:"P5",t:"Pratique guidée",d:"Faire pratiquer sous supervision immédiate avec feedback correctif, jusqu'à ~80 % de réussite, avant toute mise en autonomie"},{n:"P6",t:"Vérification systématique",d:"Vérifier la compréhension de chacun à chaque étape — ne jamais se contenter d'un « tout le monde a compris ? » sans preuve"},{n:"P7",t:"Taux de réussite élevé",d:"Calibrer la difficulté pour ~80 % de réussite : assez exigeant pour apprendre, assez accessible pour ne pas saturer la mémoire de travail"},{n:"P8",t:"Échafaudages",d:"Fournir des supports temporaires (listes d'étapes, modèles, exemples partiellement résolus) et les retirer progressivement à mesure que la compétence s'installe"},{n:"P9",t:"Pratique autonome",d:"Prévoir une pratique indépendante abondante et variée jusqu'à l'automatisation — c'est elle qui libère la mémoire de travail pour les tâches complexes"},{n:"P10",t:"Révisions espacées",d:"Programmer des révisions hebdomadaires et mensuelles : l'oubli est normal, la reprise espacée le combat et consolide la mémoire à long terme"}],
+refs:[{t:"Rosenshine, B. — Principles of Instruction (2012)",m:"American Educator · Synthèse de 40 ans de recherche",f:"10 principes issus de la psychologie cognitive, de l'observation des enseignants experts et de la recherche sur le tutorat. Le point d'entrée le plus accessible : 10 pages, directement actionnables."},{t:"Gauthier, C., Bissonnette, S., & Richard, M. — Enseignement explicite et réussite des élèves (2013)",m:"De Boeck · La référence francophone",f:"Formalise les trois temps de la leçon (modelage, pratique guidée, pratique autonome) et la gestion des apprentissages ; le pont le plus direct entre la recherche anglo-saxonne et les classes francophones."},{t:"Bissonnette, S., Richard, M., Gauthier, C., & Bouchard, C. — Quelles sont les stratégies d'enseignement efficaces ? (2010)",m:"Revue de recherche appliquée sur l'apprentissage · Mégaanalyse",f:"Synthèse de 11 méta-analyses (362 études, 30 000+ élèves en difficulté) : l'enseignement explicite et l'enseignement réciproque dominent en lecture, écriture et mathématiques."},{t:"Stockard, J., Wood, T.W., Coughlin, C., & Khoury, C.R. — The Effectiveness of Direct Instruction Curricula (2018)",m:"Review of Educational Research · Méta-analyse d'un demi-siècle",f:"328 études (1966–2016), près de 4 000 effets : effets positifs et significatifs dans toutes les matières, persistants dans le temps, croissants avec l'exposition."},{t:"Archer, A., & Hughes, C. — Explicit Instruction: Effective and Efficient Teaching (2011)",m:"Guilford Press · Manuel de mise en œuvre",f:"Décline l'approche en 16 éléments et en routines de classe concrètes (réponses chorales, vérification systématique, rythme soutenu) — l'ouvrage le plus opérationnel pour la pratique quotidienne."},{t:"Kirschner, P., Sweller, J., & Clark, R. — Why Minimal Guidance During Instruction Does Not Work (2006)",m:"Educational Psychologist",f:"Les approches à guidance minimale ignorent les limites de la mémoire de travail — effets inférieurs pour les novices. Le fondement cognitif de l'enseignement explicite."},{t:"Hattie, J. — Visible Learning (2009) & The Sequel (2023)",m:"Méta-analyse · 1 400+ méta-analyses · 300M+ élèves",f:"L'enseignement explicite parmi les 20 pratiques les plus efficaces (d = 0.59). Hattie le distingue explicitement du cours magistral passif."},{t:"Engelmann & Becker — Project Follow Through (1968–1977)",m:"US Dept. of Education · 200 000 élèves",f:"La plus grande expérimentation pédagogique de l'histoire : la Direct Instruction surpasse les 21 autres approches testées, y compris sur l'estime de soi. Résultats politiquement ignorés des décennies."}],
+debatePro:["Supérieur pour les novices et l'acquisition initiale — cohérent avec les limites connues de la mémoire de travail (Kirschner, Sweller & Clark 2006)","La pratique guidée avec feedback bat la mise en autonomie immédiate","Effets robustes, durables et croissants avec l'exposition (Stockard et al. 2018)","Les élèves en difficulté en bénéficient le plus (Follow Through ; Bissonnette et al. 2010)","Contrairement à la caricature, les effets mesurés sur la confiance et l'image de soi scolaire sont positifs"],
+debateCon:["Favorise-t-il la motivation intrinsèque à long terme ? La question reste ouverte","Transfert vers les tâches complexes et inédites : données mixtes — les fondations ne suffisent pas, il faut aussi varier les contextes d'application","Effet d'inversion de l'expertise : la guidance complète devient contre-productive pour les élèves déjà compétents","Risque de sur-guidage si la troisième phase (pratique autonome) est négligée ou écourtée","Débat de définition : la Direct Instruction scriptée d'Engelmann n'est pas l'enseignement explicite générique — les effets mesurés varient selon ce qu'on évalue"],
+warn:{t:"L'erreur classique : confondre « explicite » avec « magistral » — et sur-guider trop longtemps",d:"Sans pratique guidée, sans vérification de la compréhension de tous et sans pratique autonome, il ne reste qu'un exposé — et l'exposé seul plafonne à d = 0.17. À l'inverse, l'effet d'inversion de l'expertise rappelle qu'un guidage complet devient contre-productif pour les élèves déjà compétents : les échafaudages sont faits pour être retirés. L'enseignement explicite est une séquence dynamique qui se déplace du « je fais » vers le « tu fais » — pas un style d'enseignement figé."},
+v2:{
+def:"<b>De quoi parle-t-on ?</b> Une façon de structurer la leçon en trois temps — l'enseignant montre en raisonnant à voix haute, fait pratiquer sous supervision avec feedback, puis met en autonomie une fois ~80 % de réussite atteints — avec une vérification constante de la compréhension de tous les élèves. Ce n'est pas un exposé magistral : c'est une séquence, validée par 50 ans de recherche.",
+gauge:{max:1.2,thresh:0.40,main:{v:0.59,l:"enseignement explicite · Hattie 2023"},marks:[{v:0.17,l:"cours magistral seul"},{v:0.74,l:"modelage + pratique guidée"}],months:"Concrètement : un effet de cette taille équivaut à <b>≈ +7 mois</b> de progression sur une année scolaire (conversion EEF).",threshNote:"Le trait vertical marque le <b>seuil d'effet souhaité (d = 0.40)</b> — Hattie 2023."},
+baro:{title:"Solidité des preuves",score:5,label:"Très élevée · 5/5",why:"<b>328 études</b> sur 50 ans (Stockard 2018) · <b>362 études</b> élèves en difficulté (Bissonnette 2010) · <b>200 000 élèves</b> Follow Through · répliqué sur 5 décennies, effets persistants"},
+phases:{title:"La méthode en une image — le transfert de responsabilité",items:[
+{k:"Temps 1 · Modelage",t:"« Je fais »",d:"L'enseignant résout en pensant à voix haute : il rend visibles les raisonnements invisibles, montre les erreurs typiques, multiplie les exemples résolus.",share:88},
+{k:"Temps 2 · Pratique guidée",t:"« Nous faisons »",d:"Les élèves s'exercent sous supervision immédiate, avec feedback correctif. L'enseignant interroge tout le monde — pas seulement les volontaires.",share:50},
+{k:"Temps 3 · Pratique autonome",t:"« Tu fais »",d:"Pratique indépendante abondante et variée, jusqu'à l'automatisation — celle qui libère la mémoire de travail pour les tâches complexes.",share:15}],
+gates:["compréhension<br>vérifiée","~80 % de<br>réussite"]},
+lesson:{title:"Une leçon type de 50 minutes",segs:[
+{min:"8 min",flex:8,ci:0,lbl:"<b>Rappel</b> des acquis",ps:["P1"]},
+{min:"12 min",flex:12,ci:1,lbl:"<b>Modelage</b> à voix haute",ps:["P2","P4"]},
+{min:"18 min",flex:18,ci:2,lbl:"<b>Pratique guidée</b> + vérification",ps:["P3","P5","P6","P7"]},
+{min:"10 min",flex:10,ci:3,lbl:"<b>Autonomie</b>",ps:["P8","P9"]},
+{min:"",flex:2,ci:4,lbl:"<b>Clôture</b>",ps:[]}],
+note:"Répartition indicative, à moduler selon la nouveauté de la notion. <b>La règle qui ne bouge pas :</b> on ne passe au bloc suivant que si la vérification de la compréhension le permet. Les révisions espacées <span class='v2-pref'>P10</span> se programment à l'échelle de la semaine et du mois."},
+tl:{title:"50 ans de preuves — comment le consensus s'est construit",nodes:[
+{x:12,yr:"1968–77",lb:"Project Follow Through · 200 000 élèves"},
+{x:27,yr:"1976–86",lb:"Rosenshine : recherches processus-produit"},
+{x:42,yr:"2006",lb:"Kirschner, Sweller & Clark : le fondement cognitif"},
+{x:57,yr:"2010",lb:"Mégaanalyse francophone (Bissonnette et al.)"},
+{x:68,yr:"2012",lb:"Rosenshine : les 10 principes"},
+{x:83,yr:"2018",lb:"Stockard et al. : 328 études, 50 ans"},
+{x:89,yr:"2023",lb:"Hattie, The Sequel"}]},
+prinGroups:{title:"Les 10 principes de Rosenshine, par moment de la leçon",groups:[
+{t:"Ouvrir",items:[{n:"P1",d:"Révision quotidienne : 5–8 min de rappel en début de cours"},{n:"P10",d:"Révisions espacées, hebdomadaires et mensuelles"}]},
+{t:"Présenter",items:[{n:"P2",d:"Petits pas : une étape courte à la fois, pratique après chacune"},{n:"P4",d:"Modelage : penser à voix haute, exemples résolus"}]},
+{t:"Guider",items:[{n:"P3",d:"Interroger tous les élèves (ardoises, désignation aléatoire)"},{n:"P5",d:"Pratique guidée avec feedback jusqu'à ~80 % de réussite"},{n:"P6",d:"Vérifier la compréhension de chacun à chaque étape"},{n:"P7",d:"Calibrer la difficulté pour un taux de réussite élevé"}]},
+{t:"Consolider",items:[{n:"P8",d:"Échafaudages temporaires, retirés progressivement"},{n:"P9",d:"Pratique autonome abondante jusqu'à l'automatisation"}]}]},
+path:{title:"Pour aller plus loin — parcours en 3 étapes",steps:[
+{lv:"🌱",k:"Étape 1 · Démarrer",t:"Rosenshine (2012)",d:"Principles of Instruction — 10 principes en 10 pages, le point d'entrée le plus accessible et le plus cité."},
+{lv:"🌿",k:"Étape 2 · Structurer",t:"Gauthier, Bissonnette & Richard (2013)",d:"Enseignement explicite et réussite des élèves — la référence francophone : les trois temps de la leçon, la gestion des apprentissages."},
+{lv:"🌳",k:"Étape 3 · Outiller",t:"Archer & Hughes (2011)",d:"Explicit Instruction — 16 éléments et routines de classe concrètes : réponses chorales, ardoises, correction immédiate."}],
+biblio:"<b>Bibliographie complète ·</b> Rosenshine (2012), <i>American Educator</i> · Gauthier, Bissonnette & Richard (2013), De Boeck · Bissonnette, Richard, Gauthier & Bouchard (2010), <i>Revue de recherche appliquée sur l'apprentissage</i>, mégaanalyse, 362 études · Stockard, Wood, Coughlin & Khoury (2018), <i>Review of Educational Research</i>, 328 études · Archer & Hughes (2011), Guilford · Kirschner, Sweller & Clark (2006), <i>Educational Psychologist</i> · Hattie (2009, 2023), <i>Visible Learning</i> · Engelmann & Becker, Project Follow Through (1968–1977)."}
+},
 related:["Charge cognitive","Métacognition","Évaluation formative","Révision espacée","Autonomie des élèves"]},
 en:{title:"Explicit Teaching & Direct Instruction",tags:["Evidence-based pedagogy","Primary · Secondary","Strong consensus","Ideological debate"],score:"d = 0.59",scoreLbl:"Hattie Effect 2023",
 summary:"Explicit teaching is one of the most scientifically documented pedagogical approaches. From Rosenshine (1970–2012) to Hattie (2009–2023): structuring teaching, modelling, checking understanding and guided practice produces significant and robust effects, particularly for struggling students.",
 metrics:[{l:"Hattie Effect 2023",v:"d = 0.59",s:"Threshold: d = 0.40"},{l:"Meta-analyses",v:"800+",s:"Visible Learning"},{l:"Project Follow Through",v:"200,000",s:"students · 1968–1977"},{l:"Scientific grounding",v:"50 years",s:"Rosenshine 1970+"}],
-insights:[{t:"Effect is largest for struggling students",d:"Project Follow Through shows Direct Instruction outperforms all 21 other approaches tested, with the largest gaps among disadvantaged students.",lvl:'all'},{t:"Guided practice is the core mechanism",d:"Rosenshine insists: explicit teaching is not lecturing. It is modelling → guided practice → checking → independent practice.",lvl:'all'},{t:"Effects concentrated on foundational skills",d:"Reading, arithmetic, grammar: massive and replicated effects. An editorial positioning on foundational skills is scientifically defensible.",lvl:'p'},{t:"Rosenshine (2012) is the essential reference",d:"'Principles of Instruction': 10 principles in 10 pages. Most-cited text in current pedagogical debates worldwide.",lvl:'all'}],
+insights:[{t:"Effect is largest for struggling students",d:"Project Follow Through shows Direct Instruction outperforms all 21 other approaches tested, with the largest gaps among disadvantaged students.",lvl:'all'},{t:"Guided practice is the core mechanism",d:"Rosenshine insists: explicit teaching is not lecturing. It is modelling → guided practice → checking → independent practice.",lvl:'all'},{t:"Effects concentrated on foundational skills",d:"Reading, arithmetic, grammar: massive and replicated effects. This is where explicit teaching pays off most — secure the foundations before moving on to complex tasks.",lvl:'p'},{t:"Rosenshine (2012) is the essential reference",d:"'Principles of Instruction': 10 principles in 10 pages. Most-cited text in current pedagogical debates worldwide.",lvl:'all'}],
 effects:[{l:"Modelling + guided practice",v:0.74},{l:"Frequent checking",v:0.68},{l:"Spaced review",v:0.64},{l:"Clear goals",v:0.59},{l:"Immediate corrective feedback",v:0.58},{l:"Progressive independent practice",v:0.52},{l:"Lecture alone",v:0.17}],
 principles:[{n:"P1",t:"Daily review",d:"Begin with a brief review of recent and previous learning"},{n:"P2",t:"Small steps",d:"New material in small steps with practice after each"},{n:"P3",t:"Frequent questioning",d:"Ask many questions, check all students' understanding"},{n:"P4",t:"Explicit modelling",d:"Worked examples before independent practice"},{n:"P5",t:"Guided practice",d:"Guide practice to a high mastery level (80%+)"},{n:"P6",t:"Systematic checking",d:"Check understanding at each step before progressing"},{n:"P7",t:"High success rate",d:"Students should succeed on ~80% of exercises"},{n:"P8",t:"Scaffolding",d:"Supports provided during learning, gradually withdrawn"},{n:"P9",t:"Independent practice",d:"Extensive independent practice until automaticity"},{n:"P10",t:"Weekly reviews",d:"Weekly and monthly reviews for long-term memory"}],
 refs:[{t:"Hattie, J. — Visible Learning (2009) & The Sequel (2023)",m:"Meta-analysis · 1,400+ meta-analyses · 300M+ students",f:"Explicit teaching among the 20 most effective practices (d = 0.59). Hattie distinguishes it from passive lecturing."},{t:"Rosenshine, B. — Principles of Instruction (2012)",m:"American Educator · Synthesis of 40 years",f:"10 principles from cognitive psychology, expert teachers, and tutoring research. Founding text of evidence-based teaching."},{t:"Kirschner, Sweller & Clark (2006)",m:"Educational Psychologist",f:"Minimal guidance approaches ignore working memory limits — inferior outcomes for novices."},{t:"Engelmann & Becker — Project Follow Through (1968–1977)",m:"US Dept. of Education · 200,000 students",f:"Direct Instruction outperforms all 21 other approaches. Results politically ignored for decades."}],
 debatePro:["Explicit teaching superior for novices and initial acquisition","Guided practice beats immediate independent practice","Robust effects on foundational reading and numeracy","Struggling students benefit most"],
 debateCon:["Does it foster long-term intrinsic motivation?","Transfer to complex tasks: mixed evidence","Expertise Reversal Effect: less effective for experts","Compatibility with developing student autonomy?"],
-opp:{t:"Scientific grounding as a differentiator",d:"Publishers displaying their foundation in Rosenshine and Hattie stand out. A workbook structured around the 10 principles is scientifically defensible and commercially distinctive."},
 warn:{t:"Ideological tension in France and Belgium",d:"Explicit teaching is politically associated with a conservative right. 'Evidence-based pedagogy' is often better received in these contexts."},
+v2:{
+def:"<b>What is it?</b> A way of structuring the lesson in three stages — the teacher demonstrates while reasoning aloud, has students practise under supervision with feedback, then releases them to independent work once ~80% success is reached — with constant checking of every student's understanding. It is not a lecture: it is a sequence, validated by 50 years of research.",
+gauge:{max:1.2,thresh:0.40,main:{v:0.59,l:"explicit teaching · Hattie 2023"},marks:[{v:0.17,l:"lecture alone"},{v:0.74,l:"modelling + guided practice"}],months:"In concrete terms: an effect of this size equals <b>≈ +7 months</b> of progress over a school year (EEF conversion).",threshNote:"The vertical line marks the <b>desired effect threshold (d = 0.40)</b> — Hattie 2023."},
+baro:{title:"Strength of evidence",score:5,label:"Very high · 5/5",why:"<b>328 studies</b> over 50 years (Stockard 2018) · <b>362 studies</b> on struggling students (Bissonnette 2010) · <b>200,000 students</b> in Follow Through · replicated across 5 decades, lasting effects"},
+phases:{title:"The method in one picture — the transfer of responsibility",items:[
+{k:"Stage 1 · Modelling",t:"“I do”",d:"The teacher solves while thinking aloud: making invisible reasoning visible, showing typical errors, multiplying worked examples.",share:88},
+{k:"Stage 2 · Guided practice",t:"“We do”",d:"Students practise under immediate supervision, with corrective feedback. The teacher questions everyone — not just volunteers.",share:50},
+{k:"Stage 3 · Independent practice",t:"“You do”",d:"Abundant, varied independent practice, through to automaticity — which frees working memory for complex tasks.",share:15}],
+gates:["understanding<br>checked","~80% success<br>rate"]},
+lesson:{title:"A typical 50-minute lesson",segs:[
+{min:"8 min",flex:8,ci:0,lbl:"<b>Recall</b> of prior learning",ps:["P1"]},
+{min:"12 min",flex:12,ci:1,lbl:"<b>Modelling</b>, thinking aloud",ps:["P2","P4"]},
+{min:"18 min",flex:18,ci:2,lbl:"<b>Guided practice</b> + checking",ps:["P3","P5","P6","P7"]},
+{min:"10 min",flex:10,ci:3,lbl:"<b>Independence</b>",ps:["P8","P9"]},
+{min:"",flex:2,ci:4,lbl:"<b>Close</b>",ps:[]}],
+note:"An indicative split, to adjust to how new the material is. <b>The rule that never changes:</b> move to the next block only when checking for understanding allows it. Spaced reviews <span class='v2-pref'>P10</span> are scheduled across the week and the month."},
+tl:{title:"50 years of evidence — how the consensus was built",nodes:[
+{x:12,yr:"1968–77",lb:"Project Follow Through · 200,000 students"},
+{x:27,yr:"1976–86",lb:"Rosenshine: process-product research"},
+{x:42,yr:"2006",lb:"Kirschner, Sweller & Clark: the cognitive foundation"},
+{x:57,yr:"2010",lb:"French-language mega-analysis (Bissonnette et al.)"},
+{x:68,yr:"2012",lb:"Rosenshine: the 10 principles"},
+{x:83,yr:"2018",lb:"Stockard et al.: 328 studies, 50 years"},
+{x:89,yr:"2023",lb:"Hattie, The Sequel"}]},
+prinGroups:{title:"Rosenshine's 10 principles, by moment of the lesson",groups:[
+{t:"Open",items:[{n:"P1",d:"Daily review: 5–8 min of recall at the start of class"},{n:"P10",d:"Spaced weekly and monthly reviews"}]},
+{t:"Present",items:[{n:"P2",d:"Small steps: one short step at a time, practice after each"},{n:"P4",d:"Modelling: think aloud, worked examples"}]},
+{t:"Guide",items:[{n:"P3",d:"Question all students (whiteboards, random selection)"},{n:"P5",d:"Guided practice with feedback to ~80% success"},{n:"P6",d:"Check every student's understanding at every step"},{n:"P7",d:"Calibrate difficulty for a high success rate"}]},
+{t:"Consolidate",items:[{n:"P8",d:"Temporary scaffolds, gradually removed"},{n:"P9",d:"Abundant independent practice to automaticity"}]}]},
+path:{title:"To go further — a 3-step reading path",steps:[
+{lv:"🌱",k:"Step 1 · Start",t:"Rosenshine (2012)",d:"Principles of Instruction — 10 principles in 10 pages, the most accessible and most cited entry point."},
+{lv:"🌿",k:"Step 2 · Structure",t:"Gauthier, Bissonnette & Richard (2013)",d:"Enseignement explicite et réussite des élèves — the French-language reference: the three stages of the lesson, managing learning."},
+{lv:"🌳",k:"Step 3 · Equip",t:"Archer & Hughes (2011)",d:"Explicit Instruction — 16 elements and concrete classroom routines: choral responses, whiteboards, immediate correction."}],
+biblio:"<b>Full bibliography ·</b> Rosenshine (2012), <i>American Educator</i> · Gauthier, Bissonnette & Richard (2013), De Boeck · Bissonnette, Richard, Gauthier & Bouchard (2010), <i>Revue de recherche appliquée sur l'apprentissage</i>, mega-analysis, 362 studies · Stockard, Wood, Coughlin & Khoury (2018), <i>Review of Educational Research</i>, 328 studies · Archer & Hughes (2011), Guilford · Kirschner, Sweller & Clark (2006), <i>Educational Psychologist</i> · Hattie (2009, 2023), <i>Visible Learning</i> · Engelmann & Becker, Project Follow Through (1968–1977)."}
+},
 related:["Cognitive load","Metacognition","Formative assessment","Spaced practice","Student autonomy"]},
 nl:{title:"Expliciete instructie & Direct Instruction",tags:["Bewijs-gebaseerde pedagogiek","Lager · Secundair","Sterk consensus","Ideologisch debat"],score:"d = 0.59",scoreLbl:"Hattie-effect 2023",
 summary:"Expliciete instructie is een van de wetenschappelijk best gedocumenteerde benaderingen. Van Rosenshine (1970–2012) tot Hattie (2009–2023): gestructureerde instructie, modellering, begripcontrole en begeleide oefening produceren significante en robuuste effecten, in het bijzonder voor leerlingen met moeilijkheden.",
 metrics:[{l:"Hattie-effect 2023",v:"d = 0.59",s:"Drempel: d = 0.40"},{l:"Meta-analyses",v:"800+",s:"Visible Learning"},{l:"Project Follow Through",v:"200.000",s:"leerlingen · 1968–1977"},{l:"Wetenschappelijke basis",v:"50 jaar",s:"Rosenshine 1970+"}],
-insights:[{t:"Effect is het grootst voor leerlingen met moeilijkheden",d:"Project Follow Through toont aan dat Direct Instruction alle 21 andere geteste benaderingen overtreft, met de grootste verschillen bij kansarme leerlingen.",lvl:'all'},{t:"Begeleide oefening is de kern",d:"Rosenshine: expliciete instructie is geen hoorcollege. Het is modellering → begeleide oefening → controle → zelfstandige oefening.",lvl:'all'},{t:"Effecten geconcentreerd op fundamentele vaardigheden",d:"Lezen, rekenen, spelling: massieve en gerepliceerde effecten. Redactionele positionering op fundamenten is wetenschappelijk verdedigbaar.",lvl:'p'},{t:"Rosenshine (2012) is de onmisbare referentie",d:"De 'Principles of Instruction': 10 principes in 10 pagina's. Meest geciteerde tekst in actuele pedagogische debatten.",lvl:'all'}],
+insights:[{t:"Effect is het grootst voor leerlingen met moeilijkheden",d:"Project Follow Through toont aan dat Direct Instruction alle 21 andere geteste benaderingen overtreft, met de grootste verschillen bij kansarme leerlingen.",lvl:'all'},{t:"Begeleide oefening is de kern",d:"Rosenshine: expliciete instructie is geen hoorcollege. Het is modellering → begeleide oefening → controle → zelfstandige oefening.",lvl:'all'},{t:"Effecten geconcentreerd op fundamentele vaardigheden",d:"Lezen, rekenen, spelling: massieve en gerepliceerde effecten. Hier loont expliciete instructie het meest — verzeker eerst de fundamenten, ga daarna naar complexe taken.",lvl:'p'},{t:"Rosenshine (2012) is de onmisbare referentie",d:"De 'Principles of Instruction': 10 principes in 10 pagina's. Meest geciteerde tekst in actuele pedagogische debatten.",lvl:'all'}],
 effects:[{l:"Modellering + begeleide oefening",v:0.74},{l:"Frequente begripscontrole",v:0.68},{l:"Gespreide herhaling",v:0.64},{l:"Duidelijke doelen",v:0.59},{l:"Onmiddellijke corrigerende feedback",v:0.58},{l:"Progressieve zelfstandige oefening",v:0.52},{l:"Alleen hoorcollege",v:0.17}],
 principles:[{n:"P1",t:"Dagelijkse herhaling",d:"Begin met een korte herhaling van recente leerstof"},{n:"P2",t:"Kleine stappen",d:"Nieuwe stof in kleine stappen met oefening na elke stap"},{n:"P3",t:"Frequente vragen",d:"Stel veel vragen, controleer begrip van alle leerlingen"},{n:"P4",t:"Expliciet modelleren",d:"Uitgewerkte voorbeelden vóór zelfstandige oefening"},{n:"P5",t:"Begeleide oefening",d:"Begeleid tot een hoog beheersingsniveau (80%+)"},{n:"P6",t:"Systematische controle",d:"Controleer begrip bij elke stap vóór verdere voortgang"},{n:"P7",t:"Hoog slaagpercentage",d:"Leerlingen moeten ~80% correct oplossen"},{n:"P8",t:"Steigers",d:"Ondersteuning geleidelijk teruggetrokken"},{n:"P9",t:"Zelfstandige oefening",d:"Uitgebreide zelfstandige oefening tot automatisering"},{n:"P10",t:"Wekelijkse herhalingen",d:"Wekelijkse en maandelijkse herhalingen voor langetermijngeheugen"}],
 refs:[{t:"Hattie, J. — Visible Learning (2009) & The Sequel (2023)",m:"Meta-analyse · 1.400+ meta-analyses · 300M+ leerlingen",f:"Expliciete instructie bij de 20 meest effectieve praktijken (d = 0.59)."},{t:"Rosenshine, B. — Principles of Instruction (2012)",m:"American Educator · Synthese van 40 jaar",f:"10 principes uit cognitieve psychologie, expertleraren en tutoringonderzoek."},{t:"Kirschner, Sweller & Clark (2006)",m:"Educational Psychologist",f:"Minimaal begeleide benaderingen negeren werkgeheugenlimieten — inferieure resultaten voor beginners."},{t:"Engelmann & Becker — Project Follow Through (1968–1977)",m:"US Dept. of Education · 200.000 leerlingen",f:"Direct Instruction overtreft alle 21 andere geteste benaderingen."}],
 debatePro:["Expliciete instructie superieur voor beginners","Begeleide oefening klopt onmiddellijke zelfstandige oefening","Robuuste effecten op lezen en rekenen","Leerlingen met moeilijkheden profiteren het meest"],
 debateCon:["Bevordert het intrinsieke motivatie op lange termijn?","Transfer naar complexe taken: gemengd bewijs","Expertise Reversal Effect","Compatibiliteit met leerlingautonomie?"],
-opp:{t:"Wetenschappelijke verankering als onderscheidend kenmerk",d:"Uitgevers die hun grondslag in Rosenshine en Hattie tonen, onderscheiden zich. Een werkboek rond de 10 principes is wetenschappelijk verdedigbaar."},
 warn:{t:"Ideologische spanning in België en Nederland",d:"Expliciete instructie wordt politiek geassocieerd met conservatief rechts. 'Evidence-based pedagogiek' wordt beter ontvangen."},
+v2:{
+def:"<b>Wat is het?</b> Een manier om de les in drie fasen te structureren — de leerkracht doet voor terwijl hij hardop redeneert, laat oefenen onder begeleiding met feedback, en geeft pas zelfstandig werk zodra ~80% succes bereikt is — met voortdurende controle van het begrip van álle leerlingen. Het is geen hoorcollege: het is een sequentie, gevalideerd door 50 jaar onderzoek.",
+gauge:{max:1.2,thresh:0.40,main:{v:0.59,l:"expliciete instructie · Hattie 2023"},marks:[{v:0.17,l:"alleen hoorcollege"},{v:0.74,l:"modellering + begeleide oefening"}],months:"Concreet: een effect van deze omvang komt overeen met <b>≈ +7 maanden</b> vooruitgang op een schooljaar (EEF-omrekening).",threshNote:"De verticale lijn markeert de <b>drempel van het gewenste effect (d = 0.40)</b> — Hattie 2023."},
+baro:{title:"Sterkte van het bewijs",score:5,label:"Zeer hoog · 5/5",why:"<b>328 studies</b> over 50 jaar (Stockard 2018) · <b>362 studies</b> bij leerlingen met moeilijkheden (Bissonnette 2010) · <b>200.000 leerlingen</b> Follow Through · gerepliceerd over 5 decennia, blijvende effecten"},
+phases:{title:"De methode in één beeld — de overdracht van verantwoordelijkheid",items:[
+{k:"Fase 1 · Modellering",t:"„Ik doe het”",d:"De leerkracht lost op terwijl hij hardop denkt: onzichtbare redeneringen zichtbaar maken, typische fouten tonen, uitgewerkte voorbeelden vermenigvuldigen.",share:88},
+{k:"Fase 2 · Begeleide oefening",t:"„Wij doen het”",d:"Leerlingen oefenen onder onmiddellijke begeleiding, met corrigerende feedback. De leerkracht bevraagt iedereen — niet alleen de vrijwilligers.",share:50},
+{k:"Fase 3 · Zelfstandige oefening",t:"„Jij doet het”",d:"Overvloedige, gevarieerde zelfstandige oefening, tot automatisering — die het werkgeheugen vrijmaakt voor complexe taken.",share:15}],
+gates:["begrip<br>gecontroleerd","~80% succes"]},
+lesson:{title:"Een typische les van 50 minuten",segs:[
+{min:"8 min",flex:8,ci:0,lbl:"<b>Herhaling</b> van het geleerde",ps:["P1"]},
+{min:"12 min",flex:12,ci:1,lbl:"<b>Modellering</b>, hardop denkend",ps:["P2","P4"]},
+{min:"18 min",flex:18,ci:2,lbl:"<b>Begeleide oefening</b> + controle",ps:["P3","P5","P6","P7"]},
+{min:"10 min",flex:10,ci:3,lbl:"<b>Zelfstandig</b>",ps:["P8","P9"]},
+{min:"",flex:2,ci:4,lbl:"<b>Afsluiting</b>",ps:[]}],
+note:"Indicatieve verdeling, aan te passen aan hoe nieuw de leerstof is. <b>De regel die nooit verandert:</b> ga pas naar het volgende blok als de begripscontrole het toelaat. Gespreide herhalingen <span class='v2-pref'>P10</span> worden ingepland op week- en maandniveau."},
+tl:{title:"50 jaar bewijs — hoe de consensus tot stand kwam",nodes:[
+{x:12,yr:"1968–77",lb:"Project Follow Through · 200.000 leerlingen"},
+{x:27,yr:"1976–86",lb:"Rosenshine: proces-productonderzoek"},
+{x:42,yr:"2006",lb:"Kirschner, Sweller & Clark: de cognitieve basis"},
+{x:57,yr:"2010",lb:"Franstalige mega-analyse (Bissonnette et al.)"},
+{x:68,yr:"2012",lb:"Rosenshine: de 10 principes"},
+{x:83,yr:"2018",lb:"Stockard et al.: 328 studies, 50 jaar"},
+{x:89,yr:"2023",lb:"Hattie, The Sequel"}]},
+prinGroups:{title:"De 10 principes van Rosenshine, per lesmoment",groups:[
+{t:"Openen",items:[{n:"P1",d:"Dagelijkse herhaling: 5–8 min ophalen bij het begin van de les"},{n:"P10",d:"Gespreide weekelijkse en maandelijkse herhalingen"}]},
+{t:"Presenteren",items:[{n:"P2",d:"Kleine stappen: één korte stap tegelijk, oefening na elke stap"},{n:"P4",d:"Modellering: hardop denken, uitgewerkte voorbeelden"}]},
+{t:"Begeleiden",items:[{n:"P3",d:"Bevraag alle leerlingen (wisbordjes, willekeurige beurten)"},{n:"P5",d:"Begeleide oefening met feedback tot ~80% succes"},{n:"P6",d:"Controleer het begrip van iedereen bij elke stap"},{n:"P7",d:"Kalibreer de moeilijkheid voor een hoog succespercentage"}]},
+{t:"Consolideren",items:[{n:"P8",d:"Tijdelijke steigers, geleidelijk weggenomen"},{n:"P9",d:"Overvloedige zelfstandige oefening tot automatisering"}]}]},
+path:{title:"Om verder te gaan — leesparcours in 3 stappen",steps:[
+{lv:"🌱",k:"Stap 1 · Starten",t:"Rosenshine (2012)",d:"Principles of Instruction — 10 principes in 10 pagina's, het meest toegankelijke en meest geciteerde startpunt."},
+{lv:"🌿",k:"Stap 2 · Structureren",t:"Gauthier, Bissonnette & Richard (2013)",d:"Enseignement explicite et réussite des élèves — de Franstalige referentie: de drie fasen van de les, het beheer van het leren."},
+{lv:"🌳",k:"Stap 3 · Uitrusten",t:"Archer & Hughes (2011)",d:"Explicit Instruction — 16 elementen en concrete klasroutines: koorantwoorden, wisbordjes, onmiddellijke correctie."}],
+biblio:"<b>Volledige bibliografie ·</b> Rosenshine (2012), <i>American Educator</i> · Gauthier, Bissonnette & Richard (2013), De Boeck · Bissonnette, Richard, Gauthier & Bouchard (2010), <i>Revue de recherche appliquée sur l'apprentissage</i>, mega-analyse, 362 studies · Stockard, Wood, Coughlin & Khoury (2018), <i>Review of Educational Research</i>, 328 studies · Archer & Hughes (2011), Guilford · Kirschner, Sweller & Clark (2006), <i>Educational Psychologist</i> · Hattie (2009, 2023), <i>Visible Learning</i> · Engelmann & Becker, Project Follow Through (1968–1977)."}
+},
 related:["Cognitieve belasting","Metacognitie","Formatieve evaluatie","Gespreide herhaling","Leerlingautonomie"]}
 },
 ef:{
@@ -3075,6 +3258,15 @@ function renderFiche(d,key){
     <button class="ft" onclick="switchTab(this,1)" data-tab="1">✏️ ${LANG==='fr'?'En pratique':LANG==='en'?'In practice':'In de praktijk'}</button>
   </div>` : '';
 
+  if(d.v2){
+    document.getElementById('fc').innerHTML = tabsTpl + buildV2(d,key,col,t,srcLabels) + (hasPrat ? renderPratique(PRATIQUE[key][LANG], key) : '');
+    showFiche();
+    if (hasPrat) {
+      document.getElementById('fc').querySelectorAll('.fiche-tabs .ft')[0].classList.add('on');
+    }
+    return;
+  }
+
   document.getElementById('fc').innerHTML = tabsTpl + `<div class="synth-section"><div class="fh" style="background:${col.bg};">
       <div class="fh-top">
         <div class="fh-left">
@@ -3132,7 +3324,7 @@ function renderFiche(d,key){
         <div class="db dcon"><div class="dbt">${t.con}</div>${d.debateCon.map(x=>`<div class="dbr">${x}</div>`).join('')}</div>
       </div>
     </div>
-    <div class="obox"><div class="obox-icon">💡</div><div><div class="ott">${t.opp}</div><div class="otx">${d.opp.t} — ${d.opp.d}</div></div></div>
+    ${d.opp?`<div class="obox"><div class="obox-icon">💡</div><div><div class="ott">${t.opp}</div><div class="otx">${d.opp.t} — ${d.opp.d}</div></div></div>`:''}
     <div class="wbox"><div class="wbox-icon">⚠️</div><div><div class="wtt">${t.warn} — ${d.warn.t}</div><div class="wtx">${d.warn.d}</div></div></div>
     <div class="card">
       <div class="ctt"><div class="ctd" style="background:${col.accentHex};"></div>${t.rel}</div>
@@ -3143,6 +3335,133 @@ function renderFiche(d,key){
   if (hasPrat) {
     document.getElementById('fc').querySelectorAll('.fiche-tabs .ft')[0].classList.add('on');
   }
+}
+
+// ── FICHE V2 · gabarit « synthèse visuelle » ──
+// Rendu alternatif activé par la présence d'un champ optionnel `v2` dans les
+// données d'une fiche ; les fiches sans `v2` gardent le gabarit historique.
+function buildV2(d,key,col,t,srcLabels){
+  const v=d.v2, g=v.gauge, acc=col.accentHex;
+  const T={
+    fr:{eff:"L'effet en un coup d'œil",teach:"part de l'enseignant",pupil:"part de l'élève"},
+    en:{eff:"The effect at a glance",teach:"teacher's share",pupil:"student's share"},
+    nl:{eff:"Het effect in één oogopslag",teach:"aandeel leerkracht",pupil:"aandeel leerling"}
+  }[LANG];
+  const pct=x=>(x/g.max*100).toFixed(1);
+  const ticks=[];for(let x=0;x<=g.max+1e-9;x+=0.2)ticks.push(Math.round(x*10)/10);
+
+  const heroHtml=`<div class="fh" style="background:${col.bg};">
+    <div class="fh-top"><div class="fh-left">
+      <div class="fh-ey" style="color:rgba(255,255,255,0.75);"><div class="fh-edot" style="background:rgba(255,255,255,0.75);"></div>${t.eyF}</div>
+      <div class="fh-tt">${d.title}</div>
+      <div class="fh-tags">${d.tags.map(tg=>`<span class="fh-tag">${tg}</span>`).join('')}</div>
+    </div></div>
+    <div class="fh-sum v2-def">${v.def}</div>
+  </div>`;
+
+  const effHtml=`<div class="card" style="margin-bottom:14px;">
+    <div class="ctt"><div class="ctd" style="background:${acc};"></div>${T.eff}</div>
+    <div class="v2-gauge-block">
+      <div>
+        <div class="v2-gauge">
+          <div class="v2-gtrack" style="background:linear-gradient(90deg,var(--g50) 0%,var(--g50) ${pct(g.thresh)}%,${acc}16 ${pct(g.thresh)}%,${acc}16 100%);">
+            <span class="v2-gthresh" style="left:${pct(g.thresh)}%;"></span>
+            ${g.marks.map(m=>`<span class="v2-gmark" style="left:${pct(m.v)}%;"></span><span class="v2-gsub" style="left:${pct(m.v)}%;"><b>${m.v.toFixed(2)}</b>${m.l}</span>`).join('')}
+            <span class="v2-gmark main" style="left:${pct(g.main.v)}%;background:${acc};box-shadow:0 0 0 4px ${acc}33;"></span>
+            <span class="v2-gflag" style="left:${pct(g.main.v)}%;"><span class="gv" style="color:${col.ins};">d = ${g.main.v.toFixed(2)}</span><br><span class="gl">${g.main.l}</span></span>
+          </div>
+          <div class="v2-gscale">${ticks.map(x=>`<span>${x}</span>`).join('')}</div>
+          <div class="v2-gnote"><span class="tickd"></span><span>${g.threshNote}</span></div>
+        </div>
+        <div class="v2-months" style="background:${acc}12;--mv:${col.ins};">${g.months}</div>
+      </div>
+      <div class="v2-baro">
+        <div class="v2-baro-t">${v.baro.title}</div>
+        <div class="v2-dots">${[0,1,2,3,4].map(i=>`<span class="v2-dot${i<v.baro.score?' on':''}"></span>`).join('')}</div>
+        <div class="v2-baro-v">${v.baro.label}</div>
+        <div class="v2-baro-why">${v.baro.why}</div>
+      </div>
+    </div>
+  </div>`;
+
+  const insightsHtml=`<div class="card" style="margin-bottom:14px;">
+    <div class="ctt"><div class="ctd" style="background:${acc};"></div>${t.ins}</div>
+    ${d.insights.map((i,n)=>{
+      const lvl=i.lvl||'all';
+      let pillsHtml='';
+      if(lvl==='ps'){
+        pillsHtml=`<div class="lvl-pills"><span class="lp lp-p">🏫 ${LANG==='fr'?'Primaire':LANG==='en'?'Primary':'Lager onderwijs'}</span><span class="lp lp-s">🎓 ${LANG==='fr'?'Secondaire':LANG==='en'?'Secondary':'Secundair'}</span></div>`;
+      } else if(lvl==='all'){
+        pillsHtml=`<div class="lvl-pills"><span class="lp lp-all">📚 ${LANG==='fr'?'Tous niveaux':LANG==='en'?'All levels':'Alle niveaus'}</span></div>`;
+      } else if(lvl==='p'){
+        pillsHtml=`<div class="lvl-pills"><span class="lp lp-p">🏫 ${LANG==='fr'?'Primaire':LANG==='en'?'Primary':'Lager onderwijs'}</span></div>`;
+      } else if(lvl==='s'){
+        pillsHtml=`<div class="lvl-pills"><span class="lp lp-s">🎓 ${LANG==='fr'?'Secondaire':LANG==='en'?'Secondary':'Secundair'}</span></div>`;
+      }
+      return `<div class="ii"><div class="in" style="background:${acc}18;color:${col.ins};">${n+1}</div><div><div class="it">${i.t}</div><div class="id">${i.d}</div>${pillsHtml}</div></div>`;
+    }).join('')}
+  </div>`;
+
+  const ph=v.phases;
+  const phasesHtml=ph?`<div class="card" style="margin-bottom:14px;">
+    <div class="ctt"><div class="ctd" style="background:${acc};"></div>${ph.title}</div>
+    <div class="v2-grr">${ph.items.map((p,i)=>{
+      const cell=`<div class="v2-phase"><div class="v2-phase-k" style="color:${col.ins};">${p.k}</div><div class="v2-phase-t">${p.t}</div><div class="v2-phase-d">${p.d}</div><div class="v2-share"><div class="v2-share-bar"><span style="width:${p.share}%;background:${acc};"></span><span style="width:${100-p.share}%;background:var(--t400);"></span></div><div class="v2-share-lbl"><span>${p.share} %</span><span>${100-p.share} %</span></div></div></div>`;
+      const gate=i<ph.items.length-1?`<div class="v2-gate"><div class="ga" style="color:${col.ins};">→</div><div class="gt">${ph.gates[i]}</div></div>`:'';
+      return cell+gate;
+    }).join('')}</div>
+    <div class="v2-legend"><span><span class="v2-swatch" style="background:${acc};"></span>${T.teach}</span><span><span class="v2-swatch" style="background:var(--t400);"></span>${T.pupil}</span></div>
+  </div>`:'';
+
+  const ls=v.lesson;
+  const segCols=[col.pill,col.bg,col.dot,'var(--t400)','var(--a400)'];
+  const lessonHtml=ls?`<div class="card" style="margin-bottom:14px;">
+    <div class="ctt"><div class="ctd" style="background:${acc};"></div>${ls.title}</div>
+    <div class="v2-lesson">${ls.segs.map(s=>`<div class="v2-lseg" style="flex:${s.flex};background:${segCols[s.ci]};">${s.min}</div>`).join('')}</div>
+    <div class="v2-llbls">${ls.segs.map(s=>`<div class="v2-llbl" style="flex:${s.flex};">${s.lbl}${s.ps.map(p=>`<span class="v2-pref">${p}</span>`).join('')}</div>`).join('')}</div>
+    <p class="v2-lnote">${ls.note}</p>
+  </div>`:'';
+
+  const tl=v.tl;
+  const tlHtml=tl?`<div class="card" style="margin-bottom:14px;">
+    <div class="ctt"><div class="ctd" style="background:${acc};"></div>${tl.title}</div>
+    <div class="v2-tl-scroll"><div class="v2-tl">
+      <div class="v2-tl-line"></div>
+      ${tl.nodes.map((n,i)=>`<div class="v2-tl-node" style="left:${n.x}%;"><div class="${i%2?'bot':'top'}"><span class="yr" style="color:${col.ins};">${n.yr}</span><div class="lb">${n.lb}</div></div><div class="nd" style="background:${acc};"></div></div>`).join('')}
+    </div></div>
+  </div>`:'';
+
+  const pg=v.prinGroups;
+  const prinHtml=pg?`<div class="card" style="margin-bottom:14px;">
+    <div class="ctt"><div class="ctd" style="background:${acc};"></div>${pg.title}</div>
+    <div class="v2-pgs">${pg.groups.map(gr=>`<div class="v2-pg"><div class="v2-pg-t" style="color:${col.ins};">${gr.t}</div>${gr.items.map(it=>`<div class="v2-pchip"><span class="v2-pn" style="background:${acc}18;color:${col.ins};">${it.n}</span><span>${it.d}</span></div>`).join('')}</div>`).join('')}</div>
+    ${key==='ee'?`<div class="src-note">${srcLabels[LANG]}</div>`:''}
+  </div>`:'';
+
+  const debHtml=`<div class="card" style="margin-bottom:14px;">
+    <div class="ctt"><div class="ctd" style="background:${acc};"></div>${t.deb}</div>
+    <div class="dg">
+      <div class="db dpro"><div class="dbt">${t.pro}</div>${d.debatePro.map(x=>`<div class="dbr">${x}</div>`).join('')}</div>
+      <div class="db dcon"><div class="dbt">${t.con}</div>${d.debateCon.map(x=>`<div class="dbr">${x}</div>`).join('')}</div>
+    </div>
+  </div>`;
+
+  const warnHtml=`<div class="wbox"><div class="wbox-icon">⚠️</div><div><div class="wtt">${t.warn} — ${d.warn.t}</div><div class="wtx">${d.warn.d}</div></div></div>`;
+
+  const pa=v.path;
+  const pathHtml=pa?`<div class="card" style="margin-bottom:14px;">
+    <div class="ctt"><div class="ctd" style="background:${acc};"></div>${pa.title}</div>
+    <div class="v2-path">${pa.steps.map(s=>`<div class="v2-step"><span class="lv">${s.lv}</span><div class="v2-step-k">${s.k}</div><div class="v2-step-t">${s.t}</div><div class="v2-step-d">${s.d}</div></div>`).join('')}</div>
+    <div class="v2-biblio">${pa.biblio}</div>
+  </div>`:'';
+
+  const relHtml=`<div class="card">
+    <div class="ctt"><div class="ctd" style="background:${acc};"></div>${t.rel}</div>
+    <div class="rchips">${d.related.map(r=>`<div class="rc" style="border-color:${acc}44;" onmouseover="this.style.background='${acc}12';this.style.color='${col.ins}';this.style.borderColor='${acc}';" onmouseout="this.style.background='';this.style.color='';this.style.borderColor='${acc}44';" onclick="generateAIFiche('${r}')">${r}</div>`).join('')}
+    </div>
+  </div>`;
+
+  return `<div class="synth-section">${heroHtml}${effHtml}${insightsHtml}${phasesHtml}${lessonHtml}${tlHtml}${prinHtml}${debHtml}${warnHtml}${pathHtml}${relHtml}</div>`;
 }
 
 function switchTab(btn, idx) {
