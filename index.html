@@ -507,7 +507,8 @@ const THEME_COLORS={
   cl:{bg:'#633806',pill:'#301A00',dot:'#FAC775',ins:'#633806',eff:'#BA7517',accentHex:'#BA7517'},
   ib:{bg:'#26215C',pill:'#1A1640',dot:'#AFA9EC',ins:'#3C3489',eff:'#534AB7',accentHex:'#534AB7'},
   gm:{bg:'#993C1D',pill:'#5A1E08',dot:'#F0997B',ins:'#712B13',eff:'#D85A30',accentHex:'#D85A30'},
-  dy:{bg:'#3C3489',pill:'#26215C',dot:'#AFA9EC',ins:'#3C3489',eff:'#534AB7',accentHex:'#534AB7'}
+  dy:{bg:'#3C3489',pill:'#26215C',dot:'#AFA9EC',ins:'#3C3489',eff:'#534AB7',accentHex:'#534AB7'},
+  ct:{bg:'#085041',pill:'#042C53',dot:'#5DCAA5',ins:'#085041',eff:'#1D9E75',accentHex:'#1D9E75'}
 };
 
 const BADGE_STYLES={
@@ -537,7 +538,7 @@ fr:[
   {icon:'🧠',label:'Cognition & autorégulation',keys:['mc','au','rs','gm']},
   {icon:'🤖',label:'Technologies éducatives',keys:['ia']},
   {icon:'🤝',label:'Pédagogie active & sociale',keys:['ac']},
-  {icon:'🧩',label:'Inclusion & besoins spécifiques',keys:['dy']},
+  {icon:'🧩',label:'Inclusion & besoins spécifiques',keys:['dy','ct']},
   {icon:'🔢',label:'Didactiques disciplinaires',keys:['dm','ib']},
   {icon:'🏫',label:'Neurosciences & cerveau',keys:['ns']},
   {icon:'📚',label:'Littératie, lecture & langues',keys:['cp','cl','l2']}
@@ -548,7 +549,7 @@ en:[
   {icon:'🧠',label:'Cognition & self-regulation',keys:['mc','au','rs','gm']},
   {icon:'🤖',label:'Educational technologies',keys:['ia']},
   {icon:'🤝',label:'Active & social pedagogy',keys:['ac']},
-  {icon:'🧩',label:'Inclusion & specific needs',keys:['dy']},
+  {icon:'🧩',label:'Inclusion & specific needs',keys:['dy','ct']},
   {icon:'🔢',label:'Subject didactics',keys:['dm','ib']},
   {icon:'🏫',label:'Neuroscience & the brain',keys:['ns']},
   {icon:'📚',label:'Literacy, reading & languages',keys:['cp','cl','l2']}
@@ -559,7 +560,7 @@ nl:[
   {icon:'🧠',label:'Cognitie & zelfregulatie',keys:['mc','au','rs','gm']},
   {icon:'🤖',label:'Onderwijstechnologieën',keys:['ia']},
   {icon:'🤝',label:'Actieve & sociale pedagogiek',keys:['ac']},
-  {icon:'🧩',label:'Inclusie & specifieke behoeften',keys:['dy']},
+  {icon:'🧩',label:'Inclusie & specifieke behoeften',keys:['dy','ct']},
   {icon:'🔢',label:'Vakdidactieken',keys:['dm','ib']},
   {icon:'🏫',label:'Neurowetenschappen & brein',keys:['ns']},
   {icon:'📚',label:'Geletterdheid, lezen & talen',keys:['cp','cl','l2']}
@@ -584,7 +585,8 @@ fr:[
   {key:'ns',em:'🏫',tt:'Neurosciences & apprentissage',sb:'Dehaene · plasticité · neuromythes',bd:'d = 0.55',bdCls:'bp'},
   {key:'cp',em:'📚',tt:'Conscience phonologique & lecture',sb:'Science of Reading · Scarborough · phonics',bd:'d = 0.73',bdCls:'bt'},
   {key:'cl',em:'💡',tt:'Compréhension en lecture',sb:'Simple View · Gough & Tunmer · vocabulaire',bd:'d = 0.60',bdCls:'ba'},
-  {key:'l2',em:'🌍',tt:'Langues étrangères & CLIL',sb:'Krashen · Cummins · immersion · Belgique',bd:'d = 0.52',bdCls:'bb'}
+  {key:'l2',em:'🌍',tt:'Langues étrangères & CLIL',sb:'Krashen · Cummins · immersion · Belgique',bd:'d = 0.52',bdCls:'bb'},
+  {key:'ct',em:'👥',tt:'Coenseignement (team teaching)',sb:'Cook & Friend · inclusion · besoins spécifiques',bd:'d = 0.19',bdCls:'bt'}
 ],
 en:[
   {key:'ee',em:'📖',tt:'Explicit Teaching',sb:'Direct Instruction · Rosenshine · Hattie',bd:'d = 0.59',bdCls:'bb'},
@@ -604,7 +606,8 @@ en:[
   {key:'ns',em:'🏫',tt:'Neuroscience & Learning',sb:'Dehaene · plasticity · neuromyths',bd:'d = 0.55',bdCls:'bp'},
   {key:'cp',em:'📚',tt:'Phonological Awareness & Reading',sb:'Science of Reading · Scarborough · phonics',bd:'d = 0.73',bdCls:'bt'},
   {key:'cl',em:'💡',tt:'Reading Comprehension',sb:'Simple View · Gough & Tunmer · vocabulary',bd:'d = 0.60',bdCls:'ba'},
-  {key:'l2',em:'🌍',tt:'Foreign Languages & CLIL',sb:'Krashen · Cummins · immersion · Belgium',bd:'d = 0.52',bdCls:'bb'}
+  {key:'l2',em:'🌍',tt:'Foreign Languages & CLIL',sb:'Krashen · Cummins · immersion · Belgium',bd:'d = 0.52',bdCls:'bb'},
+  {key:'ct',em:'👥',tt:'Co-Teaching (Team Teaching)',sb:'Cook & Friend · inclusion · special needs',bd:'d = 0.19',bdCls:'bt'}
 ],
 nl:[
   {key:'ee',em:'📖',tt:'Expliciete instructie',sb:'Direct Instruction · Rosenshine · Hattie',bd:'d = 0.59',bdCls:'bb'},
@@ -624,7 +627,8 @@ nl:[
   {key:'ns',em:'🏫',tt:'Neurowetenschappen & leren',sb:'Dehaene · plasticiteit · neuromythen',bd:'d = 0.55',bdCls:'bp'},
   {key:'cp',em:'📚',tt:'Fonologisch bewustzijn & lezen',sb:'Science of Reading · Scarborough · fonetisch',bd:'d = 0.73',bdCls:'bt'},
   {key:'cl',em:'💡',tt:'Leesbegrip',sb:'Simple View · Gough & Tunmer · woordenschat',bd:'d = 0.60',bdCls:'ba'},
-  {key:'l2',em:'🌍',tt:'Vreemde talen & CLIL',sb:'Krashen · Cummins · immersie · België',bd:'d = 0.52',bdCls:'bb'}
+  {key:'l2',em:'🌍',tt:'Vreemde talen & CLIL',sb:'Krashen · Cummins · immersie · België',bd:'d = 0.52',bdCls:'bb'},
+  {key:'ct',em:'👥',tt:'Co-teaching (team teaching)',sb:'Cook & Friend · inclusie · specifieke behoeften',bd:'d = 0.19',bdCls:'bt'}
 ]};
 const D={
 ee:{
@@ -1879,6 +1883,92 @@ debateCon:["Diagnose moeilijk en vaak laat — bronnen moeten werken vóór de d
 opp:{t:"Inclusieve evidence-based reeks — vrijwel onontgonnen markt in de Nederlandstalige wereld",d:"Er bestaat vrijwel geen Nederlandstalige reeks pedagogische bronnen voor leerlingen met SLS gestructureerd volgens onderzoeksgegevens. De Belgische markt is bijzonder veelbelovend: redelijke aanpassingen zijn verankerd in het decreet inclusief onderwijs (2009), en scholen zoeken praktische tools. Een 'Anders leren'-reeks — UDL, evidence-based, voor lager en secundair — zou de eerste van zijn soort in het Nederlands zijn."},
 warn:{t:"Aanpassing niet verwarren met het verlagen van verwachtingen",d:"De meest voorkomende fout in SLS-bronnen: inhoud vereenvoudigen in plaats van format aanpassen. Een leerling met dyslexie heeft geen kortere tekst nodig — maar een tekst met een aangepast lettertype, voldoende regelafstand, tekst-naar-spraak beschikbaar en evaluatie die spelling niet bestraft. Conceptuele verwachtingen verlagen berooft de leerling van zijn recht op leren. Effectieve bronnen passen de vorm aan, niet de inhoud."},
 related:["Differentiatie","Fonologisch bewustzijn & lezen","Neurowetenschappen & leren","Cognitieve belasting","Formatieve evaluatie"],key:'dy'}
+},
+ct:{
+fr:{title:"Coenseignement & Team Teaching",tags:["Pédagogie inclusive & besoins spécifiques","Primaire · Secondaire","Base de preuves mince · très dépendant de la mise en œuvre","Forte demande en contexte inclusif"],score:"d = 0.19",scoreLbl:"Hattie 2023 — team teaching, tous modèles confondus",
+summary:"Le coenseignement (ou team teaching) associe un enseignant de classe ordinaire à un enseignant spécialisé ou de soutien, qui partagent la responsabilité de planifier, dispenser et évaluer l'enseignement pour une classe hétérogène incluant des élèves à besoins spécifiques, en même temps, dans la même salle. Cook et Friend (1995) ont formalisé six dispositifs de coenseignement — du simple binôme observateur/enseignant jusqu'au véritable enseignement en équipe. Ce modèle est aujourd'hui une pratique courante dans les classes inclusives de nombreux pays, mais sa base de preuves est plus mince que sa popularité ne le laisse penser : les effets globaux sont modestes, et les résultats dépendent bien davantage du dispositif choisi et de la qualité réelle de la collaboration que de la simple présence de deux adultes.",
+metrics:[{l:"Effet Hattie",v:"d = 0.19",s:"Sous le seuil de 0.40"},{l:"Études rigoureuses trouvées (Murawski & Swanson 2001)",v:"6",s:"Sur des décennies de littérature publiée"},{l:"Modèles de coenseignement (Cook & Friend 1995)",v:"6",s:"De l'observation au véritable enseignement en équipe"},{l:"Modèle dominant sur le terrain",v:"Un enseigne, l'autre assiste",s:"Jugé le plus faible par Cook & Friend"}],
+insights:[
+{t:"L'effet chiffré global est faible — et souvent passé sous silence",d:"La synthèse de Hattie situe le team teaching à d = 0.19, bien en dessous du seuil de 0.40 qu'il considère comme le signe d'une intervention efficace. Ce chiffre est rarement mentionné dans les formations au coenseignement, qui insistent surtout sur les bénéfices qualitatifs.",lvl:'all'},
+{t:"'Deux enseignants dans la salle' n'est pas la même chose que coenseigner",d:"La métasynthèse d'études qualitatives de Scruggs, Mastropieri & McDuffie (2007) montre que, dans la majorité des classes observées, l'enseignant ordinaire dirige l'enseignement pendant que l'enseignant spécialisé circule en position de soutien — le dispositif 'un enseigne, l'autre assiste' que Cook et Friend déconseillaient explicitement de généraliser.",lvl:'all'},
+{t:"La base de preuves est plus mince que ne le suggère la littérature professionnelle",d:"Murawski & Swanson (2001) ont passé en revue des décennies de publications sur le coenseignement et n'ont trouvé que 6 études suffisamment rigoureuses pour calculer une taille d'effet. Le coenseignement est largement imposé dans les politiques d'inclusion, bien avant que les données ne le confirment.",lvl:'all'},
+{t:"Les résultats dépendent du choix du modèle et d'un temps de planification protégé",d:"La revue systématique de Solis, Vaughn, Swanson & McCulley (2012) conclut que l'enseignement par ateliers, en parallèle ou différencié — qui créent de véritables petits groupes différenciés — sont plus défendables que le schéma par défaut 'un dirige, l'autre aide', mais seulement lorsque les enseignants disposent d'un temps de coplanification réel et programmé.",lvl:'all'}],
+effects:[{l:"Team teaching, tous modèles confondus (Hattie 2023)",v:0.19},{l:"Études rigoureuses uniquement (Murawski & Swanson 2001)",v:0.40},{l:"Pour comparaison — apprentissage coopératif (Hattie 2023)",v:0.54},{l:"Pour comparaison — enseignement explicite (Hattie 2023)",v:0.59},{l:"Pour comparaison — différenciation pédagogique (Hattie 2023)",v:0.41}],
+principles:[
+{n:"P1",t:"Adapter le modèle à l'objectif de la leçon",d:"Ne pas se limiter par défaut à 'un enseigne, l'autre assiste' ; choisir l'enseignement par ateliers, en parallèle ou différencié quand l'objectif est une réelle différenciation en petits groupes"},
+{n:"P2",t:"Protéger un vrai temps de coplanification",d:"Sans un créneau commun, récurrent et programmé, le coenseignement se réduit à un enseignant principal et un assistant"},
+{n:"P3",t:"Instaurer une parité visible",d:"Les deux enseignants doivent enseigner, circuler, noter et s'adresser à toute la classe ; un écart de statut visible nuit à la crédibilité du spécialiste"},
+{n:"P4",t:"Faire tourner le rôle de meneur",d:"Alterner qui dirige l'enseignement collectif d'une leçon à l'autre, pour que l'enseignant spécialisé ne soit pas cantonné en permanence au rôle d'assistant"},
+{n:"P5",t:"Utiliser les modèles différenciés pour de vrais petits groupes",d:"L'enseignement par ateliers et en parallèle crée les groupes restreints et ciblés que le modèle dominant offre rarement"},
+{n:"P6",t:"Former les deux enseignants ensemble",d:"Une formation continue conjointe sur les six modèles de coenseignement produit une bien meilleure fidélité qu'une formation destinée au seul enseignant spécialisé"},
+{n:"P7",t:"Suivre les résultats réels des élèves",d:"La popularité du coenseignement dépasse ses preuves ; mesurer les apprentissages et l'engagement plutôt que de supposer que deux adultes garantissent un meilleur enseignement"},
+{n:"P8",t:"Grouper selon les besoins, pas selon l'étiquette",d:"Former les groupes en fonction de ce qu'exige la leçon, pas d'une répartition figée classe ordinaire / classe spécialisée, pour éviter les dispositifs stigmatisants"}],
+refs:[
+{t:"Cook, L., & Friend, M. — Co-Teaching: Guidelines for Creating Effective Practices (1995)",m:"Focus on Exceptional Children · Typologie fondatrice",f:"Définit les six dispositifs de coenseignement encore utilisés aujourd'hui, du simple binôme observateur/enseignant au véritable enseignement en équipe."},
+{t:"Murawski, W.W., & Swanson, H.L. — A Meta-Analysis of Co-Teaching Research: Where Are the Data? (2001)",m:"Remedial and Special Education · Méta-analyse",f:"Ne trouve que 6 études méthodologiquement rigoureuses après des décennies de littérature professionnelle ; effet global modéré sur ce sous-ensemble restreint."},
+{t:"Scruggs, T.E., Mastropieri, M.A., & McDuffie, K.A. — Co-Teaching in Inclusive Classrooms: A Metasynthesis of Qualitative Research (2007)",m:"Exceptional Children · Métasynthèse qualitative",f:"Montre que l'enseignant ordinaire dirige généralement pendant que le spécialiste joue un rôle de soutien, ce qui limite les bénéfices attendus du modèle."},
+{t:"Solis, M., Vaughn, S., Swanson, E., & McCulley, L. — Collaborative Models of Instruction: The Empirical Foundations of Inclusion and Co-Teaching (2012)",m:"Psychology in the Schools · Revue systématique",f:"Identifie le temps de coplanification, la parité des rôles et le choix du modèle de regroupement comme les principaux facteurs de réussite."}],
+debatePro:["Maintient les élèves à besoins spécifiques en classe ordinaire, sans la stigmatisation du retrait de classe","Permet une réelle différenciation en petits groupes via l'enseignement par ateliers, en parallèle ou différencié","Renforce les compétences de l'enseignant ordinaire en stratégies spécialisées, par modelage intégré","Offre une capacité double d'observation, de feedback immédiat et de gestion du comportement"],
+debateCon:["La synthèse de Hattie classe le team teaching parmi les stratégies à effet plus faible (d = 0.19)","Le modèle dominant sur le terrain cantonne le spécialiste à un rôle d'assistant (Scruggs et al. 2007)","Exige un temps de coplanification protégé, rarement financé ou programmé","La base de preuves rigoureuse reste étonnamment mince après des décennies de pratique généralisée (Murawski & Swanson 2001)"],
+opp:{t:"Un guide de mise en œuvre par modèle fait largement défaut dans les ressources francophones",d:"La plupart des ressources francophones sur le coenseignement ne décrivent que le dispositif 'un dirige, l'autre aide', sans présenter l'enseignement par ateliers, en parallèle ou différencié comme des options concrètes et planifiables. Un guide pratique court, traduisant les six modèles de Cook et Friend en gabarits de leçons prêts à l'emploi — avec un protocole de temps de coplanification — comblerait un vrai manque pour les coordinateurs d'inclusion."},
+warn:{t:"Ne pas présenter le coenseignement comme une solution d'inclusion garantie",d:"Le chiffre global de Hattie (d = 0.19) et la méta-analyse de Murawski & Swanson montrent que la simple présence de deux adultes dans une salle, sans choix de modèle, parité des rôles ni coplanification, produit des effets faibles. Les données soutiennent des dispositifs précis et bien mis en œuvre — pas le 'coenseignement' comme étiquette indifférenciée."},
+related:["Différenciation pédagogique","Troubles dys & besoins spécifiques","Apprentissage coopératif","Évaluation formative"],key:'ct'},
+en:{title:"Co-Teaching & Team Teaching",tags:["Inclusive & special education","Primary · Secondary","Thin evidence base · highly implementation-dependent","High demand in inclusive settings"],score:"d = 0.19",scoreLbl:"Hattie 2023 — team teaching, pooled across models",
+summary:"Co-teaching (also called team teaching) pairs a general education teacher with a special education or support teacher who share responsibility for planning, delivering and assessing instruction to a mixed class that includes students with disabilities, at the same time, in the same room. Cook and Friend (1995) formalised six co-teaching arrangements — from one lead teacher with an observing partner to fully shared team teaching. The model is now standard practice in inclusive classrooms across many countries, but its evidence base is thinner than its popularity suggests: pooled effects are modest, and outcomes depend far more on which arrangement is used and how well the two teachers actually collaborate than on the mere presence of two adults.",
+metrics:[{l:"Hattie effect size",v:"d = 0.19",s:"Below the d = 0.40 hinge point"},{l:"Rigorous studies found (Murawski & Swanson 2001)",v:"6",s:"Out of decades of published literature"},{l:"Co-teaching models (Cook & Friend 1995)",v:"6",s:"From 'one observe' to full team teaching"},{l:"Dominant real-world model",v:"One Teach, One Assist",s:"Ranked weakest by Cook & Friend"}],
+insights:[
+{t:"The headline effect size is low — and often left out",d:"Hattie's synthesis places team teaching at d = 0.19, well below the 0.40 threshold he treats as the sign of an effective intervention. This figure is frequently omitted from co-teaching training materials, which tend to emphasise only qualitative benefits.",lvl:'all'},
+{t:"'Two teachers in the room' is not the same as co-teaching",d:"Scruggs, Mastropieri & McDuffie's (2007) metasynthesis of qualitative studies found that in most observed classrooms, the general education teacher led instruction while the special educator circulated in a support role — the 'One Teach, One Assist' arrangement Cook and Friend explicitly warned against overusing.",lvl:'all'},
+{t:"The evidence base is thinner than the practice literature suggests",d:"Murawski & Swanson (2001) searched decades of co-teaching publications and found only 6 studies with enough methodological rigour to compute an effect size. Co-teaching is widely mandated in inclusion policy well ahead of the data confirming it.",lvl:'all'},
+{t:"Outcomes hinge on model choice and protected planning time",d:"Solis, Vaughn, Swanson & McCulley's (2012) systematic review concludes that station teaching, parallel teaching and alternative teaching — which create genuinely smaller, differentiated groups — are more defensible than the default 'one lead, one helper' pattern, but only when teachers have real, scheduled co-planning time.",lvl:'all'}],
+effects:[{l:"Team teaching, all models pooled (Hattie 2023)",v:0.19},{l:"Rigorous co-teaching studies only (Murawski & Swanson 2001)",v:0.40},{l:"For comparison — cooperative learning (Hattie 2023)",v:0.54},{l:"For comparison — explicit teaching (Hattie 2023)",v:0.59},{l:"For comparison — differentiated instruction (Hattie 2023)",v:0.41}],
+principles:[
+{n:"P1",t:"Match the model to the lesson goal",d:"Don't default to One Teach/One Assist; choose station, parallel or alternative teaching when the goal is genuine small-group differentiation"},
+{n:"P2",t:"Protect real shared planning time",d:"Co-teaching without a scheduled, recurring joint-planning block collapses into one lead teacher plus an aide"},
+{n:"P3",t:"Establish visible parity",d:"Both teachers should instruct, circulate, grade and address the whole class; a visible status gap undermines the specialist's credibility"},
+{n:"P4",t:"Rotate the lead role",d:"Alternate who leads whole-class instruction across lessons so the special educator isn't permanently cast as an assistant"},
+{n:"P5",t:"Use differentiated models for genuine small groups",d:"Station and parallel teaching create the smaller, targeted groups that the dominant model rarely delivers"},
+{n:"P6",t:"Train both teachers together",d:"Joint professional development on the six co-teaching models produces far more fidelity than training only the special education teacher"},
+{n:"P7",t:"Track actual student outcomes",d:"Co-teaching's popularity has outpaced its evidence; measure achievement and engagement rather than assuming two adults automatically means better instruction"},
+{n:"P8",t:"Group by skill need, not by label",d:"Form groups around what a given lesson requires, not a fixed general-education/special-education split, to avoid stigmatising arrangements"}],
+refs:[
+{t:"Cook, L., & Friend, M. — Co-Teaching: Guidelines for Creating Effective Practices (1995)",m:"Focus on Exceptional Children · Founding typology",f:"Defines the six co-teaching arrangements still used today, from one lead teacher with an observing partner to fully shared team teaching."},
+{t:"Murawski, W.W., & Swanson, H.L. — A Meta-Analysis of Co-Teaching Research: Where Are the Data? (2001)",m:"Remedial and Special Education · Meta-analysis",f:"Found only 6 methodologically rigorous studies after decades of practice literature; moderate pooled effect within that narrow subset."},
+{t:"Scruggs, T.E., Mastropieri, M.A., & McDuffie, K.A. — Co-Teaching in Inclusive Classrooms: A Metasynthesis of Qualitative Research (2007)",m:"Exceptional Children · Qualitative metasynthesis",f:"Shows the general education teacher typically leads while the specialist plays a support role, undercutting the model's intended benefits."},
+{t:"Solis, M., Vaughn, S., Swanson, E., & McCulley, L. — Collaborative Models of Instruction: The Empirical Foundations of Inclusion and Co-Teaching (2012)",m:"Psychology in the Schools · Systematic review",f:"Identifies co-planning time, role parity and grouping-model choice as the strongest moderators of success."}],
+debatePro:["Keeps students with disabilities in the general education classroom without pull-out stigma","Enables genuine small-group differentiation through station, parallel and alternative teaching","Builds general educators' capacity in specialised strategies through embedded modelling","Provides two adults' worth of monitoring, immediate feedback and behaviour support"],
+debateCon:["Hattie's synthesis ranks team teaching among the lower-effect strategies (d = 0.19)","The dominant real-world model relegates the specialist to a helper role (Scruggs et al. 2007)","Requires protected joint-planning time that is rarely funded or scheduled","The rigorous evidence base is remarkably thin after decades of widespread practice (Murawski & Swanson 2001)"],
+opp:{t:"A model-matched implementation guide is largely missing from French/Dutch-language resources",d:"Most co-teaching materials available to French- and Dutch-speaking teachers describe only the 'one lead, one helper' arrangement, without introducing station, parallel or alternative teaching as concrete, plannable options. A short field guide translating Cook and Friend's six models into ready-to-use lesson templates — with a shared planning-time protocol — would fill a real, practical gap for inclusion coordinators."},
+warn:{t:"Don't market co-teaching as a guaranteed inclusion solution",d:"Hattie's pooled figure (d = 0.19) and Murawski & Swanson's meta-analysis show that simply placing two adults in a room, without model selection, role parity and joint planning, produces weak effects. The evidence supports specific, well-implemented arrangements — not 'co-teaching' as an undifferentiated label."},
+related:["Differentiated Instruction","Specific Learning Difficulties","Cooperative Learning","Formative Assessment"],key:'ct'},
+nl:{title:"Co-teaching & Team Teaching",tags:["Inclusief onderwijs & specifieke behoeften","Lager · Secundair","Beperkte onderzoeksbasis · sterk afhankelijk van uitvoering","Hoge vraag in inclusieve settings"],score:"d = 0.19",scoreLbl:"Hattie 2023 — team teaching, alle modellen samen",
+summary:"Co-teaching (ook team teaching genoemd) koppelt een leerkracht gewoon onderwijs aan een leerkracht buitengewoon onderwijs of ondersteuning, die samen verantwoordelijk zijn voor het plannen, geven en evalueren van instructie aan een gemengde klas met leerlingen met specifieke behoeften, tegelijk, in dezelfde ruimte. Cook en Friend (1995) formaliseerden zes co-teachingvormen — van een observerende partner tot volwaardig team teaching. Het model is intussen standaardpraktijk in inclusieve klassen in veel landen, maar de onderzoeksbasis is dunner dan de populariteit doet vermoeden: de gepoolde effecten zijn bescheiden, en de resultaten hangen veel sterker af van het gekozen model en de kwaliteit van de samenwerking dan van de loutere aanwezigheid van twee volwassenen.",
+metrics:[{l:"Hattie-effect",v:"d = 0.19",s:"Onder de drempel van 0.40"},{l:"Rigoureuze studies gevonden (Murawski & Swanson 2001)",v:"6",s:"Op decennia gepubliceerde literatuur"},{l:"Co-teachingmodellen (Cook & Friend 1995)",v:"6",s:"Van observatie tot volwaardig team teaching"},{l:"Dominant model in de praktijk",v:"Eén geeft les, de ander ondersteunt",s:"Door Cook & Friend als zwakst beoordeeld"}],
+insights:[
+{t:"Het globale effect is laag — en wordt vaak niet vermeld",d:"Hatties synthese plaatst team teaching op d = 0.19, ruim onder de drempel van 0.40 die hij als teken van een effectieve interventie beschouwt. Dit cijfer ontbreekt vaak in vormingen over co-teaching, die vooral de kwalitatieve voordelen benadrukken.",lvl:'all'},
+{t:"'Twee leerkrachten in de klas' is niet hetzelfde als co-teaching",d:"De metasynthese van kwalitatief onderzoek van Scruggs, Mastropieri & McDuffie (2007) toont dat in de meeste geobserveerde klassen de leerkracht gewoon onderwijs de instructie leidt, terwijl de leerkracht buitengewoon onderwijs rondloopt in een ondersteunende rol — precies het model 'één geeft les, de ander ondersteunt' dat Cook en Friend expliciet afraadden als standaard.",lvl:'all'},
+{t:"De onderzoeksbasis is dunner dan de praktijkliteratuur suggereert",d:"Murawski & Swanson (2001) doorzochten decennia aan co-teachingpublicaties en vonden slechts 6 studies methodologisch rigoureus genoeg om een effectgrootte te berekenen. Co-teaching wordt breed opgelegd in inclusiebeleid, ver vooruitlopend op de bevestigende data.",lvl:'all'},
+{t:"Resultaten hangen af van modelkeuze en beschermde plantijd",d:"De systematische review van Solis, Vaughn, Swanson & McCulley (2012) concludeert dat stationonderwijs, parallel onderwijs en gedifferentieerd onderwijs — die echt kleinere, gedifferentieerde groepen creëren — verdedigbaarder zijn dan het standaardpatroon 'één leidt, één helpt', maar enkel wanneer leerkrachten over echte, ingeplande gezamenlijke plantijd beschikken.",lvl:'all'}],
+effects:[{l:"Team teaching, alle modellen samen (Hattie 2023)",v:0.19},{l:"Enkel rigoureuze studies (Murawski & Swanson 2001)",v:0.40},{l:"Ter vergelijking — coöperatief leren (Hattie 2023)",v:0.54},{l:"Ter vergelijking — expliciete instructie (Hattie 2023)",v:0.59},{l:"Ter vergelijking — differentiatie (Hattie 2023)",v:0.41}],
+principles:[
+{n:"P1",t:"Kies het model op basis van het lesdoel",d:"Val niet standaard terug op 'één geeft les, de ander ondersteunt'; kies station-, parallel- of gedifferentieerd onderwijs wanneer het doel echte differentiatie in kleine groepen is"},
+{n:"P2",t:"Bescherm echte gezamenlijke plantijd",d:"Zonder een vast, terugkerend, ingepland moment verwordt co-teaching tot één hoofdleerkracht met een assistent"},
+{n:"P3",t:"Zorg voor zichtbare gelijkwaardigheid",d:"Beide leerkrachten moeten lesgeven, rondlopen, beoordelen en de hele klas aanspreken; een zichtbaar statusverschil ondermijnt de geloofwaardigheid van de specialist"},
+{n:"P4",t:"Wissel de leidende rol af",d:"Wissel per les af wie de klassikale instructie leidt, zodat de leerkracht buitengewoon onderwijs niet permanent in de assistentrol belandt"},
+{n:"P5",t:"Gebruik gedifferentieerde modellen voor echte kleine groepen",d:"Station- en parallel onderwijs creëren de kleinere, gerichte groepen die het dominante model zelden biedt"},
+{n:"P6",t:"Vorm beide leerkrachten samen",d:"Gezamenlijke professionalisering over de zes co-teachingmodellen levert veel meer getrouwheid op dan vorming die alleen de leerkracht buitengewoon onderwijs bereikt"},
+{n:"P7",t:"Volg de werkelijke leerlingresultaten op",d:"De populariteit van co-teaching loopt voor op het bewijs; meet leerwinst en betrokkenheid in plaats van aan te nemen dat twee volwassenen automatisch beter onderwijs betekenen"},
+{n:"P8",t:"Groepeer op basis van behoefte, niet op label",d:"Vorm groepen op basis van wat een les vereist, niet op een vaste opdeling gewoon/buitengewoon onderwijs, om stigmatiserende indelingen te vermijden"}],
+refs:[
+{t:"Cook, L., & Friend, M. — Co-Teaching: Guidelines for Creating Effective Practices (1995)",m:"Focus on Exceptional Children · Grondleggende typologie",f:"Definieert de zes co-teachingvormen die vandaag nog worden gebruikt, van een observerende partner tot volwaardig team teaching."},
+{t:"Murawski, W.W., & Swanson, H.L. — A Meta-Analysis of Co-Teaching Research: Where Are the Data? (2001)",m:"Remedial and Special Education · Meta-analyse",f:"Vond slechts 6 methodologisch rigoureuze studies na decennia praktijkliteratuur; matig gepoold effect binnen die kleine subset."},
+{t:"Scruggs, T.E., Mastropieri, M.A., & McDuffie, K.A. — Co-Teaching in Inclusive Classrooms: A Metasynthesis of Qualitative Research (2007)",m:"Exceptional Children · Kwalitatieve metasynthese",f:"Toont dat de leerkracht gewoon onderwijs doorgaans de leiding neemt terwijl de specialist een ondersteunende rol speelt, wat de verwachte voordelen van het model beperkt."},
+{t:"Solis, M., Vaughn, S., Swanson, E., & McCulley, L. — Collaborative Models of Instruction: The Empirical Foundations of Inclusion and Co-Teaching (2012)",m:"Psychology in the Schools · Systematische review",f:"Identificeert plantijd, rolgelijkwaardigheid en de keuze van het groeperingsmodel als de belangrijkste succesfactoren."}],
+debatePro:["Houdt leerlingen met specifieke behoeften in de gewone klas, zonder het stigma van aparte begeleiding","Maakt echte differentiatie in kleine groepen mogelijk via station-, parallel- of gedifferentieerd onderwijs","Versterkt de vaardigheden van de leerkracht gewoon onderwijs in gespecialiseerde strategieën, via ingebouwd modelleren","Biedt dubbele observatiecapaciteit, onmiddellijke feedback en gedragsondersteuning"],
+debateCon:["Hatties synthese plaatst team teaching bij de strategieën met een lager effect (d = 0.19)","Het dominante model in de praktijk verengt de specialist tot een ondersteunende rol (Scruggs et al. 2007)","Vereist beschermde gezamenlijke plantijd, die zelden gefinancierd of ingepland wordt","De rigoureuze onderzoeksbasis blijft opvallend dun na decennia wijdverspreide praktijk (Murawski & Swanson 2001)"],
+opp:{t:"Een modelgerichte implementatiegids ontbreekt grotendeels in Nederlandstalige bronnen",d:"De meeste Nederlandstalige co-teachingbronnen beschrijven enkel het model 'één leidt, één helpt', zonder station-, parallel- of gedifferentieerd onderwijs voor te stellen als concrete, planbare opties. Een korte praktijkgids die de zes modellen van Cook en Friend vertaalt naar direct bruikbare lessjablonen — met een protocol voor gezamenlijke plantijd — zou een echte, praktische leemte opvullen voor zorgcoördinatoren."},
+warn:{t:"Presenteer co-teaching niet als een gegarandeerde inclusieoplossing",d:"Hatties gepoolde cijfer (d = 0.19) en de meta-analyse van Murawski & Swanson tonen dat de loutere aanwezigheid van twee volwassenen in een klas, zonder modelkeuze, rolgelijkwaardigheid en gezamenlijke planning, zwakke effecten oplevert. De data ondersteunen specifieke, goed uitgevoerde vormen — niet 'co-teaching' als ongedifferentieerd label."},
+related:["Differentiatie","Leerstoornissen & specifieke behoeften","Coöperatief leren","Formatieve evaluatie"],key:'ct'}
 }
 
 };
@@ -2503,13 +2593,13 @@ const QUOTA_UI = {
   fr: {
     ok:   (rem) => `<strong>${rem} fiche${rem>1?'s':''} gratuite${rem>1?'s':''} restante${rem>1?'s':''}</strong> — consultez librement les thèmes qui vous intéressent.`,
     warn: () => `<strong>Plus qu'1 fiche gratuite</strong> — créez un compte pour accéder à l'intégralité du catalogue.`,
-    done: () => `<strong>Quota atteint</strong> — créez un compte gratuit pour accéder aux 15 fiches restantes.`,
+    done: () => `<strong>Quota atteint</strong> — créez un compte gratuit pour accéder aux 16 fiches restantes.`,
     btn:  {ok:'Accès complet', warn:'Créer un compte', done:'Débloquer tout'},
     modalTitle: 'Accédez à toutes les fiches',
-    modalSub: 'Vous avez consulté vos 3 fiches gratuites. Créez un compte pour accéder aux 15 fiches restantes — gratuitement.',
+    modalSub: 'Vous avez consulté vos 3 fiches gratuites. Créez un compte pour accéder aux 16 fiches restantes — gratuitement.',
     modalBtn: 'Accéder à toutes les fiches →',
     modalSkip: 'Rester sur les fiches gratuites',
-    perks: ['📚 18 fiches complètes','✏️ Onglet En pratique','🌍 FR · EN · NL','🤖 Génération IA'],
+    perks: ['📚 19 fiches complètes','✏️ Onglet En pratique','🌍 FR · EN · NL','🤖 Génération IA'],
     seen: 'Consulté',
     locked: 'Compte requis',
     emailPlaceholder: 'votre@email.com',
@@ -2518,13 +2608,13 @@ const QUOTA_UI = {
   en: {
     ok:   (rem) => `<strong>${rem} free sheet${rem>1?'s':''} remaining</strong> — browse the themes that interest you.`,
     warn: () => `<strong>Only 1 free sheet left</strong> — create an account to access the full catalogue.`,
-    done: () => `<strong>Quota reached</strong> — create a free account to access the 15 remaining sheets.`,
+    done: () => `<strong>Quota reached</strong> — create a free account to access the 16 remaining sheets.`,
     btn:  {ok:'Full access', warn:'Create account', done:'Unlock all'},
     modalTitle: 'Access all sheets',
-    modalSub: 'You have viewed your 3 free sheets. Create an account to access the 15 remaining sheets — free of charge.',
+    modalSub: 'You have viewed your 3 free sheets. Create an account to access the 16 remaining sheets — free of charge.',
     modalBtn: 'Access all sheets →',
     modalSkip: 'Stay on free sheets',
-    perks: ['📚 18 complete sheets','✏️ In practice tab','🌍 FR · EN · NL','🤖 AI generation'],
+    perks: ['📚 19 complete sheets','✏️ In practice tab','🌍 FR · EN · NL','🤖 AI generation'],
     seen: 'Viewed',
     locked: 'Account required',
     emailPlaceholder: 'your@email.com',
@@ -2533,13 +2623,13 @@ const QUOTA_UI = {
   nl: {
     ok:   (rem) => `<strong>${rem} gratis fiche${rem>1?'s':''} over</strong> — bekijk de thema's die u interesseren.`,
     warn: () => `<strong>Nog maar 1 gratis fiche</strong> — maak een account aan voor toegang tot de volledige catalogus.`,
-    done: () => `<strong>Limiet bereikt</strong> — maak een gratis account aan voor de 15 overige fiches.`,
+    done: () => `<strong>Limiet bereikt</strong> — maak een gratis account aan voor de 16 overige fiches.`,
     btn:  {ok:'Volledige toegang', warn:'Account aanmaken', done:'Alles ontgrendelen'},
     modalTitle: 'Toegang tot alle fiches',
-    modalSub: 'U hebt uw 3 gratis fiches bekeken. Maak een account aan voor de 15 overige fiches — volledig gratis.',
+    modalSub: 'U hebt uw 3 gratis fiches bekeken. Maak een account aan voor de 16 overige fiches — volledig gratis.',
     modalBtn: 'Toegang tot alle fiches →',
     modalSkip: 'Blijf op gratis fiches',
-    perks: ['📚 18 volledige fiches','✏️ In de praktijk tab','🌍 FR · EN · NL','🤖 AI-generatie'],
+    perks: ['📚 19 volledige fiches','✏️ In de praktijk tab','🌍 FR · EN · NL','🤖 AI-generatie'],
     seen: 'Bekeken',
     locked: 'Account vereist',
     emailPlaceholder: 'uw@email.com',
@@ -3229,9 +3319,9 @@ updateNavAccount();
   <div class="modal-box" id="modal-box">
     <div style="font-size:34px;text-align:center;margin-bottom:12px;">🔓</div>
     <div class="modal-title" id="modal-title">Accédez à toutes les fiches</div>
-    <div class="modal-sub" id="modal-sub">Vous avez consulté vos 3 fiches gratuites. Créez un compte pour accéder aux 15 fiches restantes — gratuitement.</div>
+    <div class="modal-sub" id="modal-sub">Vous avez consulté vos 3 fiches gratuites. Créez un compte pour accéder aux 16 fiches restantes — gratuitement.</div>
     <div class="modal-perks">
-      <div class="modal-perk"><div class="modal-perk-icon">📚</div><div class="modal-perk-txt"><strong>18 fiches complètes</strong>Méta-analyses réelles</div></div>
+      <div class="modal-perk"><div class="modal-perk-icon">📚</div><div class="modal-perk-txt"><strong>19 fiches complètes</strong>Méta-analyses réelles</div></div>
       <div class="modal-perk"><div class="modal-perk-icon">✏️</div><div class="modal-perk-txt"><strong>En pratique</strong>Applications directes</div></div>
       <div class="modal-perk"><div class="modal-perk-icon">🌍</div><div class="modal-perk-txt"><strong>3 langues</strong>FR · EN · NL</div></div>
       <div class="modal-perk"><div class="modal-perk-icon">🤖</div><div class="modal-perk-txt"><strong>Génération IA</strong>Tout nouveau thème</div></div>
