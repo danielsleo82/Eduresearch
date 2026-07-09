@@ -302,8 +302,7 @@ body{font-family:var(--font);background:var(--bgs);color:var(--tx);min-height:10
 
 /* ── FICHE V2 · synthèse visuelle ── */
 .v2-def{font-family:Georgia,'Times New Roman',serif;font-size:15px;line-height:1.7;}
-.v2-gauge-block{display:grid;grid-template-columns:1fr 240px;gap:26px;align-items:start;}
-@media(max-width:700px){.v2-gauge-block{grid-template-columns:1fr;}}
+.v2-gauge-block{display:grid;grid-template-columns:1fr;gap:18px;align-items:start;}
 .v2-gauge{margin-top:52px;}
 .v2-gtrack{position:relative;height:14px;border-radius:7px;}
 .v2-gthresh{position:absolute;top:-8px;bottom:-8px;width:2px;background:var(--tx);opacity:.55;transform:translateX(-50%);}
@@ -375,6 +374,31 @@ body{font-family:var(--font);background:var(--bgs);color:var(--tx);min-height:10
 .v2-biblio{font-size:11px;color:var(--tm);line-height:1.8;columns:2;column-gap:26px;}
 @media(max-width:640px){.v2-biblio{columns:1;}}
 .v2-biblio b{color:var(--tx);font-weight:600;}
+/* V2 pleine largeur desktop — activée par .fp-wide, posée uniquement pour les fiches v2 */
+.v2-fh-grid{display:grid;grid-template-columns:1fr;gap:24px;align-items:start;}
+.v2-hero-side{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);border-radius:var(--r);padding:16px 18px;}
+.v2-hero-side .v2-baro-t{color:rgba(255,255,255,.75);}
+.v2-hero-side .v2-baro-v{color:#9FE1CB;}
+.v2-hero-side .v2-baro-why{color:rgba(255,255,255,.82);}
+.v2-hero-side .v2-baro-why b{color:#fff;}
+.v2-hero-side .v2-dot{background:rgba(255,255,255,.22);}
+.v2-hero-side .v2-dot.on{background:#5DCAA5;}
+.v2-duo{margin-bottom:14px;}
+.v2-duo>*{margin-bottom:14px;}
+.v2-duo>*:last-child{margin-bottom:0;}
+@media(min-width:1100px){
+  .fp.fp-wide{max-width:1160px;}
+  .fp-wide .v2-fh-grid{grid-template-columns:1fr 320px;gap:34px;}
+  .fp-wide .v2-hero-side{align-self:center;}
+  .fp-wide .v2-gauge-block{grid-template-columns:1fr 280px;gap:34px;align-items:center;}
+  .fp-wide .v2-ins-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 30px;}
+  .fp-wide .v2-duo{display:grid;grid-template-columns:3fr 2fr;gap:14px;align-items:stretch;}
+  .fp-wide .v2-duo>*{margin-bottom:0;}
+  .fp-wide .v2-tl-node{width:170px;}
+  .fp-wide .v2-biblio{columns:3;}
+  /* L'onglet « En pratique » garde sa largeur de lecture, centré dans le conteneur élargi */
+  .fp-wide .pratique-section{max-width:644px;margin-left:auto;margin-right:auto;}
+}
 
 /* ── OPTION C : QUOTA FREEMIUM ── */
 .quota-bar{background:var(--bgs);border:1.5px solid var(--bd);border-radius:var(--rl);padding:11px 16px;display:flex;align-items:center;gap:12px;margin-bottom:20px;}
@@ -3258,6 +3282,9 @@ function renderFiche(d,key){
     <button class="ft" onclick="switchTab(this,1)" data-tab="1">✏️ ${LANG==='fr'?'En pratique':LANG==='en'?'In practice':'In de praktijk'}</button>
   </div>` : '';
 
+  // Conteneur élargi (1160px) uniquement pour les fiches v2 ; les fiches v1 restent à 700px
+  document.querySelector('#pg-fiche .fp').classList.toggle('fp-wide', !!d.v2);
+
   if(d.v2){
     document.getElementById('fc').innerHTML = tabsTpl + buildV2(d,key,col,t,srcLabels) + (hasPrat ? renderPratique(PRATIQUE[key][LANG], key) : '');
     showFiche();
@@ -3350,13 +3377,23 @@ function buildV2(d,key,col,t,srcLabels){
   const pct=x=>(x/g.max*100).toFixed(1);
   const ticks=[];for(let x=0;x<=g.max+1e-9;x+=0.2)ticks.push(Math.round(x*10)/10);
 
+  const baroHtml=`<div class="v2-hero-side">
+    <div class="v2-baro-t">${v.baro.title}</div>
+    <div class="v2-dots">${[0,1,2,3,4].map(i=>`<span class="v2-dot${i<v.baro.score?' on':''}"></span>`).join('')}</div>
+    <div class="v2-baro-v">${v.baro.label}</div>
+    <div class="v2-baro-why">${v.baro.why}</div>
+  </div>`;
+
   const heroHtml=`<div class="fh" style="background:${col.bg};">
-    <div class="fh-top"><div class="fh-left">
-      <div class="fh-ey" style="color:rgba(255,255,255,0.75);"><div class="fh-edot" style="background:rgba(255,255,255,0.75);"></div>${t.eyF}</div>
-      <div class="fh-tt">${d.title}</div>
-      <div class="fh-tags">${d.tags.map(tg=>`<span class="fh-tag">${tg}</span>`).join('')}</div>
-    </div></div>
-    <div class="fh-sum v2-def">${v.def}</div>
+    <div class="v2-fh-grid">
+      <div>
+        <div class="fh-ey" style="color:rgba(255,255,255,0.75);"><div class="fh-edot" style="background:rgba(255,255,255,0.75);"></div>${t.eyF}</div>
+        <div class="fh-tt">${d.title}</div>
+        <div class="fh-sum v2-def">${v.def}</div>
+        <div class="fh-tags">${d.tags.map(tg=>`<span class="fh-tag">${tg}</span>`).join('')}</div>
+      </div>
+      ${baroHtml}
+    </div>
   </div>`;
 
   const effHtml=`<div class="card" style="margin-bottom:14px;">
@@ -3373,20 +3410,14 @@ function buildV2(d,key,col,t,srcLabels){
           <div class="v2-gscale">${ticks.map(x=>`<span>${x}</span>`).join('')}</div>
           <div class="v2-gnote"><span class="tickd"></span><span>${g.threshNote}</span></div>
         </div>
-        <div class="v2-months" style="background:${acc}12;--mv:${col.ins};">${g.months}</div>
       </div>
-      <div class="v2-baro">
-        <div class="v2-baro-t">${v.baro.title}</div>
-        <div class="v2-dots">${[0,1,2,3,4].map(i=>`<span class="v2-dot${i<v.baro.score?' on':''}"></span>`).join('')}</div>
-        <div class="v2-baro-v">${v.baro.label}</div>
-        <div class="v2-baro-why">${v.baro.why}</div>
-      </div>
+      <div class="v2-months" style="background:${acc}12;--mv:${col.ins};">${g.months}</div>
     </div>
   </div>`;
 
   const insightsHtml=`<div class="card" style="margin-bottom:14px;">
     <div class="ctt"><div class="ctd" style="background:${acc};"></div>${t.ins}</div>
-    ${d.insights.map((i,n)=>{
+    <div class="v2-ins-grid">${d.insights.map((i,n)=>{
       const lvl=i.lvl||'all';
       let pillsHtml='';
       if(lvl==='ps'){
@@ -3399,7 +3430,7 @@ function buildV2(d,key,col,t,srcLabels){
         pillsHtml=`<div class="lvl-pills"><span class="lp lp-s">🎓 ${LANG==='fr'?'Secondaire':LANG==='en'?'Secondary':'Secundair'}</span></div>`;
       }
       return `<div class="ii"><div class="in" style="background:${acc}18;color:${col.ins};">${n+1}</div><div><div class="it">${i.t}</div><div class="id">${i.d}</div>${pillsHtml}</div></div>`;
-    }).join('')}
+    }).join('')}</div>
   </div>`;
 
   const ph=v.phases;
@@ -3413,14 +3444,19 @@ function buildV2(d,key,col,t,srcLabels){
     <div class="v2-legend"><span><span class="v2-swatch" style="background:${acc};"></span>${T.teach}</span><span><span class="v2-swatch" style="background:var(--t400);"></span>${T.pupil}</span></div>
   </div>`:'';
 
+  const warnHtml=`<div class="wbox"><div class="wbox-icon">⚠️</div><div><div class="wtt">${t.warn} — ${d.warn.t}</div><div class="wtx">${d.warn.d}</div></div></div>`;
+
   const ls=v.lesson;
   const segCols=[col.pill,col.bg,col.dot,'var(--t400)','var(--a400)'];
-  const lessonHtml=ls?`<div class="card" style="margin-bottom:14px;">
+  const lessonCard=ls?`<div class="card">
     <div class="ctt"><div class="ctd" style="background:${acc};"></div>${ls.title}</div>
     <div class="v2-lesson">${ls.segs.map(s=>`<div class="v2-lseg" style="flex:${s.flex};background:${segCols[s.ci]};">${s.min}</div>`).join('')}</div>
     <div class="v2-llbls">${ls.segs.map(s=>`<div class="v2-llbl" style="flex:${s.flex};">${s.lbl}${s.ps.map(p=>`<span class="v2-pref">${p}</span>`).join('')}</div>`).join('')}</div>
     <p class="v2-lnote">${ls.note}</p>
   </div>`:'';
+  // La vigilance voisine avec la leçon type sur desktop large ; sans leçon, elle
+  // reprend sa place historique après le débat.
+  const lessonHtml=ls?`<div class="v2-duo">${lessonCard}${warnHtml}</div>`:'';
 
   const tl=v.tl;
   const tlHtml=tl?`<div class="card" style="margin-bottom:14px;">
@@ -3446,8 +3482,6 @@ function buildV2(d,key,col,t,srcLabels){
     </div>
   </div>`;
 
-  const warnHtml=`<div class="wbox"><div class="wbox-icon">⚠️</div><div><div class="wtt">${t.warn} — ${d.warn.t}</div><div class="wtx">${d.warn.d}</div></div></div>`;
-
   const pa=v.path;
   const pathHtml=pa?`<div class="card" style="margin-bottom:14px;">
     <div class="ctt"><div class="ctd" style="background:${acc};"></div>${pa.title}</div>
@@ -3461,7 +3495,7 @@ function buildV2(d,key,col,t,srcLabels){
     </div>
   </div>`;
 
-  return `<div class="synth-section">${heroHtml}${effHtml}${insightsHtml}${phasesHtml}${lessonHtml}${tlHtml}${prinHtml}${debHtml}${warnHtml}${pathHtml}${relHtml}</div>`;
+  return `<div class="synth-section">${heroHtml}${effHtml}${insightsHtml}${phasesHtml}${lessonHtml}${tlHtml}${prinHtml}${debHtml}${ls?'':warnHtml}${pathHtml}${relHtml}</div>`;
 }
 
 function switchTab(btn, idx) {
@@ -3543,6 +3577,7 @@ document.getElementById('si').addEventListener('keydown', e => { if (e.key === '
 async function generateAIFiche(topic){
   const t = UI[LANG];
   showFiche();
+  document.querySelector('#pg-fiche .fp').classList.remove('fp-wide');
 
   // No tabs for AI-generated fiches (no PRATIQUE data)
   document.getElementById('fc').innerHTML = `<div class="synth-section"><div class="fh" style="background:#1D9E75;">
