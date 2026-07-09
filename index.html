@@ -505,6 +505,65 @@ select.modal-input:invalid,.modal-input option[value=""]{color:var(--tf);}
 .cat-count{font-size:11px;color:var(--tf);margin-left:auto;padding:2px 8px;background:var(--bgs);border-radius:20px;border:1px solid var(--bd);}
 /* Override grid for categories — more compact */
 .tgrid{margin-bottom:0;}
+
+/* ── ACCUEIL PASTEL (framework F3) · 1160px ──
+   Overrides en fin de cascade : ne touche que l'accueil et la nav,
+   les pages fiches (v1 et v2) gardent leur habillage. */
+:root{--pv:#4A3F73;--pvl:#7A7291;--pfaint:#A79FBB;--coral:#E8724C;--pbg:#FBF6EF;--plav:#F1E8FB;--pgreen:#DFF3E9;--pgreen-ink:#1F7A55;}
+#pg-home{background:var(--pbg);}
+.hero{background:var(--pbg);padding:44px 28px 34px;}
+.hero-in{max-width:1160px;}
+.hero-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:38px;align-items:center;}
+.hero-ey{color:var(--coral);font-size:10.5px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;margin-bottom:12px;}
+.hero-tt{font-size:33px;font-weight:800;color:var(--pv);line-height:1.15;letter-spacing:-.01em;margin-bottom:12px;max-width:24ch;}
+.hero-tt em{font-style:normal;color:var(--coral);}
+.hero-sub{color:var(--pvl);max-width:52ch;}
+.si{background:#fff;border:1.5px solid transparent;border-radius:26px;box-shadow:0 5px 18px rgba(58,51,72,.10);color:var(--pv);}
+.si::placeholder{color:var(--pfaint);}
+.si:focus{border-color:var(--coral);background:#fff;box-shadow:0 5px 18px rgba(58,51,72,.15);}
+.sbtn{background:var(--coral);border-radius:18px;}
+.sbtn:hover{background:#D45F3A;}
+.sh{color:var(--pfaint);}
+.hero-fact{background:var(--plav);border-radius:26px;padding:20px 22px;font-size:12px;color:var(--pv);line-height:1.65;cursor:pointer;transition:transform .15s,box-shadow .15s;}
+.hero-fact:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(58,51,72,.12);}
+.hero-fact b{display:block;font-size:13.5px;margin-bottom:6px;}
+.hbody{max-width:1160px;}
+.slbl{color:var(--pfaint);}
+.spromo{background:#fff;border:none;border-radius:20px;box-shadow:0 3px 12px rgba(58,51,72,.06);}
+/* cartes */
+.tgrid{grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;}
+.tc{border-radius:20px;border:1.5px solid transparent;padding:17px 18px 15px;}
+.tc:hover{box-shadow:0 10px 26px rgba(58,51,72,.13);border-color:transparent;}
+.tc-accent{display:none;}
+.tc-em{width:38px;height:38px;border-radius:14px;background:rgba(255,255,255,.8);display:flex;align-items:center;justify-content:center;font-size:19px;margin-bottom:10px;}
+.tc-tt{font-size:13.5px;font-weight:800;}
+.tc-sb{color:var(--pvl);}
+.tc-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.tc-bd{font-weight:800;box-shadow:0 1px 4px rgba(58,51,72,.08);}
+.tc-dots{display:flex;gap:2.5px;flex-shrink:0;}
+.tc-dots i{width:7px;height:7px;border-radius:50%;}
+/* catégories */
+.cat-header{border-bottom:none;padding-bottom:0;gap:10px;margin-bottom:12px;}
+.cat-icon{width:34px;height:34px;border-radius:12px;background:#fff;box-shadow:0 2px 8px rgba(58,51,72,.08);display:flex;align-items:center;justify-content:center;font-size:17px;}
+.cat-title{font-size:15px;font-weight:800;color:var(--pv);}
+.cat-count{background:#fff;border:none;color:var(--pfaint);font-weight:700;}
+.cat-section{margin-bottom:32px;}
+/* quota + promo analyseur */
+.quota-bar{border-radius:20px;background:#fff;box-shadow:0 3px 12px rgba(58,51,72,.07);}
+.analyser-promo{border-radius:22px;}
+/* navigation */
+.nav-top{background:#fff;}
+.nav-menu{background:var(--pbg);}
+.logo-edu,.logo-res{color:var(--pv);}
+.logo-dot{background:var(--coral);}
+.lang-sw{background:var(--plav);border:none;border-radius:16px;}
+.lb{color:#6A4FA3;font-weight:700;}
+.lb.on{background:#6A4FA3;color:#fff;}
+.lb:hover:not(.on){background:rgba(255,255,255,.6);color:#6A4FA3;}
+.nbadge{background:var(--pgreen);color:var(--pgreen-ink);border:none;font-weight:700;}
+.nm-item.active{color:var(--pv);}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:20px;}}
+@media(max-width:600px){.hero{padding:30px 20px 26px;}.hero-tt{font-size:25px;}}
 </style>
 
 <!-- Google Analytics -->
@@ -550,15 +609,21 @@ select.modal-input:invalid,.modal-input option[value=""]{color:var(--tf);}
 </nav>
 <div id="pg-home" class="page active">
   <div class="hero">
-    <div class="hero-in">
-      <div class="hero-ey" id="h-ey">VEILLE PÉDAGOGIQUE MONDIALE</div>
-      <div class="hero-logo"><span class="hl-edu">Edu</span><div class="hl-dot"></div><span class="hl-res">Research</span></div>
-      <div class="hero-sub" id="h-sub">Des fiches thèmes fondées sur de vraies méta-analyses — Hattie, Rosenshine, Sweller, Wiliam. Recherchez n'importe quel thème pour une synthèse scientifique.</div>
-      <div class="sw">
-        <input class="si" id="si" placeholder="Ex : apprentissage coopératif, révision espacée..."/>
-        <button class="sbtn" onclick="doSearch()"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></button>
+    <div class="hero-in hero-grid">
+      <div>
+        <div class="hero-ey" id="h-ey">VEILLE PÉDAGOGIQUE MONDIALE</div>
+        <div class="hero-tt" id="h-tt">La recherche en éducation, <em>enfin lisible.</em></div>
+        <div class="hero-sub" id="h-sub">Des fiches thèmes fondées sur de vraies méta-analyses — Hattie, Rosenshine, Sweller, Wiliam. Recherchez n'importe quel thème pour une synthèse scientifique.</div>
+        <div class="sw">
+          <input class="si" id="si" placeholder="Ex : apprentissage coopératif, révision espacée..."/>
+          <button class="sbtn" onclick="doSearch()"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></button>
+        </div>
+        <div class="sh" id="h-hint">Appuyez sur Entrée pour générer une fiche scientifique</div>
       </div>
-      <div class="sh" id="h-hint">Appuyez sur Entrée pour générer une fiche scientifique</div>
+      <div class="hero-fact" onclick="loadTheme('cc')">
+        <b id="hf-title">💡 Le chiffre de la semaine</b>
+        <span id="hf-text">Pour un novice, étudier un exemple résolu est 2 à 3 fois plus efficace que résoudre le problème seul (d = 0.81) → fiche Charge cognitive</span>
+      </div>
     </div>
   </div>
   <div class="hbody">
@@ -621,13 +686,13 @@ const BADGE_STYLES={
 };
 
 const UI={
-fr:{ey:'VEILLE PÉDAGOGIQUE MONDIALE',sub:"Des fiches fondées sur de vraies méta-analyses — Hattie, Rosenshine, Sweller, Wiliam.",hint:'Appuyez sur Entrée pour générer une fiche scientifique',sl:'OU RECHERCHEZ UN NOUVEAU THÈME',sp:"Tapez n'importe quel thème pédagogique.",ph:'Ex : apprentissage coopératif, révision espacée...',back:'Retour aux thèmes',badge:'Données scientifiques réelles',loading:'Génération en cours...',lsub:'Synthèse sur',eyF:'SYNTHÈSE · DONNÉES SCIENTIFIQUES RÉELLES',eyG:'SYNTHÈSE GÉNÉRÉE · RECHERCHE RÉELLE',ins:'Insights éditoriaux clés',eff:"Taille d'effet (d de Cohen)",effn:'d > 0.40 = effet significatif · Hattie 2023',refs:'Références scientifiques réelles',prin:'Principes clés',deb:'Établi vs débattu',pro:'✓ Consensus fort',con:'⚡ Encore contesté',opp:'Opportunité éditoriale',warn:'Tension à connaître',rel:'Thèmes connexes',err:'Impossible de générer la fiche.',
+fr:{ey:'VEILLE PÉDAGOGIQUE MONDIALE',sub:"Des fiches fondées sur de vraies méta-analyses — Hattie, Rosenshine, Sweller, Wiliam.",hint:'Appuyez sur Entrée pour générer une fiche scientifique',sl:'OU RECHERCHEZ UN NOUVEAU THÈME',sp:"Tapez n'importe quel thème pédagogique.",ph:'Ex : apprentissage coopératif, révision espacée...',back:'Retour aux thèmes',badge:'Données scientifiques réelles',loading:'Génération en cours...',lsub:'Synthèse sur',eyF:'SYNTHÈSE · DONNÉES SCIENTIFIQUES RÉELLES',eyG:'SYNTHÈSE GÉNÉRÉE · RECHERCHE RÉELLE',ins:'Insights éditoriaux clés',eff:"Taille d'effet (d de Cohen)",effn:'d > 0.40 = effet significatif · Hattie 2023',refs:'Références scientifiques réelles',prin:'Principes clés',deb:'Établi vs débattu',pro:'✓ Consensus fort',con:'⚡ Encore contesté',opp:'Opportunité éditoriale',warn:'Tension à connaître',rel:'Thèmes connexes',err:'Impossible de générer la fiche.',ht:"La recherche en éducation, <em>enfin lisible.</em>",factT:"💡 Le chiffre de la semaine",factX:"Pour un novice, étudier un exemple résolu est 2 à 3 fois plus efficace que résoudre le problème seul (d = 0.81) → fiche Charge cognitive",
 
 prom:`Tu es un expert en sciences de l'éducation. Génère une fiche sur "{T}" en FRANÇAIS. Bases-toi uniquement sur de vraies recherches. Réponds en HTML sans html/head/body. Sections requises:\n<h2>Résumé scientifique</h2><p>...</p>\n<h2>Insights éditoriaux</h2><p><strong>1. Titre</strong> — explication actionnable.</p>(3-4)\n<h2>Références scientifiques réelles</h2><div class="ref-block"><strong>Auteur — Titre (année)</strong><br>Revue<br>Apport.</div>(3-4)\n<h2>Consensus vs débats</h2><p><strong>Établi:</strong>... <strong>Débattu:</strong>...</p>\n<h2>Signal éditorial</h2><div class="opp-block"><strong>Opportunité:</strong>...</div><div class="warn-block"><strong>Vigilance:</strong>...</div>\n<h2>Thèmes connexes</h2><p>...</p>`},
-en:{ey:'GLOBAL PEDAGOGICAL RESEARCH',sub:"Theme sheets based on real meta-analyses — Hattie, Rosenshine, Sweller, Wiliam.",hint:'Press Enter to generate a scientific sheet',sl:'OR SEARCH FOR A NEW THEME',sp:"Type any pedagogical theme.",ph:'E.g. cooperative learning, spaced practice...',back:'Back to themes',badge:'Real scientific data',loading:'Generating sheet...',lsub:'Synthesis on',eyF:'SYNTHESIS · REAL SCIENTIFIC DATA',eyG:'GENERATED SYNTHESIS · REAL SCIENCE',ins:'Key editorial insights',eff:"Effect size (Cohen's d)",effn:'d > 0.40 = significant effect · Hattie 2023',refs:'Real scientific references',prin:'Key principles',deb:'Established vs debated',pro:'✓ Strong consensus',con:'⚡ Still contested',opp:'Editorial opportunity',warn:'Tension to know',rel:'Related themes',err:'Unable to generate the sheet.',
+en:{ey:'GLOBAL PEDAGOGICAL RESEARCH',sub:"Theme sheets based on real meta-analyses — Hattie, Rosenshine, Sweller, Wiliam.",hint:'Press Enter to generate a scientific sheet',sl:'OR SEARCH FOR A NEW THEME',sp:"Type any pedagogical theme.",ph:'E.g. cooperative learning, spaced practice...',back:'Back to themes',badge:'Real scientific data',loading:'Generating sheet...',lsub:'Synthesis on',eyF:'SYNTHESIS · REAL SCIENTIFIC DATA',eyG:'GENERATED SYNTHESIS · REAL SCIENCE',ins:'Key editorial insights',eff:"Effect size (Cohen's d)",effn:'d > 0.40 = significant effect · Hattie 2023',refs:'Real scientific references',prin:'Key principles',deb:'Established vs debated',pro:'✓ Strong consensus',con:'⚡ Still contested',opp:'Editorial opportunity',warn:'Tension to know',rel:'Related themes',err:'Unable to generate the sheet.',ht:"Education research, <em>finally readable.</em>",factT:"💡 This week's number",factX:"For a novice, studying a worked example is 2 to 3 times more effective than solving the problem alone (d = 0.81) → Cognitive Load sheet",
 
 prom:`You are an education science expert. Generate a sheet on "{T}" in ENGLISH. Real research only. HTML no html/head/body. Required sections:\n<h2>Scientific summary</h2><p>...</p>\n<h2>Editorial insights</h2><p><strong>1. Title</strong> — actionable explanation.</p>(3-4)\n<h2>Real scientific references</h2><div class="ref-block"><strong>Author — Title (year)</strong><br>Journal<br>Contribution.</div>(3-4)\n<h2>Consensus vs debates</h2><p><strong>Established:</strong>... <strong>Debated:</strong>...</p>\n<h2>Editorial signal</h2><div class="opp-block"><strong>Opportunity:</strong>...</div><div class="warn-block"><strong>Caution:</strong>...</div>\n<h2>Related themes</h2><p>...</p>`},
-nl:{ey:'WERELDWIJDE PEDAGOGISCHE RESEARCH',sub:"Themafiches gebaseerd op echte meta-analyses — Hattie, Rosenshine, Sweller, Wiliam.",hint:'Druk op Enter om een wetenschappelijke fiche te genereren',sl:'OF ZOEK EEN NIEUW THEMA',sp:"Typ een pedagogisch thema.",ph:"Bijv. coöperatief leren, gespreide herhaling...",back:"Terug naar thema's",badge:'Echte wetenschappelijke gegevens',loading:'Fiche genereren...',lsub:'Synthese over',eyF:'SYNTHESE · ECHTE WETENSCHAPPELIJKE GEGEVENS',eyG:"GEGENEREERDE SYNTHESE · ECHT ONDERZOEK",ins:'Belangrijkste redactionele inzichten',eff:"Effectgrootte (Cohen's d)",effn:'d > 0.40 = significant · Hattie 2023',refs:'Echte wetenschappelijke referenties',prin:'Sleutelprincipes',deb:'Vastgesteld vs betwist',pro:'✓ Sterk consensus',con:'⚡ Nog betwist',opp:'Redactionele kans',warn:'Spanningspunt',rel:"Verwante thema's",err:'De fiche kan niet worden gegenereerd.',
+nl:{ey:'WERELDWIJDE PEDAGOGISCHE RESEARCH',sub:"Themafiches gebaseerd op echte meta-analyses — Hattie, Rosenshine, Sweller, Wiliam.",hint:'Druk op Enter om een wetenschappelijke fiche te genereren',sl:'OF ZOEK EEN NIEUW THEMA',sp:"Typ een pedagogisch thema.",ph:"Bijv. coöperatief leren, gespreide herhaling...",back:"Terug naar thema's",badge:'Echte wetenschappelijke gegevens',loading:'Fiche genereren...',lsub:'Synthese over',eyF:'SYNTHESE · ECHTE WETENSCHAPPELIJKE GEGEVENS',eyG:"GEGENEREERDE SYNTHESE · ECHT ONDERZOEK",ins:'Belangrijkste redactionele inzichten',eff:"Effectgrootte (Cohen's d)",effn:'d > 0.40 = significant · Hattie 2023',refs:'Echte wetenschappelijke referenties',prin:'Sleutelprincipes',deb:'Vastgesteld vs betwist',pro:'✓ Sterk consensus',con:'⚡ Nog betwist',opp:'Redactionele kans',warn:'Spanningspunt',rel:"Verwante thema's",err:'De fiche kan niet worden gegenereerd.',ht:"Onderwijsonderzoek, <em>eindelijk leesbaar.</em>",factT:"💡 Het cijfer van de week",factX:"Voor een beginner is een uitgewerkt voorbeeld bestuderen 2 tot 3 keer effectiever dan het probleem zelf oplossen (d = 0.81) → fiche Cognitieve belasting",
 
 prom:`Je bent een expert in onderwijswetenschappen. Genereer een fiche over "{T}" in het NEDERLANDS. Echt onderzoek. HTML geen html/head/body. Vereiste secties:\n<h2>Wetenschappelijke samenvatting</h2><p>...</p>\n<h2>Redactionele inzichten</h2><p><strong>1. Titel</strong> — uitvoerbare uitleg.</p>(3-4)\n<h2>Echte wetenschappelijke referenties</h2><div class="ref-block"><strong>Auteur — Titel (jaar)</strong><br>Tijdschrift<br>Bijdrage.</div>(3-4)\n<h2>Consensus vs debatten</h2><p><strong>Vastgesteld:</strong>... <strong>Betwist:</strong>...</p>\n<h2>Redactioneel signaal</h2><div class="opp-block"><strong>Kans:</strong>...</div><div class="warn-block"><strong>Voorzichtigheid:</strong>...</div>\n<h2>Verwante thema's</h2><p>...</p>`}
 };
@@ -3273,6 +3338,9 @@ function setLang(l,btn){
   btn.classList.add('on');
   const t=UI[l];
   document.getElementById('h-ey').textContent=t.ey;
+  document.getElementById('h-tt').innerHTML=t.ht;
+  document.getElementById('hf-title').textContent=t.factT;
+  document.getElementById('hf-text').textContent=t.factX;
   document.getElementById('h-sub').textContent=t.sub;
   document.getElementById('h-hint').textContent=t.hint;
   document.getElementById('h-sl').textContent=t.sl;
@@ -3305,13 +3373,18 @@ function cardHTML(c){
   const clickFn = canOpen
     ? `loadTheme('${c.key}')`
     : `openModal('${c.key}')`;
-  return `<div class="tc${extraCls}" onclick="${clickFn}" style="border-color:${isSeen?col.accentHex+'66':col.accentHex+'22'};">
+  // Pastilles de solidité des preuves — seulement pour les fiches migrées v2 (baro renseigné)
+  const v2d = (typeof D!=='undefined') && D[c.key] && D[c.key][LANG] && D[c.key][LANG].v2;
+  const baro = v2d && v2d.baro ? v2d.baro.score : null;
+  const dotsHtml = baro!=null
+    ? `<div class="tc-dots">${[0,1,2,3,4].map(i=>`<i style="background:${i<baro?col.accentHex:'rgba(0,0,0,0.10)'};"></i>`).join('')}</div>`
+    : '';
+  return `<div class="tc${extraCls}" onclick="${clickFn}" style="background:${col.accentHex}14;border-color:${isSeen?col.accentHex+'55':'transparent'};">
     ${badgeHtml}
-    <div class="tc-accent" style="background:${col.accentHex};"></div>
-    <div class="tc-em">${c.em}</div>
-    <div class="tc-tt">${c.tt}</div>
+    <div class="tc-em"><span>${c.em}</span></div>
+    <div class="tc-tt" style="color:${col.ins};">${c.tt}</div>
     <div class="tc-sb">${c.sb}</div>
-    <div class="tc-bd" style="background:${bs.bg};color:${bs.color};">${c.bd}</div>
+    <div class="tc-foot"><span class="tc-bd" style="background:#fff;color:${col.ins};">${c.bd}</span>${dotsHtml}</div>
   </div>`;
 }
 
